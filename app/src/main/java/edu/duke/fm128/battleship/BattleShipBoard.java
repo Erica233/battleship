@@ -1,6 +1,8 @@
 package edu.duke.fm128.battleship;
 
-
+/**
+ * A battleship board for the battleship game
+ */
 public class BattleShipBoard implements Board {
   private final int width;
   private final int height;
@@ -22,10 +24,18 @@ public class BattleShipBoard implements Board {
     this.height = h;
   }
 
+  /**
+   * Gets the height of the BattleShipBoard
+   * @return the height of the BattleShipBoard
+   */
   public int getHeight() {
     return height;
   }
 
+  /**
+   * Gets the width of the BattleShipBoard
+   * @return the width of the BattleShipBoard 
+   */
   public int getWidth() {
     return width;
   }
