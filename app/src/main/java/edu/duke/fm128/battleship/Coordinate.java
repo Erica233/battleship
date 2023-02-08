@@ -1,5 +1,7 @@
 package edu.duke.fm128.battleship;
 
+import java.util.Locale;
+
 /**
  * This class stands for a coordinate with row and column number
  */
@@ -20,15 +22,17 @@ public class Coordinate {
   /**
    * Constructs a corresponding Coordinate with the specified string
    * @param descr a string including row letter and column number
-   * @throws IllegalArgumentException if the row letter is not between 'A' and 'Z' (ignoring cases)
+   * @throws IllegalArgumentException if the string length is not equal to 2,
+   * or the row letter is not between 'A' and 'Z' (ignoring cases),
    * or the column number is less than 0 or larger than 9.
    */
   public Coordinate(String descr) {
     if (descr.length() != 2) {
       throw new IllegalArgumentException("The length of Coordinate must be 2!");
     }
+    descr = descr.toUpperCase(Locale.ROOT);
     int colNum = descr.charAt(1);
-    char rowLetter = descr.toUpperCase().charAt(0);
+    char rowLetter = descr.charAt(0);
     if (rowLetter < 'A' || rowLetter > 'Z') {
       throw new IllegalArgumentException("The row letter of Coordinate must be a letter!");
     }

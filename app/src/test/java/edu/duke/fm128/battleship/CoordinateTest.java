@@ -26,7 +26,6 @@ public class CoordinateTest {
     Coordinate c4 = new Coordinate("Z0");
     assertEquals(25, c4.getRow());
     assertEquals(0, c4.getColumn());
-
   }
   @Test
   public void test_string_constructor_error_cases() {
@@ -57,7 +56,7 @@ public class CoordinateTest {
   @Test
   public void test_toString() {
     Coordinate c1 = new Coordinate(1, 2);
-    assertEquals(c1.toString(), "(1, 2)");
+    assertEquals("(1, 2)", c1.toString());
   }
 
   @Test
