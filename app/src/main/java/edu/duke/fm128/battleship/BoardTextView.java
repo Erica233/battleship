@@ -29,9 +29,9 @@ public class BoardTextView {
   }
 
   /**
-   * Makes the empty board given width and height, including header and body
+   * Displays the information of the board
    * 
-   * @return the String that is the empty given board
+   * @return the String that displays the information of the board
    */
   public String displayMyOwnBoard() {
     StringBuilder ans = new StringBuilder();

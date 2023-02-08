@@ -47,8 +47,7 @@ public class BattleShipBoard<T> implements Board<T> {
    * 
    * @param where the coordinate
    * @return the information offered by the ship which occupies the given
-   *         coordinate,
-   *         or return null if it is not occupied by any ships
+   *         coordinate, or return null if it is not occupied by any ships
    */
   public T whatIsAt(Coordinate where) {
     for (Ship<T> s : myShips) {
