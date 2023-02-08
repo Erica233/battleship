@@ -22,11 +22,12 @@ public class BattleShipBoardTest {
   }
 
   /**
-   * A helper function to check whether the board information is the same as expected
+   * A helper function to check whether the board information is the same as
+   * expected
    *
-   * @param b current BattleShipBoard
+   * @param b        current BattleShipBoard
    * @param expected expected results
-   * @param <T> Character
+   * @param <T>      Character
    */
   private <T> void checkWhatIsAtBoard(BattleShipBoard<T> b, T[][] expected) {
     for (int i = 0; i < b.getWidth(); i++) {
@@ -35,6 +36,7 @@ public class BattleShipBoardTest {
       }
     }
   }
+
   @Test
   public void test_whatIsAt() {
     BattleShipBoard<Character> b1 = new BattleShipBoard<>(10, 20);
@@ -43,10 +45,10 @@ public class BattleShipBoardTest {
     checkWhatIsAtBoard(b1, expected);
 
     // add ships and test reults
-    b1.tryAddShip(new BasicShip(new Coordinate(3,5)));
+    b1.tryAddShip(new BasicShip(new Coordinate(3, 5)));
     expected[3][5] = 's';
     checkWhatIsAtBoard(b1, expected);
-    b1.tryAddShip(new BasicShip(new Coordinate(0,0)));
+    b1.tryAddShip(new BasicShip(new Coordinate(0, 0)));
     expected[0][0] = 's';
     checkWhatIsAtBoard(b1, expected);
   }
