@@ -1,11 +1,14 @@
 package edu.duke.fm128.battleship;
 
+import java.util.ArrayList;
+
 /**
  * A battleship board for the battleship game
  */
 public class BattleShipBoard<T> implements Board<T> {
   private final int width;
   private final int height;
+  final ArrayList<Ship<T>> myShips;
 
   /**
    * Constructs a BattleShipBoard with the specified width and height
@@ -22,6 +25,32 @@ public class BattleShipBoard<T> implements Board<T> {
     }
     this.width = w;
     this.height = h;
+    this.myShips = new ArrayList<>();
+  }
+
+  /**
+   * Adds the ship to the list of myShips and return true
+   * @param toAdd the ship to add
+   * @return true
+   */
+  public boolean tryAddShip(Ship<T> toAdd) {
+    myShips.add(toAdd);
+    return true;
+  }
+
+  /**
+   * Gives the information offered by the Ship which occupies the given coordinate.
+   * @param where the coordinate
+   * @return the information offered by the ship which occupies the given coordinate,
+   * or return null if it is not occupied by any ships
+   */
+  public T whatIsAt(Coordinate where) {
+    for (Ship<T> s: myShips) {
+      if (s.occupiesCoordinates(where)){
+        return s.getDisplayInfoAt(where);
+      }
+    }
+    return null;
   }
 
   /**
