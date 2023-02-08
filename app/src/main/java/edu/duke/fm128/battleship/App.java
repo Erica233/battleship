@@ -6,30 +6,30 @@ package edu.duke.fm128.battleship;
 import java.io.*;
 
 public class App {
-    /*
-    public String getGreeting() {
-        return "Hello World!";
-    }
-     */
-    final Board<Character> theBoard;
-    final BoardTextView view;
-    final BufferedReader inputReader;
-    final PrintStream out;
+  /*
+   * public String getGreeting() {
+   * return "Hello World!";
+   * }
+   */
+  final Board<Character> theBoard;
+  final BoardTextView view;
+  final BufferedReader inputReader;
+  final PrintStream out;
 
-    public App(Board<Character> theBoard, Reader inputSource, PrintStream out) {
-        this.theBoard = theBoard;
-        this.view = new BoardTextView(theBoard);
-        this.inputReader = new BufferedReader(inputSource);
-        this.out = out;
-    }
+  public App(Board<Character> theBoard, Reader inputSource, PrintStream out) {
+    this.theBoard = theBoard;
+    this.view = new BoardTextView(theBoard);
+    this.inputReader = new BufferedReader(inputSource);
+    this.out = out;
+  }
 
-    public Placement readPlacement(String prompt) throws IOException {
-        out.println(prompt);
-        String s = inputReader.readLine();
-        return new Placement(s);
-    }
+  public Placement readPlacement(String prompt) throws IOException {
+    out.println(prompt);
+    String s = inputReader.readLine();
+    return new Placement(s);
+  }
 
-    public static void main(String[] args) {
-        //System.out.println(new App().getGreeting());
-    }
+  public static void main(String[] args) {
+    // System.out.println(new App().getGreeting());
+  }
 }
