@@ -13,13 +13,16 @@ public class Coordinate {
     if (descr.length() != 2) {
       throw new IllegalArgumentException("The length of Coordinate must be 2!");
     }
-    int colNum = descr.charAt(1) - '0';
+    int colNum = descr.charAt(1);
     char rowLetter = descr.toUpperCase().charAt(0);
     if (rowLetter < 'A' || rowLetter > 'Z') {
       throw new IllegalArgumentException("The row letter of Coordinate must be a letter!");
     }
+    if (colNum < '0' || colNum > '9') {
+      throw new IllegalArgumentException("The row letter of Coordinate must be a number between 0 and 9!");
+    }
     this.row = rowLetter - 'A';
-    this.column = colNum;
+    this.column = colNum - '0';
   }
 
   @Override
