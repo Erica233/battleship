@@ -12,9 +12,11 @@ public class BattleShipBoard<T> implements Board<T> {
 
   /**
    * Constructs a BattleShipBoard with the specified width and height
+   * 
    * @param w is the width of the newly constructed board.
    * @param h is the height of the newly constructed board.
-   * @throws IllegalArgumentException if the width or height are less than or equal to zero.
+   * @throws IllegalArgumentException if the width or height are less than or
+   *                                  equal to zero.
    */
   public BattleShipBoard(int w, int h) {
     if (w <= 0) {
@@ -30,6 +32,7 @@ public class BattleShipBoard<T> implements Board<T> {
 
   /**
    * Adds the ship to the list of myShips and return true
+   * 
    * @param toAdd the ship to add
    * @return true
    */
@@ -39,14 +42,17 @@ public class BattleShipBoard<T> implements Board<T> {
   }
 
   /**
-   * Gives the information offered by the Ship which occupies the given coordinate.
+   * Gives the information offered by the Ship which occupies the given
+   * coordinate.
+   * 
    * @param where the coordinate
-   * @return the information offered by the ship which occupies the given coordinate,
-   * or return null if it is not occupied by any ships
+   * @return the information offered by the ship which occupies the given
+   *         coordinate,
+   *         or return null if it is not occupied by any ships
    */
   public T whatIsAt(Coordinate where) {
-    for (Ship<T> s: myShips) {
-      if (s.occupiesCoordinates(where)){
+    for (Ship<T> s : myShips) {
+      if (s.occupiesCoordinates(where)) {
         return s.getDisplayInfoAt(where);
       }
     }
@@ -55,6 +61,7 @@ public class BattleShipBoard<T> implements Board<T> {
 
   /**
    * Gets the height of the BattleShipBoard
+   * 
    * @return the height of the BattleShipBoard
    */
   public int getHeight() {
@@ -63,10 +70,10 @@ public class BattleShipBoard<T> implements Board<T> {
 
   /**
    * Gets the width of the BattleShipBoard
-   * @return the width of the BattleShipBoard 
+   * 
+   * @return the width of the BattleShipBoard
    */
   public int getWidth() {
     return width;
   }
-
 }

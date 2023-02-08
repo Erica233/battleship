@@ -11,6 +11,7 @@ public class Coordinate {
 
   /**
    * Constructs a Coordinate with the specified row and column number
+   * 
    * @param r is the row number of the newly constructed coordinate.
    * @param c is the column number of the newly constructed coordinate.
    */
@@ -21,10 +22,13 @@ public class Coordinate {
 
   /**
    * Constructs a corresponding Coordinate with the specified string
+   * 
    * @param descr a string including row letter and column number
    * @throws IllegalArgumentException if the string length is not equal to 2,
-   * or the row letter is not between 'A' and 'Z' (ignoring cases),
-   * or the column number is less than 0 or larger than 9.
+   *                                  or the row letter is not between 'A' and 'Z'
+   *                                  (ignoring cases),
+   *                                  or the column number is less than 0 or
+   *                                  larger than 9.
    */
   public Coordinate(String descr) {
     if (descr.length() != 2) {
@@ -44,7 +48,9 @@ public class Coordinate {
   }
 
   /**
-   * Checks if two objects are the same coordinates, according to their row and column numbers
+   * Checks if two objects are the same coordinates, according to their row and
+   * column numbers
+   * 
    * @param o object to check
    * @return boolean that if the two objects are the same
    */
@@ -59,6 +65,7 @@ public class Coordinate {
 
   /**
    * Gives the row and column number of the coordinate
+   * 
    * @return a String that shows the row and column number of the coordinate
    */
   @Override
@@ -68,6 +75,7 @@ public class Coordinate {
 
   /**
    * Calculates the hashcode of the coordinate
+   * 
    * @return the hashcode number of the coordinate
    */
   @Override
@@ -79,6 +87,7 @@ public class Coordinate {
   public int getRow() {
     return row;
   }
+
   public int getColumn() {
     return column;
   }

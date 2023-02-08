@@ -5,7 +5,7 @@ package edu.duke.fm128.battleship;
  * a Board (i.e., converting it to a string to show
  * to the user).
  * It supports two ways to display the Board:
- * one for the player's own board, and one for the 
+ * one for the player's own board, and one for the
  * enemy's board.
  */
 public class BoardTextView {
@@ -16,8 +16,9 @@ public class BoardTextView {
 
   /**
    * Constructs a BoardView, given the board it will display.
+   * 
    * @param toDisplay is the Board to display
-   * @throws IllegalArgumentException if the board is larger than 10x26. 
+   * @throws IllegalArgumentException if the board is larger than 10x26.
    */
   public BoardTextView(Board<Character> toDisplay) {
     this.toDisplay = toDisplay;
@@ -29,6 +30,7 @@ public class BoardTextView {
 
   /**
    * Makes the empty board given width and height, including header and body
+   * 
    * @return the String that is the empty given board
    */
   public String displayMyOwnBoard() {
@@ -38,7 +40,7 @@ public class BoardTextView {
     ans.append(header);
     for (int i = 0; i < toDisplay.getHeight(); i++) {
       sep = " ";
-      char sym = (char)((int)'A' + i);
+      char sym = (char) ((int) 'A' + i);
       ans.append(sym);
       for (int j = 0; j < toDisplay.getWidth(); j++) {
         ans.append(sep);
@@ -61,7 +63,7 @@ public class BoardTextView {
    */
   String makeHeader() {
     StringBuilder ans = new StringBuilder("  "); // README shows two spaces at
-    String sep = ""; //start with nothing to separate, then switch to | to separate
+    String sep = ""; // start with nothing to separate, then switch to | to separate
     for (int i = 0; i < toDisplay.getWidth(); i++) {
       ans.append(sep);
       ans.append(i);

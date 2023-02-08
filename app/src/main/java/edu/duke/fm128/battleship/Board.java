@@ -6,6 +6,7 @@ package edu.duke.fm128.battleship;
 public interface Board<T> {
   /**
    * Adds the ship to the list of myShips and return true
+   * 
    * @param toAdd the ship to add
    * @return true
    */
@@ -13,19 +14,24 @@ public interface Board<T> {
 
   /**
    * Gives the information of the given coordinate if it is occupied.
+   * 
    * @param where the coordinate
-   * @return the information of the given coordinate if it is occupied, otherwise, return null
+   * @return the information of the given coordinate if it is occupied, otherwise,
+   *         return null
    */
   T whatIsAt(Coordinate where);
 
   /**
    * Gets the width of the Board
+   * 
    * @return the width of the Board
    */
-   int getWidth();
-  /** 
+  int getWidth();
+
+  /**
    * Gets the height of the Board
+   * 
    * @return the height of the Board
    */
-   int getHeight();
+  int getHeight();
 }

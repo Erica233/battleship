@@ -6,7 +6,7 @@ public class BasicShip implements Ship<Character> {
   public BasicShip(Coordinate c) {
     this.myLocation = c;
   }
-  
+
   @Override
   public boolean occupiesCoordinates(Coordinate where) {
     // TODO Auto-generated method stub
@@ -22,7 +22,7 @@ public class BasicShip implements Ship<Character> {
   @Override
   public void recordHitAt(Coordinate where) {
     // TODO Auto-generated method stub
-    
+
   }
 
   @Override
@@ -36,5 +36,4 @@ public class BasicShip implements Ship<Character> {
     // TODO Auto-generated method stub
     return 's';
   }
-
 }
