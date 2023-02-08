@@ -3,15 +3,15 @@ package edu.duke.fm128.battleship;
 /**
  * A Board
  */
-public interface Board {
+public interface Board<T> {
   /** 
    * Gets the width of the Board
    * @return the width of the Board
    */
-  public int getWidth();
+   int getWidth();
   /** 
    * Gets the height of the Board
    * @return the height of the Board
    */
-  public int getHeight();
+   int getHeight();
 }

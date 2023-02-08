@@ -3,7 +3,7 @@ package edu.duke.fm128.battleship;
 /**
  * A battleship board for the battleship game
  */
-public class BattleShipBoard implements Board {
+public class BattleShipBoard<T> implements Board<T> {
   private final int width;
   private final int height;
 
