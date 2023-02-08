@@ -1,6 +1,7 @@
 package edu.duke.fm128.battleship;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,4 +21,32 @@ public class BattleShipBoardTest {
     assertThrows(IllegalArgumentException.class, () -> new BattleShipBoard<>(-8, 20));
   }
 
+  /**
+   * A helper function to check whether the board information is the same as expected
+   * @param b current BattleShipBoard
+   * @param expected expected results
+   * @param <T> Character
+   */
+  private <T> void checkWhatIsAtBoard(BattleShipBoard<T> b, T[][] expected) {
+    for (int i = 0; i < b.getWidth(); i++) {
+      for (int j = 0; j < b.getHeight(); j++) {
+        assertEquals(expected[i][j], b.whatIsAt(new Coordinate(i, j)));
+      }
+    }
+  }
+  @Test
+  public void test_whatIsAt() {
+    BattleShipBoard<Character> b1 = new BattleShipBoard<>(10, 20);
+    Character[][] expected = new Character[10][20];
+    // check that it has no ships anywhere
+    checkWhatIsAtBoard(b1, expected);
+
+    // add ships and test reults
+    b1.tryAddShip(new BasicShip(new Coordinate(3,5)));
+    expected[3][5] = 's';
+    checkWhatIsAtBoard(b1, expected);
+    b1.tryAddShip(new BasicShip(new Coordinate(0,0)));
+    expected[0][0] = 's';
+    checkWhatIsAtBoard(b1, expected);
+  }
 }
