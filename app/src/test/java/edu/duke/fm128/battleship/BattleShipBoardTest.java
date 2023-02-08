@@ -23,6 +23,7 @@ public class BattleShipBoardTest {
 
   /**
    * A helper function to check whether the board information is the same as expected
+   *
    * @param b current BattleShipBoard
    * @param expected expected results
    * @param <T> Character
