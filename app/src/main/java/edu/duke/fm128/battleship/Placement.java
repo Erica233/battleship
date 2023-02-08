@@ -18,7 +18,6 @@ public class Placement {
     this.where = wh;
     this.orientation = Character.toUpperCase(orient);
   }
-
   /**
    * Constructs a corresponding Placement with the specified string
    * @param descr a string including the coordinate and orientation of the placement
@@ -76,5 +75,4 @@ public class Placement {
   public char getOrientation() {
     return orientation;
   }
-
 }
