@@ -58,7 +58,7 @@ public class Placement {
    * and orientation of the placement
    * 
    * @param o object to check
-   * @return boolean that if the two objects have the same coordinate and
+   * @return boolean that if the two objects have the same location and
    *         orientation
    */
   @Override
