@@ -36,15 +36,20 @@ public class BoardTextView {
   public String displayMyOwnBoard() {
     StringBuilder ans = new StringBuilder();
     String sep;
+    Character info;
     String header = makeHeader();
     ans.append(header);
-    for (int i = 0; i < toDisplay.getHeight(); i++) {
+    for (int r = 0; r < toDisplay.getHeight(); r++) {
       sep = " ";
-      char sym = (char) ((int) 'A' + i);
+      char sym = (char) ((int) 'A' + r);
       ans.append(sym);
-      for (int j = 0; j < toDisplay.getWidth(); j++) {
+      for (int c = 0; c < toDisplay.getWidth(); c++) {
         ans.append(sep);
-        ans.append(" ");
+        info = toDisplay.whatIsAt(new Coordinate(r, c));
+        if (info == null) {
+          info = ' ';
+        }
+        ans.append(info);
         sep = "|";
       }
       sep = " ";

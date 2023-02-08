@@ -44,8 +44,18 @@ public class BoardTextViewTest {
   public void test_invalid_board_size() {
     Board<Character> wideBoard = new BattleShipBoard<>(11, 20);
     Board<Character> tallBoard = new BattleShipBoard<>(10, 27);
-    // you should write two assertThrows here
     assertThrows(IllegalArgumentException.class, () -> new BoardTextView(wideBoard));
     assertThrows(IllegalArgumentException.class, () -> new BoardTextView(tallBoard));
   }
+
+  /*@Test
+  public void test_display_4by3() {
+    String expectedHeader = "  0|1|2|3\n";
+    String expectedBody = "A  | | |  A\n" +
+            "B  | | |  B\n" +
+            "C  | | |  C\n";
+    emptyBoardHelper(3, 5, expectedHeader, expectedBody);
+
+  }
+  */
 }
