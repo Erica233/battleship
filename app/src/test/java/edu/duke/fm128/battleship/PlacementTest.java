@@ -52,10 +52,13 @@ public class PlacementTest {
     Placement p2 = new Placement(c1, 'V');
     Placement p3 = new Placement("B2h");
     Placement p4 = new Placement("A2V");
+    Placement p5 = new Placement(new Coordinate(1, 2), 'V');
     assertEquals(p1, p1);
     assertEquals(p1, p2);
     assertNotEquals(p1, p3);
     assertNotEquals(p4, p3);
+    assertEquals(p1, p5);
+    assertEquals(p2, p5);
     assertNotEquals("((1, 2), V)", p1);
     assertNotEquals(p1, "((1, 2), V)");
   }

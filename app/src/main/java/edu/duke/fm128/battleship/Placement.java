@@ -65,7 +65,7 @@ public class Placement {
   public boolean equals(Object o) {
     if (o.getClass().equals(getClass())) {
       Placement p = (Placement) o;
-      return where == p.where && orientation == p.orientation;
+      return where.equals(p.where) && orientation == p.orientation;
     }
     return false;
   }
