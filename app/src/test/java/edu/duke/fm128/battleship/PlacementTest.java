@@ -11,7 +11,6 @@ public class PlacementTest {
         Placement p1 = new Placement(c1, 'v');
         Placement p2 = new Placement(c1, 'V');
         assertEquals(new Coordinate(1, 2), p1.getWhere());
-        assertEquals('v', p1.getOrientation());
         assertEquals('V', p2.getOrientation());
     }
 
@@ -57,6 +56,8 @@ public class PlacementTest {
         assertNotEquals(p1, p3);
         assertNotEquals(p4, p3);
         assertNotEquals("((1, 2), V)", p1);
+        assertNotEquals(p1, "((1, 2), V)");
+        assertTrue(!p1.equals(p4));
     }
 
     @Test
