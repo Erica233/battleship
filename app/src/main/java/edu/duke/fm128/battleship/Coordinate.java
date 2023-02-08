@@ -13,8 +13,8 @@ public class Coordinate {
     if (descr.length() != 2) {
       throw new IllegalArgumentException("The length of Coordinate must be 2!");
     }
+    int colNum = descr.charAt(1) - '0';
     char rowLetter = descr.toUpperCase().charAt(0);
-    int colNum = descr.charAt(1);
     if (rowLetter < 'A' || rowLetter > 'Z') {
       throw new IllegalArgumentException("The row letter of Coordinate must be a letter!");
     }
