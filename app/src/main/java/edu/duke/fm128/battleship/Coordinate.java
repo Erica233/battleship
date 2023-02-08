@@ -9,6 +9,19 @@ public class Coordinate {
     this.column = c;
   }
 
+  public Coordinate(String descr) {
+    if (descr.length() != 2) {
+      throw new IllegalArgumentException("The length of Coordinate must be 2!");
+    }
+    char rowLetter = descr.toUpperCase().charAt(0);
+    int colNum = descr.charAt(1);
+    if (rowLetter < 'A' || rowLetter > 'Z') {
+      throw new IllegalArgumentException("The row letter of Coordinate must be a letter!");
+    }
+    this.row = rowLetter - 'A';
+    this.column = colNum;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (o.getClass().equals(getClass())) {
