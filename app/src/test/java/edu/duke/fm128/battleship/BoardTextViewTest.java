@@ -52,8 +52,8 @@ public class BoardTextViewTest {
   public void test_display_occupied_4by3() {
     String expectedHeader = "  0|1|2|3\n";
     String expectedBody = "A s| | |  A\n" +
-            "B  | | |  B\n" +
-            "C  | | |  C\n";
+        "B  | | |  B\n" +
+        "C  | | |  C\n";
     String expected = expectedHeader + expectedBody + expectedHeader;
 
     Board<Character> b1 = new BattleShipBoard<>(4, 3);
@@ -63,8 +63,8 @@ public class BoardTextViewTest {
 
     b1.tryAddShip(new BasicShip(new Coordinate(2, 3)));
     expectedBody = "A s| | |  A\n" +
-            "B  | | |  B\n" +
-            "C  | | |s C\n";
+        "B  | | |  B\n" +
+        "C  | | |s C\n";
     expected = expectedHeader + expectedBody + expectedHeader;
     assertEquals(expected, view.displayMyOwnBoard());
   }
