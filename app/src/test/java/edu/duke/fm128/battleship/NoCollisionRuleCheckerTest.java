@@ -38,6 +38,7 @@ class NoCollisionRuleCheckerTest {
         Placement p1 = new Placement(new Coordinate(-1, 2), 'H');
         Ship<Character> sub0 = f.makeSubmarine(p0);
         Ship<Character> sub1 = f.makeSubmarine(p1);
+
         assertTrue(checker.checkPlacement(sub0, b1));
         assertFalse(checker.checkPlacement(sub1, b1));
         b1.tryAddShip(sub0);
