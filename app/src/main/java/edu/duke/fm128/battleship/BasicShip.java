@@ -1,8 +1,11 @@
 package edu.duke.fm128.battleship;
 
+import java.util.HashMap;
+
 public class BasicShip implements Ship<Character> {
   private final Coordinate myLocation;
-
+  HashMap<Coordinate, Boolean>  myPieces;
+  
   public BasicShip(Coordinate c) {
     this.myLocation = c;
   }
