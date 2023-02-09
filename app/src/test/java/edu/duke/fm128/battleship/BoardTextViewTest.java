@@ -57,11 +57,11 @@ public class BoardTextViewTest {
     String expected = expectedHeader + expectedBody + expectedHeader;
 
     Board<Character> b1 = new BattleShipBoard<>(4, 3);
-    b1.tryAddShip(new BasicShip(new Coordinate(0, 0)));
+    b1.tryAddShip(new RectangleShip<>(new Coordinate(0, 0), 's', '*'));
     BoardTextView view = new BoardTextView(b1);
     assertEquals(expected, view.displayMyOwnBoard());
 
-    b1.tryAddShip(new BasicShip(new Coordinate(2, 3)));
+    b1.tryAddShip(new RectangleShip<>(new Coordinate(2, 3), 's', '*'));
     expectedBody = "A s| | |  A\n" +
         "B  | | |  B\n" +
         "C  | | |s C\n";

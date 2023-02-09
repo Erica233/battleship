@@ -45,10 +45,10 @@ public class BattleShipBoardTest {
     checkWhatIsAtBoard(b1, expected);
 
     // add ships and test reults
-    b1.tryAddShip(new BasicShip(new Coordinate(3, 5)));
+    b1.tryAddShip(new RectangleShip<>(new Coordinate(3, 5), 's', '*'));
     expected[3][5] = 's';
     checkWhatIsAtBoard(b1, expected);
-    b1.tryAddShip(new BasicShip(new Coordinate(0, 0)));
+    b1.tryAddShip(new RectangleShip<>(new Coordinate(0, 0), 's', '*'));
     expected[0][0] = 's';
     checkWhatIsAtBoard(b1, expected);
   }

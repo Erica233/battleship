@@ -2,10 +2,47 @@ package edu.duke.fm128.battleship;
 
 import java.util.HashSet;
 
-public class RectangleShip extends BasicShip {
+/**
+ * A ship that is rectangular, which extends a BasicShip
+ *
+ * @param <T> Character
+ */
+public class RectangleShip<T> extends BasicShip<T> {
 
-  public RectangleShip(Coordinate upperLeft, int width, int height) {
-    super(makeCoords(upperLeft, width, height));
+  /**
+   * Constructs a RectangleShip
+   *
+   * @param upperLeft the coordinate of the upper left part of the ship
+   * @param width the width of the ship
+   * @param height the height of the ship
+   * @param shipInfo the ShipDisplayInfo
+   */
+  public RectangleShip(Coordinate upperLeft, int width, int height, ShipDisplayInfo<T> shipInfo) {
+    super(makeCoords(upperLeft, width, height), shipInfo);
+  }
+
+  /**
+   * Constructs a RectangleShip
+   *
+   * @param upperLeft the coordinate of the upper left part of the ship
+   * @param width the width of the ship
+   * @param height the height of the ship
+   * @param data myData
+   * @param onHit onHit
+   */
+  public RectangleShip(Coordinate upperLeft, int width, int height, T data, T onHit) {
+    this(upperLeft, width, height, new SimpleShipDisplayInfo<>(data, onHit));
+  }
+
+  /**
+   * Constructs a RectangleShip
+   *
+   * @param upperLeft the coordinate of the upper left part of the ship
+   * @param data myData
+   * @param onHit onHit
+   */
+  public RectangleShip(Coordinate upperLeft, T data, T onHit) {
+    this(upperLeft, 1, 1, data, onHit);
   }
 
   /**
@@ -26,5 +63,4 @@ public class RectangleShip extends BasicShip {
     }
     return coordsSet;
   }
-
 }
