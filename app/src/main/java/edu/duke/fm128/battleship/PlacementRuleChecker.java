@@ -1,15 +1,39 @@
 package edu.duke.fm128.battleship;
 
+/**
+ * A abstract class that is a PlacementRuleChecker
+ *
+ * @param <T>
+ */
 public abstract class PlacementRuleChecker<T> {
   private final PlacementRuleChecker<T> next;
 
+  /**
+   * Constructs a PlacementRuleChecker
+   *
+   * @param next the next PlacementRuleChecker
+   */
   public PlacementRuleChecker(PlacementRuleChecker<T> next) {
     this.next = next;
   }
 
+  /**
+   * Checks whether they follow the placement rule.
+   * Subclasses will override this method to specify how they check their own rule
+   *
+   * @param theShip the ship to check
+   * @param theBoard the board to check
+   * @return true if they follow the placement rule, otherwise false
+   */
   protected abstract boolean checkMyRule(Ship<T> theShip, Board<T> theBoard);
 
-  // Subclasses will generally NOT override this method
+  /**
+   * Checks whether they follow all the placement rules
+   *
+   * @param theShip the ship to check
+   * @param theBoard the board to check
+   * @return true if they follow all the placement rules, otherwise false
+   */
   public boolean checkPlacement(Ship<T> theShip, Board<T> theBoard) {
     // if we fail our own rule: stop the placement is not legal
     if (!checkMyRule(theShip, theBoard)) {

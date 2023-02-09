@@ -29,6 +29,11 @@ public abstract class BasicShip<T> implements Ship<T> {
     this.myDisplayInfo = _myDisplayInfo;
   }
 
+  /**
+   * Get all of the Coordinates that this Ship occupies.
+   *
+   * @return An Set with the coordinates that this Ship occupies
+   */
   public Set<Coordinate> getCoordinates() {
     return myPieces.keySet();
   }

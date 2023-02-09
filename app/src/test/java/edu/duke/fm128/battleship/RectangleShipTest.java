@@ -9,6 +9,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RectangleShipTest {
   @Test
+  void test_get_coordinates() {
+    HashSet<Coordinate> expected = new HashSet<>();
+    Coordinate c1 = new Coordinate(1, 2);
+    Coordinate c2 = new Coordinate(2, 2);
+    Coordinate c3 = new Coordinate(3, 2);
+    expected.add(c1);
+    expected.add(c2);
+    expected.add(c3);
+    RectangleShip<Character> recShip = new RectangleShip<>("submarine", c1, 1, 3, 's', '*');
+    assertEquals(expected, recShip.getCoordinates());
+  }
+
+  @Test
   void test_make_coords() {
     HashSet<Coordinate> realSet = RectangleShip.makeCoords(new Coordinate(1, 2), 1, 3);
     HashSet<Coordinate> expectedSet = new HashSet<>();
