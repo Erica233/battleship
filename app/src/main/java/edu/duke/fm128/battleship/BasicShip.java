@@ -1,6 +1,7 @@
 package edu.duke.fm128.battleship;
 
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * Abstract class for a basic ship
@@ -26,6 +27,10 @@ public abstract class BasicShip<T> implements Ship<T> {
       this.myPieces.put(c, false);
     }
     this.myDisplayInfo = _myDisplayInfo;
+  }
+
+  public Set<Coordinate> getCoordinates() {
+    return myPieces.keySet();
   }
 
   /**

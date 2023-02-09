@@ -7,6 +7,13 @@ package edu.duke.fm128.battleship;
  */
 public interface Ship<T> {
   /**
+   * Get all of the Coordinates that this Ship occupies.
+   * 
+   * @return An Iterable with the coordinates that this Ship occupies
+   */
+  public Iterable<Coordinate> getCoordinates();
+
+  /**
    * Check if this ship occupies the given coordinate.
    * 
    * @param where is the Coordinate to check if this Ship occupies
@@ -55,6 +62,7 @@ public interface Ship<T> {
 
   /**
    * Get the name of this Ship, such as "submarine".
+   * 
    * @return the name of this ship
    */
   public String getName();
