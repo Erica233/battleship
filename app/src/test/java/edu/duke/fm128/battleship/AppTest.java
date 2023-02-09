@@ -39,7 +39,7 @@ class AppTest {
 
   @Test
   void test_do_one_placement() throws IOException {
-    StringReader sr = new StringReader("B2v\n");
+    StringReader sr = new StringReader("A2v\n");
 
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     PrintStream ps = new PrintStream(bytes, true);
@@ -52,9 +52,9 @@ class AppTest {
     app.doOnePlacement();
 
     String expected = "  0|1|2|3\n" +
-        "A  | | |  A\n" +
-        "B  | |s|  B\n" +
-        "C  | | |  C\n" +
+        "A  | |d|  A\n" +
+        "B  | |d|  B\n" +
+        "C  | |d|  C\n" +
         "  0|1|2|3\n";
     assertEquals(prompt + "\n" + expected, bytes.toString());
   }

@@ -10,6 +10,7 @@ public class App {
   final BoardTextView view;
   final BufferedReader inputReader;
   final PrintStream out;
+  final AbstractShipFactory<Character> shipFactory;
 
   /**
    * Constructs an App
@@ -23,6 +24,7 @@ public class App {
     this.view = new BoardTextView(theBoard);
     this.inputReader = new BufferedReader(inputSource);
     this.out = out;
+    this.shipFactory = new V1ShipFactory();
   }
 
   /**
@@ -48,15 +50,13 @@ public class App {
   public void doOnePlacement() throws IOException {
     String prompt = "Where would you like to put your ship?";
     Placement p = readPlacement(prompt);
-    BasicShip<Character> a_basicShip = new RectangleShip<>(p.getWhere(), 's', '*');
+    Ship<Character> a_basicShip  = shipFactory.makeDestroyer(p);
     theBoard.tryAddShip(a_basicShip);
     out.print(view.displayMyOwnBoard());
   }
 
   public static void main(String[] args) throws IOException {
     Board<Character> b = new BattleShipBoard<>(10, 20);
-    // Java does support System.setIn and System.setOut
-    // to change System.in and System.out???
     App app = new App(b, new InputStreamReader(System.in), System.out);
     app.doOnePlacement();
   }
