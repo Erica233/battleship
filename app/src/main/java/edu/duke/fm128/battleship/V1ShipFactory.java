@@ -8,11 +8,11 @@ public class V1ShipFactory implements AbstractShipFactory<Character> {
   /**
    * A helper function that creates ship
    *
-   * @param where the placement
-   * @param w width
-   * @param h height
+   * @param where  the placement
+   * @param w      width
+   * @param h      height
    * @param letter the symbol letter
-   * @param name the name of the ship type
+   * @param name   the name of the ship type
    * @return a newly constructed RectangleShip
    */
   protected Ship<Character> createShip(Placement where, int w, int h, char letter, String name) {
