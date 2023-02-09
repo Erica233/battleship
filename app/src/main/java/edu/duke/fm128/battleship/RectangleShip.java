@@ -8,30 +8,34 @@ import java.util.HashSet;
  * @param <T> Character
  */
 public class RectangleShip<T> extends BasicShip<T> {
+  private final String name;
 
   /**
    * Constructs a RectangleShip
    *
+   * @param name the (type) name of the ship
    * @param upperLeft the coordinate of the upper left part of the ship
    * @param width     the width of the ship
    * @param height    the height of the ship
-   * @param shipInfo  the ShipDisplayInfo
+   * @param myDisplayInfo  the ShipDisplayInfo
    */
-  public RectangleShip(Coordinate upperLeft, int width, int height, ShipDisplayInfo<T> shipInfo) {
-    super(makeCoords(upperLeft, width, height), shipInfo);
+  public RectangleShip(String name, Coordinate upperLeft, int width, int height, ShipDisplayInfo<T> myDisplayInfo) {
+    super(makeCoords(upperLeft, width, height), myDisplayInfo);
+    this.name = name;
   }
 
   /**
    * Constructs a RectangleShip
    *
+   * @param name the (type) name of the ship
    * @param upperLeft the coordinate of the upper left part of the ship
    * @param width     the width of the ship
    * @param height    the height of the ship
    * @param data      myData
    * @param onHit     onHit
    */
-  public RectangleShip(Coordinate upperLeft, int width, int height, T data, T onHit) {
-    this(upperLeft, width, height, new SimpleShipDisplayInfo<>(data, onHit));
+  public RectangleShip(String name, Coordinate upperLeft, int width, int height, T data, T onHit) {
+    this(name, upperLeft, width, height, new SimpleShipDisplayInfo<T>(data, onHit));
   }
 
   /**
@@ -42,7 +46,7 @@ public class RectangleShip<T> extends BasicShip<T> {
    * @param onHit     onHit
    */
   public RectangleShip(Coordinate upperLeft, T data, T onHit) {
-    this(upperLeft, 1, 1, data, onHit);
+    this("testship", upperLeft, 1, 1, data, onHit);
   }
 
   /**
@@ -62,5 +66,10 @@ public class RectangleShip<T> extends BasicShip<T> {
       }
     }
     return coordsSet;
+  }
+
+  /** getters and setters **/
+  public String getName() {
+    return name;
   }
 }
