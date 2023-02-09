@@ -39,23 +39,23 @@ class AppTest {
 
   @Test
   void test_do_one_placement() throws IOException {
-      StringReader sr = new StringReader("B2v\n");
+    StringReader sr = new StringReader("B2v\n");
 
-      ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-      PrintStream ps = new PrintStream(bytes, true);
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    PrintStream ps = new PrintStream(bytes, true);
 
-      Board<Character> b = new BattleShipBoard<>(4, 3);
-      App app = new App(b, sr, ps);
+    Board<Character> b = new BattleShipBoard<>(4, 3);
+    App app = new App(b, sr, ps);
 
-      String prompt = "Where would you like to put your ship?";
+    String prompt = "Where would you like to put your ship?";
 
-      app.doOnePlacement();
+    app.doOnePlacement();
 
-      String expected = "  0|1|2|3\n" +
-              "A  | | |  A\n" +
-              "B  | |s|  B\n" +
-              "C  | | |  C\n" +
-              "  0|1|2|3\n";
-      assertEquals(prompt + "\n" + expected, bytes.toString());
+    String expected = "  0|1|2|3\n" +
+        "A  | | |  A\n" +
+        "B  | |s|  B\n" +
+        "C  | | |  C\n" +
+        "  0|1|2|3\n";
+    assertEquals(prompt + "\n" + expected, bytes.toString());
   }
 }

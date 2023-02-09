@@ -48,3 +48,7 @@ clover{
         additionalArgs = "-g:lines,source,vars"
     }
 }
+
+run{
+    standardInput = System.in
+}

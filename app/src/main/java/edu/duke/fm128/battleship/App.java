@@ -30,17 +30,16 @@ public class App {
   }
 
   public void doOnePlacement() throws IOException {
-      String prompt = "Where would you like to put your ship?";
-      Placement p = readPlacement(prompt);
-      BasicShip a_basicShip = new BasicShip(p.getWhere());
-      theBoard.tryAddShip(a_basicShip);
-      out.print(view.displayMyOwnBoard());
+    String prompt = "Where would you like to put your ship?";
+    Placement p = readPlacement(prompt);
+    BasicShip a_basicShip = new BasicShip(p.getWhere());
+    theBoard.tryAddShip(a_basicShip);
+    out.print(view.displayMyOwnBoard());
   }
 
   public static void main(String[] args) throws IOException {
-      Board<Character> b = new BattleShipBoard<>(10, 20);
-      App app = new App(b, new InputStreamReader(System.in), System.out);
-      app.doOnePlacement();
-
+    Board<Character> b = new BattleShipBoard<>(10, 20);
+    App app = new App(b, new InputStreamReader(System.in), System.out);
+    app.doOnePlacement();
   }
 }
