@@ -57,4 +57,41 @@ public class TextPlayer {
     theBoard.tryAddShip(a_basicShip);
     out.print(view.displayMyOwnBoard());
   }
+
+  /**
+   * A helper function to output break line
+   */
+  public void printLineMarker() {
+    out.print("---------------------------------------------------------------------------\n");
+  }
+
+  /**
+   * A helper function to output instructions
+   */
+  public void printInstruction() {
+    printLineMarker();
+    out.print("Player " + name + ": you are going to place the following ships (which are all\n" +
+            "rectangular). For each ship, type the coordinate of the upper left\n" +
+            "side of the ship, followed by either H (for horizontal) or V (for\n" +
+            "vertical).  For example M4H would place a ship horizontally starting\n" +
+            "at M4 and going to the right.  You have\n" +
+            "\n" +
+            "2 \"Submarines\" ships that are 1x2 \n" +
+            "3 \"Destroyers\" that are 1x3\n" +
+            "3 \"Battleships\" that are 1x4\n" +
+            "2 \"Carriers\" that are 1x6\n");
+    printLineMarker();
+  }
+
+  /**
+   * display the starting (empty) board, print the instructions message, and place one ship
+   *
+   * @throws IOException
+   */
+  public void doPlacementPhase() throws IOException {
+    printLineMarker();
+    out.print(view.displayMyOwnBoard());
+    printInstruction();
+    doOnePlacement();
+  }
 }
