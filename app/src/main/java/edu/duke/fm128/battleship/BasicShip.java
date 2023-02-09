@@ -41,14 +41,13 @@ public abstract class BasicShip<T> implements Ship<T> {
 
   @Override
   public boolean occupiesCoordinates(Coordinate where) {
-    // TODO Auto-generated method stub
-    //return myPieces.get(where) != null;
+    // return myPieces.get(where) != null;
     return myPieces.containsKey(where);
   }
 
   @Override
   public boolean isSunk() {
-    for (Boolean val: myPieces.values()) {
+    for (Boolean val : myPieces.values()) {
       if (!val) {
         return false;
       }

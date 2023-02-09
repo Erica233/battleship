@@ -34,7 +34,8 @@ class RectangleShipTest {
     Coordinate c2 = new Coordinate(2, 2);
     Coordinate c3 = new Coordinate(3, 2);
     RectangleShip<Character> recShip = new RectangleShip<>(c1, 1, 3, 's', '*');
-    assertThrows(IllegalArgumentException.class, () -> new RectangleShip<>(new Coordinate(1, 3), 1, 3, 's', '*').wasHitAt(c0));
+    assertThrows(IllegalArgumentException.class,
+        () -> new RectangleShip<>(new Coordinate(1, 3), 1, 3, 's', '*').wasHitAt(c0));
     assertFalse(recShip.wasHitAt(c1));
     assertFalse(recShip.wasHitAt(c2));
     assertFalse(recShip.wasHitAt(c3));
@@ -42,7 +43,8 @@ class RectangleShipTest {
     assertFalse(recShip.wasHitAt(c1));
     assertTrue(recShip.wasHitAt(c2));
     assertFalse(recShip.wasHitAt(c3));
-    assertThrows(IllegalArgumentException.class, () -> new RectangleShip<>(new Coordinate(1, 3), 1, 3, 's', '*').wasHitAt(c0));
+    assertThrows(IllegalArgumentException.class,
+        () -> new RectangleShip<>(new Coordinate(1, 3), 1, 3, 's', '*').wasHitAt(c0));
   }
 
   @Test
@@ -65,15 +67,18 @@ class RectangleShipTest {
     Character data = 's';
     Character onHit = '*';
     RectangleShip<Character> recShip = new RectangleShip<>(c1, 1, 2, 's', '*');
-    assertThrows(IllegalArgumentException.class, () -> new RectangleShip<>(new Coordinate(1, 2), 1, 2, 's', '*').getDisplayInfoAt(c0));
+    assertThrows(IllegalArgumentException.class,
+        () -> new RectangleShip<>(new Coordinate(1, 2), 1, 2, 's', '*').getDisplayInfoAt(c0));
     assertEquals(data, recShip.getDisplayInfoAt(c1));
     assertEquals(data, recShip.getDisplayInfoAt(c2));
     recShip.recordHitAt(c1);
-    assertThrows(IllegalArgumentException.class, () -> new RectangleShip<>(new Coordinate(1, 2), 1, 2, 's', '*').getDisplayInfoAt(c0));
+    assertThrows(IllegalArgumentException.class,
+        () -> new RectangleShip<>(new Coordinate(1, 2), 1, 2, 's', '*').getDisplayInfoAt(c0));
     assertEquals(onHit, recShip.getDisplayInfoAt(c1));
     assertEquals(data, recShip.getDisplayInfoAt(c2));
     recShip.recordHitAt(c2);
-    assertThrows(IllegalArgumentException.class, () -> new RectangleShip<>(new Coordinate(1, 2), 1, 2, 's', '*').getDisplayInfoAt(c0));
+    assertThrows(IllegalArgumentException.class,
+        () -> new RectangleShip<>(new Coordinate(1, 2), 1, 2, 's', '*').getDisplayInfoAt(c0));
     assertEquals(onHit, recShip.getDisplayInfoAt(c1));
     assertEquals(onHit, recShip.getDisplayInfoAt(c2));
   }
