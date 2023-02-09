@@ -17,4 +17,13 @@ class RectangleShipTest {
     expectedSet.add(new Coordinate(3, 2));
     assertEquals(expectedSet, realSet);
   }
+
+  @Test
+  void test_occupy() {
+    RectangleShip recShip = new RectangleShip(new Coordinate(1, 2), 1, 3);
+    assertTrue(recShip.occupiesCoordinates(new Coordinate(1, 2)));
+    assertTrue(recShip.occupiesCoordinates(new Coordinate(2, 2)));
+    assertTrue(recShip.occupiesCoordinates(new Coordinate(3, 2)));
+    assertFalse(recShip.occupiesCoordinates(new Coordinate(0, 0)));
+  }
 }

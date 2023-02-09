@@ -2,7 +2,12 @@ package edu.duke.fm128.battleship;
 
 import java.util.HashSet;
 
-public class RectangleShip {
+public class RectangleShip extends BasicShip{
+
+  public RectangleShip(Coordinate upperLeft, int width, int height) {
+    super(makeCoords(upperLeft, width, height));
+  }
+
   /**
    * Generates the set of coordinates for a rectangle starting at upperLeft
    * whose width and height are as specified
@@ -21,12 +26,5 @@ public class RectangleShip {
     }
     return coordsSet;
   }
-
-  /*
-   * public RectangleShip(Coordinate upperLeft, int width, int height) {
-   * //super(makeCoords(upperLeft, width, height)); //specify how to call parent
-   * class constructor
-   * }
-   */
 
 }

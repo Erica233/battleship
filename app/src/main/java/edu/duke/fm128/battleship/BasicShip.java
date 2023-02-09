@@ -6,10 +6,11 @@ public class BasicShip implements Ship<Character> {
   protected HashMap<Coordinate, Boolean> myPieces;
 
   public BasicShip(Coordinate c) {
-    myPieces = new HashMap<Coordinate, Boolean>();
+    myPieces = new HashMap<>();
     myPieces.put(c, false);
   }
   public BasicShip(Iterable<Coordinate> where) {
+    this.myPieces = new HashMap<>();
     for (Coordinate c: where) {
       this.myPieces.put(c, false);
     }
