@@ -27,20 +27,14 @@ public class Placement {
    * @param descr a string including the coordinate and orientation of the
    *              placement
    * @throws IllegalArgumentException if the input string length is not equal to
-   *                                  3,
-   *                                  or the orientation is not horizontal ('H')
-   *                                  or vertical('V').
+   *                                  3
    */
   public Placement(String descr) {
     if (descr.length() != 3) {
       throw new IllegalArgumentException("The length of Coordinate must be 3!");
     }
     this.where = new Coordinate(descr.substring(0, 2));
-    char orient = descr.toUpperCase(Locale.ROOT).charAt(2);
-    if (orient != 'V' && orient != 'H') {
-      throw new IllegalArgumentException("The orientation of placement should only be vertical or horizontal!");
-    }
-    this.orientation = orient;
+    this.orientation = descr.toUpperCase(Locale.ROOT).charAt(2);
   }
 
   /**
