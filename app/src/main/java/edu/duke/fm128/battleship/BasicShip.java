@@ -9,13 +9,13 @@ public class BasicShip implements Ship<Character> {
     myPieces = new HashMap<>();
     myPieces.put(c, false);
   }
+
   public BasicShip(Iterable<Coordinate> where) {
     this.myPieces = new HashMap<>();
-    for (Coordinate c: where) {
+    for (Coordinate c : where) {
       this.myPieces.put(c, false);
     }
   }
-
 
   @Override
   public boolean occupiesCoordinates(Coordinate where) {

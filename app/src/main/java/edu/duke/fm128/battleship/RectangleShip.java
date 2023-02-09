@@ -2,7 +2,7 @@ package edu.duke.fm128.battleship;
 
 import java.util.HashSet;
 
-public class RectangleShip extends BasicShip{
+public class RectangleShip extends BasicShip {
 
   public RectangleShip(Coordinate upperLeft, int width, int height) {
     super(makeCoords(upperLeft, width, height));
