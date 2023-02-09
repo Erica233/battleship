@@ -20,7 +20,7 @@ class RectangleShipTest {
 
   @Test
   void test_occupy() {
-    RectangleShip<Character> recShip = new RectangleShip<>(new Coordinate(1, 2), 's', '*');
+    RectangleShip<Character> recShip = new RectangleShip<>(new Coordinate(1, 2), 1, 3, 's', '*');
     assertTrue(recShip.occupiesCoordinates(new Coordinate(1, 2)));
     assertTrue(recShip.occupiesCoordinates(new Coordinate(2, 2)));
     assertTrue(recShip.occupiesCoordinates(new Coordinate(3, 2)));

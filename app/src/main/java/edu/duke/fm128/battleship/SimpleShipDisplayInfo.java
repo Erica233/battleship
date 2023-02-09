@@ -11,6 +11,7 @@ public class SimpleShipDisplayInfo<T> implements ShipDisplayInfo<T> {
 
   /**
    * Constructs the ShipDisplayInfo given myData and onHit
+   * 
    * @param d myData input
    * @param h onHit input
    */

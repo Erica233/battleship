@@ -10,8 +10,8 @@ public interface ShipDisplayInfo<T> {
    * Checks if (hit) and returns onHit if so, and myData otherwise.
    *
    * @param where the coordinate
-   * @param hit the ship is hit or not
+   * @param hit   the ship is hit or not
    * @return the onHit if hit, otherwise myData
    */
-   T getInfo(Coordinate where, boolean hit);
+  T getInfo(Coordinate where, boolean hit);
 }

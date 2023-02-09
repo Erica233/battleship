@@ -17,7 +17,7 @@ public abstract class BasicShip<T> implements Ship<T> {
   /**
    * Constructs a BasicShip
    *
-   * @param where the coordinates where it is at
+   * @param where          the coordinates where it is at
    * @param _myDisplayInfo my ShipDisplayInfo
    */
   public BasicShip(Iterable<Coordinate> where, ShipDisplayInfo<T> _myDisplayInfo) {
@@ -54,8 +54,8 @@ public abstract class BasicShip<T> implements Ship<T> {
 
   @Override
   public T getDisplayInfoAt(Coordinate where) {
-    //TODO this is not right.  We need to
-    //look up the hit status of this coordinate
+    // TODO this is not right. We need to
+    // look up the hit status of this coordinate
     return myDisplayInfo.getInfo(where, false);
   }
 }
