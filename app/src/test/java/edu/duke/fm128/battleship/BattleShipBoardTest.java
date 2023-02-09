@@ -52,4 +52,18 @@ public class BattleShipBoardTest {
     expected[0][0] = 's';
     checkWhatIsAtBoard(b1, expected);
   }
+
+  @Test
+  void test_try_add_ship() {
+    InBoundsRuleChecker<Character> checker = new InBoundsRuleChecker<>(new NoCollisionRuleChecker<>(null));
+    BattleShipBoard<Character> b1 = new BattleShipBoard<>(10, 20, checker);
+    V1ShipFactory f = new V1ShipFactory();
+    Placement p0 = new Placement(new Coordinate(1, 2), 'H');
+    Placement p1 = new Placement(new Coordinate(-1, 2), 'H');
+    Ship<Character> sub0 = f.makeSubmarine(p0);
+    Ship<Character> sub1 = f.makeSubmarine(p1);
+    assertTrue(b1.tryAddShip(sub0));
+    assertFalse(b1.tryAddShip(sub1));
+  }
+
 }

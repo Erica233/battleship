@@ -44,14 +44,19 @@ public class BattleShipBoard<T> implements Board<T> {
   }
 
   /**
-   * Adds the ship to the list of myShips and return true
+   * Checks the validity of the placement,
+   * if it is valid, adds a ship to the list of myShips and returns true,
+   * otherwise, return false
    * 
    * @param toAdd the ship to add
-   * @return true
+   * @return true if the placement is valid, otherwise false
    */
   public boolean tryAddShip(Ship<T> toAdd) {
-    myShips.add(toAdd);
-    return true;
+    if (placementChecker.checkPlacement(toAdd, this)) {
+      myShips.add(toAdd);
+      return true;
+    }
+    return false;
   }
 
   /**
