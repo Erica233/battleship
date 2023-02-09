@@ -22,10 +22,11 @@ public class BattleShipBoard<T> implements Board<T> {
   }
 
   /**
-   * Constructs a BattleShipBoard with the specified width and height and PlacementRuleChecker
+   * Constructs a BattleShipBoard with the specified width and height and
+   * PlacementRuleChecker
    * 
-   * @param w is the width of the newly constructed board.
-   * @param h is the height of the newly constructed board.
+   * @param w   is the width of the newly constructed board.
+   * @param h   is the height of the newly constructed board.
    * @param prc is the PlacementRuleChecker
    * @throws IllegalArgumentException if the width or height are less than or
    *                                  equal to zero.
