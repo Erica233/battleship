@@ -13,11 +13,11 @@ public class RectangleShip<T> extends BasicShip<T> {
   /**
    * Constructs a RectangleShip
    *
-   * @param name the (type) name of the ship
-   * @param upperLeft the coordinate of the upper left part of the ship
-   * @param width     the width of the ship
-   * @param height    the height of the ship
-   * @param myDisplayInfo  the ShipDisplayInfo
+   * @param name          the (type) name of the ship
+   * @param upperLeft     the coordinate of the upper left part of the ship
+   * @param width         the width of the ship
+   * @param height        the height of the ship
+   * @param myDisplayInfo the ShipDisplayInfo
    */
   public RectangleShip(String name, Coordinate upperLeft, int width, int height, ShipDisplayInfo<T> myDisplayInfo) {
     super(makeCoords(upperLeft, width, height), myDisplayInfo);
@@ -27,7 +27,7 @@ public class RectangleShip<T> extends BasicShip<T> {
   /**
    * Constructs a RectangleShip
    *
-   * @param name the (type) name of the ship
+   * @param name      the (type) name of the ship
    * @param upperLeft the coordinate of the upper left part of the ship
    * @param width     the width of the ship
    * @param height    the height of the ship
