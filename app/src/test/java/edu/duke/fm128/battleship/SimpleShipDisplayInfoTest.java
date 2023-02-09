@@ -6,16 +6,6 @@ import org.junit.jupiter.api.Test;
 
 public class SimpleShipDisplayInfoTest {
   @Test
-  public void test_data_and_hit() {
-    Character d = 'd';
-    Character o = 'o';
-    SimpleShipDisplayInfo<Character> sd = new SimpleShipDisplayInfo<>(d, o);
-    assertEquals(d, sd.myData);
-    assertEquals(o, sd.onHit);
-    assertNotEquals(d, sd.onHit);
-  }
-
-  @Test
   public void test_get_info() {
     Character d = 'd';
     Character o = 'o';

@@ -6,8 +6,8 @@ package edu.duke.fm128.battleship;
  * @param <T> Character
  */
 public class SimpleShipDisplayInfo<T> implements ShipDisplayInfo<T> {
-  public T myData;
-  public T onHit;
+  private T myData;
+  private T onHit;
 
   /**
    * Constructs the ShipDisplayInfo given myData and onHit
