@@ -14,9 +14,9 @@ public class App {
   /**
    * Constructs an App
    *
-   * @param theBoard a board
+   * @param theBoard    a board
    * @param inputSource input
-   * @param out output
+   * @param out         output
    */
   public App(Board<Character> theBoard, Reader inputSource, PrintStream out) {
     this.theBoard = theBoard;
@@ -55,8 +55,8 @@ public class App {
 
   public static void main(String[] args) throws IOException {
     Board<Character> b = new BattleShipBoard<>(10, 20);
-    //Java does support System.setIn and System.setOut
-    //to change System.in and System.out???
+    // Java does support System.setIn and System.setOut
+    // to change System.in and System.out???
     App app = new App(b, new InputStreamReader(System.in), System.out);
     app.doOnePlacement();
   }

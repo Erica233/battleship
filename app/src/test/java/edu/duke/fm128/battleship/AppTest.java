@@ -65,22 +65,21 @@ class AppTest {
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     PrintStream out = new PrintStream(bytes, true);
 
-    //get an InputStream for our input.txt file, and the expected output
+    // get an InputStream for our input.txt file, and the expected output
     InputStream input = getClass().getClassLoader().getResourceAsStream("input.txt");
     assertNotNull(input);
     InputStream expectedStream = getClass().getClassLoader().getResourceAsStream("output.txt");
     assertNotNull(expectedStream);
-    //remember the current System.in and System.out
+    // remember the current System.in and System.out
     InputStream oldIn = System.in;
     PrintStream oldOut = System.out;
 
-    //change to our new input and output
+    // change to our new input and output
     try {
       System.setIn(input);
       System.setOut(out);
       App.main(new String[0]);
-    }
-    finally {
+    } finally {
       System.setIn(oldIn);
       System.setOut(oldOut);
     }
