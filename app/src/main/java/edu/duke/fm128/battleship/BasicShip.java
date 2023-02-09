@@ -3,18 +3,23 @@ package edu.duke.fm128.battleship;
 import java.util.HashMap;
 
 public class BasicShip implements Ship<Character> {
-  private final Coordinate myLocation;
-  HashMap<Coordinate, Boolean>  myPieces;
-  
+  protected HashMap<Coordinate, Boolean> myPieces;
+
   public BasicShip(Coordinate c) {
-    this.myLocation = c;
+    myPieces = new HashMap<Coordinate, Boolean>();
+    myPieces.put(c, false);
+  }
+  public BasicShip(Iterable<Coordinate> where) {
+    for (Coordinate c: where) {
+      this.myPieces.put(c, false);
+    }
   }
 
 
   @Override
   public boolean occupiesCoordinates(Coordinate where) {
     // TODO Auto-generated method stub
-    return where.equals(myLocation);
+    return myPieces.get(where) != null;
   }
 
   @Override
