@@ -4,11 +4,11 @@
 package edu.duke.fm128.battleship;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.ResourceAccessMode;
+import org.junit.jupiter.api.parallel.ResourceLock;
+import org.junit.jupiter.api.parallel.Resources;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
-import java.io.StringReader;
+import java.io.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -57,5 +57,36 @@ class AppTest {
         "C  | | |  C\n" +
         "  0|1|2|3\n";
     assertEquals(prompt + "\n" + expected, bytes.toString());
+  }
+
+  @Test
+  @ResourceLock(value = Resources.SYSTEM_OUT, mode = ResourceAccessMode.READ_WRITE)
+  void test_main() throws IOException {
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    PrintStream out = new PrintStream(bytes, true);
+
+    //get an InputStream for our input.txt file, and the expected output
+    InputStream input = getClass().getClassLoader().getResourceAsStream("input.txt");
+    assertNotNull(input);
+    InputStream expectedStream = getClass().getClassLoader().getResourceAsStream("output.txt");
+    assertNotNull(expectedStream);
+    //remember the current System.in and System.out
+    InputStream oldIn = System.in;
+    PrintStream oldOut = System.out;
+
+    //change to our new input and output
+    try {
+      System.setIn(input);
+      System.setOut(out);
+      App.main(new String[0]);
+    }
+    finally {
+      System.setIn(oldIn);
+      System.setOut(oldOut);
+    }
+
+    String expected = new String(expectedStream.readAllBytes());
+    String actual = bytes.toString();
+    assertEquals(expected, actual);
   }
 }

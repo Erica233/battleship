@@ -6,16 +6,18 @@ package edu.duke.fm128.battleship;
 import java.io.*;
 
 public class App {
-  /*
-   * public String getGreeting() {
-   * return "Hello World!";
-   * }
-   */
   final Board<Character> theBoard;
   final BoardTextView view;
   final BufferedReader inputReader;
   final PrintStream out;
 
+  /**
+   * Constructs an App
+   *
+   * @param theBoard a board
+   * @param inputSource input
+   * @param out output
+   */
   public App(Board<Character> theBoard, Reader inputSource, PrintStream out) {
     this.theBoard = theBoard;
     this.view = new BoardTextView(theBoard);
@@ -23,12 +25,26 @@ public class App {
     this.out = out;
   }
 
+  /**
+   * Prints out the prompt message, creates a new placement according to the input
+   *
+   * @param prompt the string that will be printed out
+   * @return the new constructed placement according to input
+   * @throws IOException
+   */
   public Placement readPlacement(String prompt) throws IOException {
     out.println(prompt);
     String s = inputReader.readLine();
     return new Placement(s);
   }
 
+  /**
+   * Reads a placement according to input, creates a basic ship
+   * according to the location of placement, adds it to the board,
+   * and prints out the board
+   *
+   * @throws IOException
+   */
   public void doOnePlacement() throws IOException {
     String prompt = "Where would you like to put your ship?";
     Placement p = readPlacement(prompt);
@@ -39,6 +55,8 @@ public class App {
 
   public static void main(String[] args) throws IOException {
     Board<Character> b = new BattleShipBoard<>(10, 20);
+    //Java does support System.setIn and System.setOut
+    //to change System.in and System.out???
     App app = new App(b, new InputStreamReader(System.in), System.out);
     app.doOnePlacement();
   }
