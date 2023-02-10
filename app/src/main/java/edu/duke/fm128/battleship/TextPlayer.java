@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.Reader;
 
+/**
+ * A TextPlayer
+ *
+ */
 public class TextPlayer {
   private final Board<Character> theBoard;
   private final BoardTextView view;

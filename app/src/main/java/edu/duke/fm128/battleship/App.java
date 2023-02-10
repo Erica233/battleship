@@ -20,6 +20,11 @@ public class App {
     this.player2 = p2;
   }
 
+  /**
+   * do the entire placement phase for both players
+   *
+   * @throws IOException
+   */
   public void doPlacementPhase() throws IOException {
     // assume each player only has one destroyer here
     player1.doOnePlacement();
