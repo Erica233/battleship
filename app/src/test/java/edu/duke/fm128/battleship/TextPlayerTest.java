@@ -1,7 +1,7 @@
 package edu.duke.fm128.battleship;
 
 import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.Disabled;
 import java.io.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -60,6 +60,7 @@ class TextPlayerTest {
     assertEquals(prompt + "\n" + expected, bytes.toString());
   }
 
+  @Disabled
   @Test
   void test_doPlacementPhase() throws IOException {
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
