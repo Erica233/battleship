@@ -22,7 +22,8 @@ public class InBoundsRuleChecker<T> extends PlacementRuleChecker<T> {
    *
    * @param theShip  the ship to check
    * @param theBoard the board to check
-   * @return null if the coordinates are in the boundaries, otherwise return the detail message
+   * @return null if the coordinates are in the boundaries, otherwise return the
+   *         detail message
    */
   @Override
   protected String checkMyRule(Ship<T> theShip, Board<T> theBoard) {
