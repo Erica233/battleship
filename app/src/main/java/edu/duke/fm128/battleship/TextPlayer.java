@@ -45,6 +45,9 @@ public class TextPlayer {
     setupShipCreationList();
   }
 
+  /**
+   * set up ships creation function
+   */
   protected void setupShipCreationMap() {
     shipCreationFns.put("Submarine", (p) -> shipFactory.makeSubmarine(p));
     shipCreationFns.put("Destroyer", (p) -> shipFactory.makeDestroyer(p));
@@ -52,6 +55,9 @@ public class TextPlayer {
     shipCreationFns.put("Carrier", (p) -> shipFactory.makeCarrier(p));
   }
 
+  /**
+   * set up ship creation list
+   */
   protected void setupShipCreationList() {
     shipsToPlace.addAll(Collections.nCopies(2, "Submarine"));
     shipsToPlace.addAll(Collections.nCopies(3, "Destroyer"));
