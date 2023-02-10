@@ -53,22 +53,6 @@ public class BattleShipBoardTest {
     checkWhatIsAtBoard(b1, expected);
   }
 
-  /**
-   * A helper function to check whether the board information is the same as
-   * expected
-   *
-   * @param b        current BattleShipBoard
-   * @param expected expected results
-   * @param <T>      Character
-   */
-  private <T> void checkWhatIsAtBoardForEnemy(BattleShipBoard<T> b, T[][] expected) {
-    for (int i = 0; i < b.getWidth(); i++) {
-      for (int j = 0; j < b.getHeight(); j++) {
-        assertEquals(expected[i][j], b.whatIsAtForEnemy(new Coordinate(i, j)));
-      }
-    }
-  }
-
   @Test
   public void test_whatIsAtForEnemy() {
     BattleShipBoard<Character> b1 = new BattleShipBoard<>(10, 20, 'X');
