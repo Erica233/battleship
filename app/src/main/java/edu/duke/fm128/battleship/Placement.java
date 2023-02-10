@@ -26,12 +26,14 @@ public class Placement {
    * 
    * @param descr a string including the coordinate and orientation of the
    *              placement
-   * @throws IllegalArgumentException if the input string length is not equal to
-   *                                  3
+   * @throws IllegalArgumentException if the placement is invalid
    */
   public Placement(String descr) {
     if (descr.length() != 3) {
-      throw new IllegalArgumentException("The length of Coordinate must be 3!");
+      throw new IllegalArgumentException("That placement is invalid: it does not have the correct format.");
+    }
+    if (getOrientation() != 'H' && getOrientation() != 'V') {
+      throw new IllegalArgumentException("That placement is invalid: it does not have the correct format.");
     }
     this.where = new Coordinate(descr.substring(0, 2));
     this.orientation = descr.toUpperCase(Locale.ROOT).charAt(2);

@@ -18,15 +18,15 @@ class NoCollisionRuleCheckerTest {
     Ship<Character> sub1 = f.makeSubmarine(p1);
     Ship<Character> sub2 = f.makeSubmarine(p2);
     Ship<Character> sub3 = f.makeSubmarine(p3);
-    assertTrue(checker.checkMyRule(sub0, b1));
-    assertTrue(checker.checkMyRule(sub1, b1));
-    assertTrue(checker.checkMyRule(sub2, b1));
-    assertTrue(checker.checkMyRule(sub3, b1));
+    assertNull(checker.checkMyRule(sub0, b1));
+    assertNull(checker.checkMyRule(sub1, b1));
+    assertNull(checker.checkMyRule(sub2, b1));
+    assertNull(checker.checkMyRule(sub3, b1));
     b1.tryAddShip(sub0);
-    assertFalse(checker.checkMyRule(sub0, b1));
-    assertFalse(checker.checkMyRule(sub1, b1));
-    assertTrue(checker.checkMyRule(sub2, b1));
-    assertTrue(checker.checkMyRule(sub3, b1));
+    assertNotEquals(null, checker.checkMyRule(sub0, b1));
+    assertNotEquals(null, checker.checkMyRule(sub1, b1));
+    assertNull(checker.checkMyRule(sub2, b1));
+    assertNull(checker.checkMyRule(sub3, b1));
   }
 
   @Test
@@ -39,13 +39,13 @@ class NoCollisionRuleCheckerTest {
     Ship<Character> sub0 = f.makeSubmarine(p0);
     Ship<Character> sub1 = f.makeSubmarine(p1);
 
-    assertTrue(checker.checkPlacement(sub0, b1));
-    assertFalse(checker.checkPlacement(sub1, b1));
+    assertNull(checker.checkPlacement(sub0, b1));
+    assertNotEquals(null, checker.checkPlacement(sub1, b1));
     b1.tryAddShip(sub0);
-    assertFalse(checker.checkPlacement(sub0, b1));
+    assertNotEquals(null, checker.checkPlacement(sub0, b1));
 
     NoCollisionRuleChecker<Character> checker2 = new NoCollisionRuleChecker<>(new InBoundsRuleChecker<>(null));
-    assertFalse(checker2.checkPlacement(sub0, b1));
-    assertFalse(checker2.checkPlacement(sub1, b1));
+    assertNotEquals(null, checker2.checkPlacement(sub0, b1));
+    assertNotEquals(null, checker2.checkPlacement(sub1, b1));
   }
 }

@@ -1,10 +1,7 @@
 
 package edu.duke.fm128.battleship;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.PrintStream;
-import java.io.Reader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -70,11 +67,14 @@ public class TextPlayer {
    *
    * @param prompt the string that will be printed out
    * @return the new constructed placement according to input
-   * @throws IOException
+   * @throws IOException if input is empty
    */
   public Placement readPlacement(String prompt) throws IOException {
     out.println(prompt);
     String s = inputReader.readLine();
+    if (s == null) {
+      throw new EOFException();
+    }
     return new Placement(s);
   }
 

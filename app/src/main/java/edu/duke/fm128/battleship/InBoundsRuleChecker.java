@@ -22,16 +22,24 @@ public class InBoundsRuleChecker<T> extends PlacementRuleChecker<T> {
    *
    * @param theShip  the ship to check
    * @param theBoard the board to check
-   * @return true if the coordinates are in the boundaries, otherwise false
+   * @return null if the coordinates are in the boundaries, otherwise return the detail message
    */
   @Override
-  protected boolean checkMyRule(Ship<T> theShip, Board<T> theBoard) {
+  protected String checkMyRule(Ship<T> theShip, Board<T> theBoard) {
     for (Coordinate c : theShip.getCoordinates()) {
-      if (0 > c.getRow() || c.getRow() >= theBoard.getHeight() || 0 > c.getColumn()
-          || c.getColumn() >= theBoard.getWidth()) {
-        return false;
+      if (0 > c.getRow()) {
+        return "That placement is invalid: the ship goes off the top of the board.";
+      }
+      if (c.getRow() >= theBoard.getHeight()) {
+        return "That placement is invalid: the ship goes off the bottom of the board.";
+      }
+      if (0 > c.getColumn()) {
+        return "That placement is invalid: the ship goes off the left of the board.";
+      }
+      if (c.getColumn() >= theBoard.getWidth()) {
+        return "That placement is invalid: the ship goes off the right of the board.";
       }
     }
-    return true;
+    return null;
   }
 }

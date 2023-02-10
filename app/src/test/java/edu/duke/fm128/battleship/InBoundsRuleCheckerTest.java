@@ -6,6 +6,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class InBoundsRuleCheckerTest {
 
+  private String outInfo(String direction) {
+    return "That placement is invalid: the ship goes off the " + direction + " of the board.";
+  }
+
   @Test
   void test_check_my_rule_and_placement() {
     BattleShipBoard<Character> b1 = new BattleShipBoard<>(10, 20);
@@ -21,15 +25,15 @@ class InBoundsRuleCheckerTest {
     Ship<Character> sub2 = f.makeSubmarine(p2);
     Ship<Character> sub3 = f.makeSubmarine(p3);
     Ship<Character> sub4 = f.makeSubmarine(p4);
-    assertTrue(checker.checkPlacement(sub0, b1));
-    assertFalse(checker.checkPlacement(sub1, b1));
-    assertFalse(checker.checkPlacement(sub2, b1));
-    assertFalse(checker.checkPlacement(sub3, b1));
-    assertFalse(checker.checkPlacement(sub4, b1));
-    assertTrue(checker.checkMyRule(sub0, b1));
-    assertFalse(checker.checkMyRule(sub1, b1));
-    assertFalse(checker.checkMyRule(sub2, b1));
-    assertFalse(checker.checkMyRule(sub3, b1));
-    assertFalse(checker.checkMyRule(sub4, b1));
+    assertNull(checker.checkPlacement(sub0, b1));
+    assertNotEquals(null, checker.checkPlacement(sub1, b1));
+    assertNotEquals(null, checker.checkPlacement(sub2, b1));
+    assertNotEquals(null, checker.checkPlacement(sub3, b1));
+    assertNotEquals(null, checker.checkPlacement(sub4, b1));
+    assertNull(checker.checkMyRule(sub0, b1));
+    assertNotEquals(null, checker.checkMyRule(sub1, b1));
+    assertNotEquals(null, checker.checkMyRule(sub2, b1));
+    assertNotEquals(null, checker.checkMyRule(sub3, b1));
+    assertNotEquals(null, checker.checkMyRule(sub4, b1));
   }
 }

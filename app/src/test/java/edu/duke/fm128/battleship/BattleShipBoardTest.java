@@ -62,8 +62,8 @@ public class BattleShipBoardTest {
     Placement p1 = new Placement(new Coordinate(-1, 2), 'H');
     Ship<Character> sub0 = f.makeSubmarine(p0);
     Ship<Character> sub1 = f.makeSubmarine(p1);
-    assertTrue(b1.tryAddShip(sub0));
-    assertFalse(b1.tryAddShip(sub1));
+    assertNull(b1.tryAddShip(sub0));
+    assertNotEquals(null, b1.tryAddShip(sub1));
   }
 
 }

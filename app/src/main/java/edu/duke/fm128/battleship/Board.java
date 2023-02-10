@@ -8,9 +8,9 @@ public interface Board<T> {
    * Adds the ship to the list of myShips and return true
    * 
    * @param toAdd the ship to add
-   * @return true
+   * @return a String that shows the validity of the add operation
    */
-  boolean tryAddShip(Ship<T> toAdd);
+  String tryAddShip(Ship<T> toAdd);
 
   /**
    * Gives the information of the given coordinate if it is occupied.

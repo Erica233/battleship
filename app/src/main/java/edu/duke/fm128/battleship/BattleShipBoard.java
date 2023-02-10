@@ -52,12 +52,13 @@ public class BattleShipBoard<T> implements Board<T> {
    * @param toAdd the ship to add
    * @return true if the placement is valid, otherwise false
    */
-  public boolean tryAddShip(Ship<T> toAdd) {
-    if (placementChecker.checkPlacement(toAdd, this)) {
+  public String tryAddShip(Ship<T> toAdd) {
+    String info = placementChecker.checkPlacement(toAdd, this);
+    if (info == null) {
       myShips.add(toAdd);
-      return true;
+      return null;
     }
-    return false;
+    return info;
   }
 
   /**
