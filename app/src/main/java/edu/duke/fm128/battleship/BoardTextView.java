@@ -45,7 +45,7 @@ public class BoardTextView {
       ans.append(sym);
       for (int c = 0; c < toDisplay.getWidth(); c++) {
         ans.append(sep);
-        info = toDisplay.whatIsAt(new Coordinate(r, c));
+        info = toDisplay.whatIsAtForSelf(new Coordinate(r, c));
         if (info == null) {
           info = ' ';
         }

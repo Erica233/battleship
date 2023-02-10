@@ -32,7 +32,7 @@ public class BattleShipBoardTest {
   private <T> void checkWhatIsAtBoard(BattleShipBoard<T> b, T[][] expected) {
     for (int i = 0; i < b.getWidth(); i++) {
       for (int j = 0; j < b.getHeight(); j++) {
-        assertEquals(expected[i][j], b.whatIsAt(new Coordinate(i, j)));
+        assertEquals(expected[i][j], b.whatIsAtForSelf(new Coordinate(i, j)));
       }
     }
   }
@@ -67,7 +67,25 @@ public class BattleShipBoardTest {
     Placement p2 = new Placement(new Coordinate(19, 0), 'V');
     Ship<Character> sub2 = f.makeSubmarine(p2);
     assertNotEquals(null, b1.tryAddShip(sub2));
+  }
 
+  @Test
+  void test_fire_at() {
+    InBoundsRuleChecker<Character> checker = new InBoundsRuleChecker<>(new NoCollisionRuleChecker<>(null));
+    BattleShipBoard<Character> b1 = new BattleShipBoard<>(3, 2, checker);
+    V1ShipFactory f = new V1ShipFactory();
+    Coordinate c0 = new Coordinate(0, 0);
+    Coordinate c1 = new Coordinate(0, 1);
+    Coordinate c2 = new Coordinate(0, 2);
+    Placement p0 = new Placement(new Coordinate(0, 0), 'H');
+    Ship<Character> sub0 = f.makeSubmarine(p0);
+    b1.tryAddShip(sub0);
+
+    assertSame(b1.fireAt(c0), sub0);
+    assertFalse(sub0.isSunk());
+    assertSame(b1.fireAt(c1), sub0);
+    assertTrue(sub0.isSunk());
+    assertNull(b1.fireAt(c2));
   }
 
 }

@@ -1,6 +1,7 @@
 package edu.duke.fm128.battleship;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * A battleship board for the battleship game
@@ -10,6 +11,7 @@ public class BattleShipBoard<T> implements Board<T> {
   private final int height;
   final ArrayList<Ship<T>> myShips;
   private final PlacementRuleChecker<T> placementChecker;
+  HashSet<Coordinate> enemyMisses;
 
   /**
    * Constructs a BattleShipBoard with the specified width and height
@@ -42,6 +44,22 @@ public class BattleShipBoard<T> implements Board<T> {
     this.height = h;
     this.myShips = new ArrayList<>();
     this.placementChecker = prc;
+    this.enemyMisses = new HashSet<>();
+  }
+
+  @Override
+  public Ship<T> fireAt(Coordinate c) {
+    //search for any ship that occupies coordinate c
+    for (Ship<T> ship: myShips) {
+      //If one is found, that Ship is "hit" by the attack and should record it
+      if (ship.occupiesCoordinates(c)) {
+        ship.recordHitAt(c);
+        return ship;
+      }
+    }
+    //If no ships are at this coordinate, record the miss in the enemyMisses, and return null.
+    enemyMisses.add(c);
+    return null;
   }
 
   /**
@@ -52,6 +70,7 @@ public class BattleShipBoard<T> implements Board<T> {
    * @param toAdd the ship to add
    * @return true if the placement is valid, otherwise false
    */
+  @Override
   public String tryAddShip(Ship<T> toAdd) {
     String info = placementChecker.checkPlacement(toAdd, this);
     if (info == null) {
@@ -69,10 +88,15 @@ public class BattleShipBoard<T> implements Board<T> {
    * @return the information offered by the ship which occupies the given
    *         coordinate, or return null if it is not occupied by any ships
    */
-  public T whatIsAt(Coordinate where) {
+  @Override
+  public T whatIsAtForSelf(Coordinate where) {
+    return whatIsAt(where, true);
+  }
+
+  protected T whatIsAt(Coordinate where, boolean isSelf) {
     for (Ship<T> s : myShips) {
       if (s.occupiesCoordinates(where)) {
-        return s.getDisplayInfoAt(where);
+        return s.getDisplayInfoAt(where, isSelf);
       }
     }
     return null;

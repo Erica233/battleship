@@ -5,6 +5,16 @@ package edu.duke.fm128.battleship;
  */
 public interface Board<T> {
   /**
+   * search for any ship that occupies coordinate c.
+   * If one is found, that Ship is "hit" by the attack and should record it, then return this ship.
+   * If no ships are at this coordinate, record the miss in the enemyMisses, and return null.
+   *
+   * @param c coordinate which the enemy tries to fire at
+   * @return the ship that is fired at
+   */
+  Ship<T> fireAt(Coordinate c);
+
+  /**
    * Adds the ship to the list of myShips and return true
    * 
    * @param toAdd the ship to add
@@ -19,7 +29,7 @@ public interface Board<T> {
    * @return the information of the given coordinate if it is occupied, otherwise,
    *         return null
    */
-  T whatIsAt(Coordinate where);
+  T whatIsAtForSelf(Coordinate where);
 
   /**
    * Gets the width of the Board

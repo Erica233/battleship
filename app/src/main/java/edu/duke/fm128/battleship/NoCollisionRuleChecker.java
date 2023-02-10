@@ -1,7 +1,5 @@
 package edu.duke.fm128.battleship;
 
-import java.nio.charset.CoderResult;
-
 /**
  * A class that is a NoCollisionRuleChecker
  *
@@ -29,7 +27,7 @@ public class NoCollisionRuleChecker<T> extends PlacementRuleChecker<T> {
   @Override
   protected String checkMyRule(Ship<T> theShip, Board<T> theBoard) {
     for (Coordinate c : theShip.getCoordinates()) {
-      if (theBoard.whatIsAt(c) != null) {
+      if (theBoard.whatIsAtForSelf(c) != null) {
         return "That placement is invalid: the ship overlaps another ship.";
       }
     }
