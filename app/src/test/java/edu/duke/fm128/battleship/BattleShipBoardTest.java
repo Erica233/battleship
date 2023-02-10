@@ -53,6 +53,39 @@ public class BattleShipBoardTest {
     checkWhatIsAtBoard(b1, expected);
   }
 
+  /**
+   * A helper function to check whether the board information is the same as
+   * expected
+   *
+   * @param b        current BattleShipBoard
+   * @param expected expected results
+   * @param <T>      Character
+   */
+  private <T> void checkWhatIsAtBoardForEnemy(BattleShipBoard<T> b, T[][] expected) {
+    for (int i = 0; i < b.getWidth(); i++) {
+      for (int j = 0; j < b.getHeight(); j++) {
+        assertEquals(expected[i][j], b.whatIsAtForEnemy(new Coordinate(i, j)));
+      }
+    }
+  }
+
+  @Test
+  public void test_whatIsAtForEnemy() {
+    BattleShipBoard<Character> b1 = new BattleShipBoard<>(10, 20, 'X');
+    V1ShipFactory f = new V1ShipFactory();
+    Coordinate c1 = new Coordinate(1, 2);
+    Coordinate c2 = new Coordinate(0, 0);
+    Placement p1 = new Placement(c1, 'V');
+    f.makeSubmarine(p1);
+
+    // add ships and test reults
+    b1.tryAddShip(new RectangleShip<>(c1, 's', '*'));
+    b1.fireAt(c1);
+    b1.fireAt(c2);
+    assertEquals('s', b1.whatIsAtForEnemy(c1));
+    assertEquals('X', b1.whatIsAtForEnemy(c2));
+  }
+
   @Test
   void test_try_add_ship() {
     InBoundsRuleChecker<Character> checker = new InBoundsRuleChecker<>(new NoCollisionRuleChecker<>(null));

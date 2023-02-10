@@ -83,14 +83,6 @@ public class BattleShipBoard<T> implements Board<T> {
     return info;
   }
 
-  /**
-   * Gives the information offered by the Ship which occupies the given
-   * coordinate.
-   * 
-   * @param where the coordinate
-   * @return the information offered by the ship which occupies the given
-   *         coordinate, or return null if it is not occupied by any ships
-   */
   @Override
   public T whatIsAtForSelf(Coordinate where) {
     return whatIsAt(where, true);
@@ -101,6 +93,15 @@ public class BattleShipBoard<T> implements Board<T> {
     return whatIsAt(where, false);
   }
 
+  /**
+   * Gives the information offered by the Ship which occupies the given
+   * coordinate.
+   *
+   * @param where the coordinate
+   * @param isSelf the boolean if it is for self
+   * @return the information offered by the ship which occupies the given
+   *         coordinate, or return null if it is not occupied by any ships
+   */
   protected T whatIsAt(Coordinate where, boolean isSelf) {
     //if the specified coordinate cooresponds to a ship,
     // use its display info.
@@ -109,8 +110,11 @@ public class BattleShipBoard<T> implements Board<T> {
         return s.getDisplayInfoAt(where, isSelf);
       }
     }
-    //However, if it does not, and we are doing this for an enemy board (isSelf is false),
-    //then xwe should check for a miss before we return null.
+    //However, if it does not, and we are doing this for an enemy board,
+    //then check for a miss before return null.
+    if (!isSelf && enemyMisses.contains(where)) {
+      return missInfo;
+    }
     return null;
   }
 
