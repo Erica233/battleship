@@ -86,10 +86,22 @@ public class TextPlayer {
    * @throws IOException
    */
   public void doOnePlacement(String shipName, Function<Placement, Ship<Character>> createFn) throws IOException {
-    Placement p = readPlacement("Player " + name + " where do you want to place a " + shipName + "?");
-    Ship<Character> s = createFn.apply(p);
-    theBoard.tryAddShip(s);
-    out.print(view.displayMyOwnBoard());
+    String problem;
+    do {
+      try {
+        Placement p = readPlacement("Player " + name + " where do you want to place a " + shipName + "?");
+        Ship<Character> s = createFn.apply(p);
+        problem = theBoard.tryAddShip(s);
+      }
+      catch (IllegalArgumentException iae) {
+        problem = "it does not have the correct format";
+      }
+      if (problem != null) {
+        String mesg = "That placement is invalid: " + problem + ".";
+        out.println(mesg);
+        out.print(view.displayMyOwnBoard());
+      }
+    } while (problem != null);
   }
 
   /**
