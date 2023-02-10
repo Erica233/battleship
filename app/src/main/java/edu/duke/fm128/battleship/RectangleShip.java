@@ -19,7 +19,8 @@ public class RectangleShip<T> extends BasicShip<T> {
    * @param height        the height of the ship
    * @param myDisplayInfo the ShipDisplayInfo
    */
-  public RectangleShip(String name, Coordinate upperLeft, int width, int height, ShipDisplayInfo<T> myDisplayInfo, ShipDisplayInfo<T> enemyDisplayInfo) {
+  public RectangleShip(String name, Coordinate upperLeft, int width, int height, ShipDisplayInfo<T> myDisplayInfo,
+      ShipDisplayInfo<T> enemyDisplayInfo) {
     super(makeCoords(upperLeft, width, height), myDisplayInfo, enemyDisplayInfo);
     this.name = name;
   }
@@ -36,7 +37,7 @@ public class RectangleShip<T> extends BasicShip<T> {
    */
   public RectangleShip(String name, Coordinate upperLeft, int width, int height, T data, T onHit) {
     this(name, upperLeft, width, height, new SimpleShipDisplayInfo<>(data, onHit),
-            new SimpleShipDisplayInfo<>(null, data));
+        new SimpleShipDisplayInfo<>(null, data));
   }
 
   /**

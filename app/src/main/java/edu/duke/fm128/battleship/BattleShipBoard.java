@@ -49,15 +49,16 @@ public class BattleShipBoard<T> implements Board<T> {
 
   @Override
   public Ship<T> fireAt(Coordinate c) {
-    //search for any ship that occupies coordinate c
-    for (Ship<T> ship: myShips) {
-      //If one is found, that Ship is "hit" by the attack and should record it
+    // search for any ship that occupies coordinate c
+    for (Ship<T> ship : myShips) {
+      // If one is found, that Ship is "hit" by the attack and should record it
       if (ship.occupiesCoordinates(c)) {
         ship.recordHitAt(c);
         return ship;
       }
     }
-    //If no ships are at this coordinate, record the miss in the enemyMisses, and return null.
+    // If no ships are at this coordinate, record the miss in the enemyMisses, and
+    // return null.
     enemyMisses.add(c);
     return null;
   }

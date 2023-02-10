@@ -6,8 +6,10 @@ package edu.duke.fm128.battleship;
 public interface Board<T> {
   /**
    * search for any ship that occupies coordinate c.
-   * If one is found, that Ship is "hit" by the attack and should record it, then return this ship.
-   * If no ships are at this coordinate, record the miss in the enemyMisses, and return null.
+   * If one is found, that Ship is "hit" by the attack and should record it, then
+   * return this ship.
+   * If no ships are at this coordinate, record the miss in the enemyMisses, and
+   * return null.
    *
    * @param c coordinate which the enemy tries to fire at
    * @return the ship that is fired at
