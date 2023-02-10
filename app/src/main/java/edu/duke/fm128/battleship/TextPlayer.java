@@ -1,5 +1,5 @@
-package edu.duke.fm128.battleship;
 
+package edu.duke.fm128.battleship;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
