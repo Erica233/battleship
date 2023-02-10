@@ -50,7 +50,7 @@ class TextPlayerTest {
 
     String prompt = "Player A where do you want to place a Destroyer?";
 
-    player.doOnePlacement();
+    player.doOnePlacement("Destroyer", player.shipCreationFns.get("Destroyer"));
 
     String expected = "  0|1|2|3\n" +
         "A  | |d|  A\n" +
@@ -64,6 +64,7 @@ class TextPlayerTest {
   void test_doPlacementPhase() throws IOException {
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     TextPlayer player = createTextPlayer(10, 20, "B2V\n", bytes);
+    player.doPlacementPhase();
 
     String emptyBoard = "---------------------------------------------------------------------------\n" +
         "  0|1|2|3|4|5|6|7|8|9\n" +
@@ -102,8 +103,6 @@ class TextPlayerTest {
         "2 \"Carriers\" that are 1x6\n" +
         "---------------------------------------------------------------------------\n";
     String prompt = "Player A where do you want to place a Destroyer?";
-
-    player.doPlacementPhase();
 
     String afterPlace = "  0|1|2|3|4|5|6|7|8|9\n" +
         "A  | | | | | | | | |  A\n" +

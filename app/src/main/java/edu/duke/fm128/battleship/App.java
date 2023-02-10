@@ -26,9 +26,8 @@ public class App {
    * @throws IOException
    */
   public void doPlacementPhase() throws IOException {
-    // assume each player only has one destroyer here
-    player1.doOnePlacement();
-    player2.doOnePlacement();
+    player1.doPlacementPhase();
+    player2.doPlacementPhase();
   }
 
   public static void main(String[] args) throws IOException {

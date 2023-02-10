@@ -4,6 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.function.Function;
 
 /**
  * A TextPlayer
@@ -16,6 +20,9 @@ public class TextPlayer {
   private final PrintStream out;
   private final AbstractShipFactory<Character> shipFactory;
   private final String name;
+  final ArrayList<String> shipsToPlace;
+  final HashMap<String, Function<Placement, Ship<Character>>> shipCreationFns;
+
 
   /**
    * Constructs a TextPlayer
@@ -32,6 +39,24 @@ public class TextPlayer {
     this.out = out;
     this.shipFactory = v1_shipFact;
     this.name = theName;
+    this.shipsToPlace = new ArrayList<>();
+    this.shipCreationFns = new HashMap<>();
+    setupShipCreationMap();
+    setupShipCreationList();
+  }
+
+  protected void setupShipCreationMap() {
+    shipCreationFns.put("Submarine", (p) -> shipFactory.makeSubmarine(p));
+    shipCreationFns.put("Destroyer", (p) -> shipFactory.makeDestroyer(p));
+    shipCreationFns.put("Battleship", (p) -> shipFactory.makeBattleship(p));
+    shipCreationFns.put("Carrier", (p) -> shipFactory.makeCarrier(p));
+  }
+
+  protected void setupShipCreationList() {
+    shipsToPlace.addAll(Collections.nCopies(2, "Submarine"));
+    shipsToPlace.addAll(Collections.nCopies(3, "Destroyer"));
+    shipsToPlace.addAll(Collections.nCopies(3, "Battleship"));
+    shipsToPlace.addAll(Collections.nCopies(2, "Carrier"));
   }
 
   /**
@@ -54,11 +79,10 @@ public class TextPlayer {
    *
    * @throws IOException
    */
-  public void doOnePlacement() throws IOException {
-    String prompt = "Player " + name + " where do you want to place a Destroyer?";
-    Placement p = readPlacement(prompt);
-    Ship<Character> a_basicShip = shipFactory.makeDestroyer(p);
-    theBoard.tryAddShip(a_basicShip);
+  public void doOnePlacement(String shipName, Function<Placement, Ship<Character>> createFn) throws IOException {
+    Placement p = readPlacement("Player " + name + " where do you want to place a " + shipName + "?");
+    Ship<Character> s = createFn.apply(p);
+    theBoard.tryAddShip(s);
     out.print(view.displayMyOwnBoard());
   }
 
@@ -96,7 +120,9 @@ public class TextPlayer {
   public void doPlacementPhase() throws IOException {
     printLineMarker();
     out.print(view.displayMyOwnBoard());
-    printInstruction();
-    doOnePlacement();
+    for (String s: shipsToPlace) {
+      printInstruction();
+      doOnePlacement(s, shipCreationFns.get(s));
+    }
   }
 }
