@@ -45,11 +45,10 @@ class TextPlayerTest {
   }
 
   @Test
-  void test_read_incvaid_placement() throws IOException {
+  void test_read_invalid_placement() throws IOException {
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     String prompt = "Please enter a location for a ship:";
     TextPlayer p2 = createTextPlayer(10, 20, "", bytes);
-    Placement expected = new Placement(new Coordinate(0, 4), 'V');
     assertThrows(EOFException.class, () -> p2.readPlacement(prompt));
   }
 
@@ -57,17 +56,36 @@ class TextPlayerTest {
   void test_do_one_placement() throws IOException {
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     TextPlayer player = createTextPlayer(4, 3, "A2v\n", bytes);
-
-    String prompt = "Player A where do you want to place a Destroyer?";
-
     player.doOnePlacement("Destroyer", player.shipCreationFns.get("Destroyer"));
 
+    String prompt = "Player A where do you want to place a Destroyer?";
     String expected = "  0|1|2|3\n" +
         "A  | |d|  A\n" +
         "B  | |d|  B\n" +
         "C  | |d|  C\n" +
         "  0|1|2|3\n";
     assertEquals(prompt + "\n" + expected, bytes.toString());
+  }
+
+  @Test
+  void test_do_invalid_one_placement() throws IOException {
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    TextPlayer player = createTextPlayer(4, 3, "2v\nA2v\n", bytes);
+    player.doOnePlacement("Destroyer", player.shipCreationFns.get("Destroyer"));
+    String expected = "Player A where do you want to place a Destroyer?\n" +
+            "That placement is invalid: it does not have the correct format.\n" +
+            "  0|1|2|3\n" +
+            "A  | | |  A\n" +
+            "B  | | |  B\n" +
+            "C  | | |  C\n" +
+            "  0|1|2|3\n" +
+            "Player A where do you want to place a Destroyer?\n" +
+            "  0|1|2|3\n" +
+            "A  | |d|  A\n" +
+            "B  | |d|  B\n" +
+            "C  | |d|  C\n" +
+            "  0|1|2|3\n";
+    assertEquals(expected, bytes.toString());
   }
 
   @Test

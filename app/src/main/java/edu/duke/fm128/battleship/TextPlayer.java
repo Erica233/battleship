@@ -85,7 +85,7 @@ public class TextPlayer {
    *
    * @throws IOException
    */
-  public void doOnePlacement(String shipName, Function<Placement, Ship<Character>> createFn) throws IOException {
+  public void doOnePlacement(String shipName, Function<Placement, Ship<Character>> createFn) throws IOException, IllegalArgumentException {
     String problem;
     do {
       try {
