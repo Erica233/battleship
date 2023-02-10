@@ -12,6 +12,7 @@ public class BattleShipBoard<T> implements Board<T> {
   final ArrayList<Ship<T>> myShips;
   private final PlacementRuleChecker<T> placementChecker;
   HashSet<Coordinate> enemyMisses;
+  final T missInfo;
 
   /**
    * Constructs a BattleShipBoard with the specified width and height
@@ -19,8 +20,8 @@ public class BattleShipBoard<T> implements Board<T> {
    * @param w is the width of the newly constructed board.
    * @param h is the height of the newly constructed board.
    */
-  public BattleShipBoard(int w, int h) {
-    this(w, h, new InBoundsRuleChecker<>(null));
+  public BattleShipBoard(int w, int h, T _missInfo) {
+    this(w, h, new InBoundsRuleChecker<>(null), _missInfo);
   }
 
   /**
@@ -33,7 +34,7 @@ public class BattleShipBoard<T> implements Board<T> {
    * @throws IllegalArgumentException if the width or height are less than or
    *                                  equal to zero.
    */
-  public BattleShipBoard(int w, int h, PlacementRuleChecker<T> prc) {
+  public BattleShipBoard(int w, int h, PlacementRuleChecker<T> prc, T _missInfo) {
     if (w <= 0) {
       throw new IllegalArgumentException("BattleShipBoard's width must be positive but is " + w);
     }
@@ -45,6 +46,7 @@ public class BattleShipBoard<T> implements Board<T> {
     this.myShips = new ArrayList<>();
     this.placementChecker = prc;
     this.enemyMisses = new HashSet<>();
+    this.missInfo = _missInfo;
   }
 
   @Override
@@ -94,12 +96,21 @@ public class BattleShipBoard<T> implements Board<T> {
     return whatIsAt(where, true);
   }
 
+  @Override
+  public T whatIsAtForEnemy(Coordinate where) {
+    return whatIsAt(where, false);
+  }
+
   protected T whatIsAt(Coordinate where, boolean isSelf) {
+    //if the specified coordinate cooresponds to a ship,
+    // use its display info.
     for (Ship<T> s : myShips) {
       if (s.occupiesCoordinates(where)) {
         return s.getDisplayInfoAt(where, isSelf);
       }
     }
+    //However, if it does not, and we are doing this for an enemy board (isSelf is false),
+    //then xwe should check for a miss before we return null.
     return null;
   }
 

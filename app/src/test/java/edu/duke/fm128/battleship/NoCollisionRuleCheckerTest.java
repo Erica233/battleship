@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class NoCollisionRuleCheckerTest {
   @Test
   void test_check_my_rule() {
-    BattleShipBoard<Character> b1 = new BattleShipBoard<>(10, 20);
+    BattleShipBoard<Character> b1 = new BattleShipBoard<>(10, 20, 'X');
     V1ShipFactory f = new V1ShipFactory();
     NoCollisionRuleChecker<Character> checker = new NoCollisionRuleChecker<>(null);
     Placement p0 = new Placement(new Coordinate(1, 2), 'H');
@@ -31,7 +31,7 @@ class NoCollisionRuleCheckerTest {
 
   @Test
   void test_combine_rules() {
-    BattleShipBoard<Character> b1 = new BattleShipBoard<>(10, 20);
+    BattleShipBoard<Character> b1 = new BattleShipBoard<>(10, 20, 'X');
     V1ShipFactory f = new V1ShipFactory();
     InBoundsRuleChecker<Character> checker = new InBoundsRuleChecker<>(new NoCollisionRuleChecker<>(null));
     Placement p0 = new Placement(new Coordinate(1, 2), 'H');

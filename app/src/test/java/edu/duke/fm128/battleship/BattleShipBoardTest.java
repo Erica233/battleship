@@ -8,17 +8,17 @@ import org.junit.jupiter.api.Test;
 public class BattleShipBoardTest {
   @Test
   public void test_width_and_height() {
-    Board<Character> b1 = new BattleShipBoard<>(10, 20);
+    Board<Character> b1 = new BattleShipBoard<>(10, 20, 'X');
     assertEquals(10, b1.getWidth());
     assertEquals(20, b1.getHeight());
   }
 
   @Test
   public void test_invalid_dimensions() {
-    assertThrows(IllegalArgumentException.class, () -> new BattleShipBoard<>(10, 0));
-    assertThrows(IllegalArgumentException.class, () -> new BattleShipBoard<>(0, 20));
-    assertThrows(IllegalArgumentException.class, () -> new BattleShipBoard<>(10, -5));
-    assertThrows(IllegalArgumentException.class, () -> new BattleShipBoard<>(-8, 20));
+    assertThrows(IllegalArgumentException.class, () -> new BattleShipBoard<>(10, 0, 'X'));
+    assertThrows(IllegalArgumentException.class, () -> new BattleShipBoard<>(0, 20, 'X'));
+    assertThrows(IllegalArgumentException.class, () -> new BattleShipBoard<>(10, -5, 'X'));
+    assertThrows(IllegalArgumentException.class, () -> new BattleShipBoard<>(-8, 20, 'X'));
   }
 
   /**
@@ -39,7 +39,7 @@ public class BattleShipBoardTest {
 
   @Test
   public void test_whatIsAt() {
-    BattleShipBoard<Character> b1 = new BattleShipBoard<>(10, 20);
+    BattleShipBoard<Character> b1 = new BattleShipBoard<>(10, 20, 'X');
     Character[][] expected = new Character[10][20];
     // check that it has no ships anywhere
     checkWhatIsAtBoard(b1, expected);
@@ -56,7 +56,7 @@ public class BattleShipBoardTest {
   @Test
   void test_try_add_ship() {
     InBoundsRuleChecker<Character> checker = new InBoundsRuleChecker<>(new NoCollisionRuleChecker<>(null));
-    BattleShipBoard<Character> b1 = new BattleShipBoard<>(10, 20, checker);
+    BattleShipBoard<Character> b1 = new BattleShipBoard<>(10, 20, checker, 'X');
     V1ShipFactory f = new V1ShipFactory();
     Placement p0 = new Placement(new Coordinate(1, 2), 'H');
     Placement p1 = new Placement(new Coordinate(-1, 2), 'H');
@@ -72,7 +72,7 @@ public class BattleShipBoardTest {
   @Test
   void test_fire_at() {
     InBoundsRuleChecker<Character> checker = new InBoundsRuleChecker<>(new NoCollisionRuleChecker<>(null));
-    BattleShipBoard<Character> b1 = new BattleShipBoard<>(3, 2, checker);
+    BattleShipBoard<Character> b1 = new BattleShipBoard<>(3, 2, checker, 'X');
     V1ShipFactory f = new V1ShipFactory();
     Coordinate c0 = new Coordinate(0, 0);
     Coordinate c1 = new Coordinate(0, 1);

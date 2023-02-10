@@ -34,6 +34,15 @@ public interface Board<T> {
   T whatIsAtForSelf(Coordinate where);
 
   /**
+   * Gives the information of the given coordinate if it is occupied to enemy.
+   *
+   * @param where the coordinate
+   * @return the information of the given coordinate if it is occupied, otherwise,
+   *         return null
+   */
+  T whatIsAtForEnemy(Coordinate where);
+
+  /**
    * Gets the width of the Board
    * 
    * @return the width of the Board

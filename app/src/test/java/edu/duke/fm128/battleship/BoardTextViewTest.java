@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 public class BoardTextViewTest {
   private void emptyBoardHelper(int w, int h, String expectedHeader, String expectedBody) {
-    Board<Character> b1 = new BattleShipBoard<>(w, h);
+    Board<Character> b1 = new BattleShipBoard<>(w, h, 'X');
     BoardTextView view = new BoardTextView(b1);
     assertEquals(expectedHeader, view.makeHeader());
     String expected = expectedHeader + expectedBody + expectedHeader;
@@ -42,8 +42,8 @@ public class BoardTextViewTest {
 
   @Test
   public void test_invalid_board_size() {
-    Board<Character> wideBoard = new BattleShipBoard<>(11, 20);
-    Board<Character> tallBoard = new BattleShipBoard<>(10, 27);
+    Board<Character> wideBoard = new BattleShipBoard<>(11, 20, 'X');
+    Board<Character> tallBoard = new BattleShipBoard<>(10, 27, 'X');
     assertThrows(IllegalArgumentException.class, () -> new BoardTextView(wideBoard));
     assertThrows(IllegalArgumentException.class, () -> new BoardTextView(tallBoard));
   }
@@ -56,7 +56,7 @@ public class BoardTextViewTest {
         "C  | | |  C\n";
     String expected = expectedHeader + expectedBody + expectedHeader;
 
-    Board<Character> b1 = new BattleShipBoard<>(4, 3);
+    Board<Character> b1 = new BattleShipBoard<>(4, 3, 'X');
     b1.tryAddShip(new RectangleShip<>(new Coordinate(0, 0), 's', '*'));
     BoardTextView view = new BoardTextView(b1);
     assertEquals(expected, view.displayMyOwnBoard());
