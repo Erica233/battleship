@@ -21,7 +21,7 @@ public class App {
   }
 
   public void doPlacementPhase() throws IOException {
-    //assume each player only has one destroyer here
+    // assume each player only has one destroyer here
     player1.doOnePlacement();
     player2.doOnePlacement();
   }
