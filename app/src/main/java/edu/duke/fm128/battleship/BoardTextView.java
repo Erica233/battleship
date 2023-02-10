@@ -36,7 +36,7 @@ public class BoardTextView {
    * @return the String that displays the information of my board
    */
   public String displayMyOwnBoard() {
-    return displayAnyBoard((c)->toDisplay.whatIsAtForSelf(c));
+    return displayAnyBoard((c) -> toDisplay.whatIsAtForSelf(c));
   }
 
   /**
@@ -45,7 +45,7 @@ public class BoardTextView {
    * @return the String that displays the information of the enemy's board
    */
   public String displayEnemyBoard() {
-    return displayAnyBoard((c)->toDisplay.whatIsAtForEnemy(c));
+    return displayAnyBoard((c) -> toDisplay.whatIsAtForEnemy(c));
   }
 
   /**
