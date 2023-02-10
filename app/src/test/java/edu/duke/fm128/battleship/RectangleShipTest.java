@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RectangleShipTest {
   @Test
@@ -94,6 +95,13 @@ class RectangleShipTest {
         () -> new RectangleShip<>("submarine", new Coordinate(1, 2), 1, 2, 's', '*').getDisplayInfoAt(c0, true));
     assertEquals(onHit, recShip.getDisplayInfoAt(c1, true));
     assertEquals(onHit, recShip.getDisplayInfoAt(c2, true));
+
+    RectangleShip<Character> ship1 = new RectangleShip<>("submarine", c1, 1, 2, new SimpleShipDisplayInfo<>(data, onHit), new SimpleShipDisplayInfo<>(' ', data));
+    assertEquals(' ', ship1.getDisplayInfoAt(c1, false));
+    assertEquals(' ', ship1.getDisplayInfoAt(c2, false));
+    ship1.recordHitAt(c2);
+    assertEquals(' ', ship1.getDisplayInfoAt(c1, false));
+    assertEquals(data, ship1.getDisplayInfoAt(c2, false));
   }
 
   @Test
