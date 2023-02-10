@@ -6,10 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class InBoundsRuleCheckerTest {
 
-  private String outInfo(String direction) {
-    return "That placement is invalid: the ship goes off the " + direction + " of the board.";
-  }
-
   @Test
   void test_check_my_rule_and_placement() {
     BattleShipBoard<Character> b1 = new BattleShipBoard<>(10, 20);

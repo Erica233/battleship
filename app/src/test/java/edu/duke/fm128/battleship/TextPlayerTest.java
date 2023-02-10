@@ -45,6 +45,15 @@ class TextPlayerTest {
   }
 
   @Test
+  void test_read_incvaid_placement() throws IOException {
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    String prompt = "Please enter a location for a ship:";
+    TextPlayer p2 = createTextPlayer(10, 20, "", bytes);
+    Placement expected = new Placement(new Coordinate(0, 4), 'V');
+    assertThrows(EOFException.class, () -> p2.readPlacement(prompt));
+  }
+
+  @Test
   void test_do_one_placement() throws IOException {
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     TextPlayer player = createTextPlayer(4, 3, "A2v\n", bytes);
