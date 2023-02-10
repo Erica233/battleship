@@ -68,4 +68,37 @@ public class BoardTextViewTest {
     expected = expectedHeader + expectedBody + expectedHeader;
     assertEquals(expected, view.displayMyOwnBoard());
   }
+
+  @Test
+  public void test_displayEnemyBoard() {
+    String myView =
+      "  0|1|2|3\n" +
+      "A  | | |  A\n" +
+      "B  |s|s|  B\n" +
+      "C  | | |  C\n" +
+      "  0|1|2|3\n";
+    String enemyView =
+            "  0|1|2|3\n" +
+            "A  | | |  A\n" +
+            "B  | | |  B\n" +
+            "C  | | |  C\n" +
+            "  0|1|2|3\n";
+    Board<Character> b1 = new BattleShipBoard<>(4, 3, 'X');
+    V1ShipFactory f = new V1ShipFactory();
+    Ship<Character> s = f.makeSubmarine(new Placement(new Coordinate(1, 1), 'H'));
+    b1.tryAddShip(s);
+    BoardTextView view = new BoardTextView(b1);
+    assertEquals(myView, view.displayMyOwnBoard());
+    assertEquals(enemyView, view.displayEnemyBoard());
+
+    b1.fireAt(new Coordinate(0, 0));
+    b1.fireAt(new Coordinate(1, 2));
+    String enemyView1 =
+            "  0|1|2|3\n" +
+            "A X| | |  A\n" +
+            "B  | |s|  B\n" +
+            "C  | | |  C\n" +
+            "  0|1|2|3\n";
+    assertEquals(enemyView1, view.displayEnemyBoard());
+  }
 }
