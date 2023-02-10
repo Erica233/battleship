@@ -99,8 +99,8 @@ public class TextPlayer {
       if (problem != null) {
         String mesg = "That placement is invalid: " + problem + ".";
         out.println(mesg);
-        out.print(view.displayMyOwnBoard());
       }
+      out.print(view.displayMyOwnBoard());
     } while (problem != null);
   }
 
