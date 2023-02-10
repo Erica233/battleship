@@ -54,10 +54,10 @@ class TextPlayerTest {
     player.doOnePlacement("Destroyer", player.shipCreationFns.get("Destroyer"));
 
     String expected = "  0|1|2|3\n" +
-            "A  | |d|  A\n" +
-            "B  | |d|  B\n" +
-            "C  | |d|  C\n" +
-            "  0|1|2|3\n";
+        "A  | |d|  A\n" +
+        "B  | |d|  B\n" +
+        "C  | |d|  C\n" +
+        "  0|1|2|3\n";
     assertEquals(prompt + "\n" + expected, bytes.toString());
   }
 
@@ -77,44 +77,43 @@ class TextPlayerTest {
     };
     tp1.doPlacementPhase();
 
-    String expected =
-            "  0|1\n" +
-                    "A  |  A\n" +
-                    "B  |  B\n" +
-                    "C  |  C\n" +
-                    "  0|1\n" +
-                    "Player test1: you are going to place the following ships (which are all\n" +
-                    "rectangular). For each ship, type the coordinate of the upper left\n" +
-                    "side of the ship, followed by either H (for horizontal) or V (for\n" +
-                    "vertical).  For example M4H would place a ship horizontally starting\n" +
-                    "at M4 and going to the right.  You have\n" +
-                    "\n" +
-                    "2 \"Submarines\" ships that are 1x2 \n" +
-                    "3 \"Destroyers\" that are 1x3\n" +
-                    "3 \"Battleships\" that are 1x4\n" +
-                    "2 \"Carriers\" that are 1x6\n" +
-                    "Player test1 where do you want to place a Submarine?\n" +
-                    "  0|1\n" +
-                    "A s|  A\n" +
-                    "B s|  B\n" +
-                    "C  |  C\n" +
-                    "  0|1\n" +
-                    "Player test1: you are going to place the following ships (which are all\n" +
-                    "rectangular). For each ship, type the coordinate of the upper left\n" +
-                    "side of the ship, followed by either H (for horizontal) or V (for\n" +
-                    "vertical).  For example M4H would place a ship horizontally starting\n" +
-                    "at M4 and going to the right.  You have\n" +
-                    "\n" +
-                    "2 \"Submarines\" ships that are 1x2 \n" +
-                    "3 \"Destroyers\" that are 1x3\n" +
-                    "3 \"Battleships\" that are 1x4\n" +
-                    "2 \"Carriers\" that are 1x6\n" +
-                    "Player test1 where do you want to place a Destroyer?\n" +
-                    "  0|1\n" +
-                    "A s|d A\n" +
-                    "B s|d B\n" +
-                    "C  |d C\n" +
-                    "  0|1\n";
+    String expected = "  0|1\n" +
+        "A  |  A\n" +
+        "B  |  B\n" +
+        "C  |  C\n" +
+        "  0|1\n" +
+        "Player test1: you are going to place the following ships (which are all\n" +
+        "rectangular). For each ship, type the coordinate of the upper left\n" +
+        "side of the ship, followed by either H (for horizontal) or V (for\n" +
+        "vertical).  For example M4H would place a ship horizontally starting\n" +
+        "at M4 and going to the right.  You have\n" +
+        "\n" +
+        "2 \"Submarines\" ships that are 1x2 \n" +
+        "3 \"Destroyers\" that are 1x3\n" +
+        "3 \"Battleships\" that are 1x4\n" +
+        "2 \"Carriers\" that are 1x6\n" +
+        "Player test1 where do you want to place a Submarine?\n" +
+        "  0|1\n" +
+        "A s|  A\n" +
+        "B s|  B\n" +
+        "C  |  C\n" +
+        "  0|1\n" +
+        "Player test1: you are going to place the following ships (which are all\n" +
+        "rectangular). For each ship, type the coordinate of the upper left\n" +
+        "side of the ship, followed by either H (for horizontal) or V (for\n" +
+        "vertical).  For example M4H would place a ship horizontally starting\n" +
+        "at M4 and going to the right.  You have\n" +
+        "\n" +
+        "2 \"Submarines\" ships that are 1x2 \n" +
+        "3 \"Destroyers\" that are 1x3\n" +
+        "3 \"Battleships\" that are 1x4\n" +
+        "2 \"Carriers\" that are 1x6\n" +
+        "Player test1 where do you want to place a Destroyer?\n" +
+        "  0|1\n" +
+        "A s|d A\n" +
+        "B s|d B\n" +
+        "C  |d C\n" +
+        "  0|1\n";
     assertEquals(expected, bytes.toString());
   }
 }

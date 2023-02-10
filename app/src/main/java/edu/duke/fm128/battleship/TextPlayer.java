@@ -1,5 +1,6 @@
 
 package edu.duke.fm128.battleship;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -22,7 +23,6 @@ public class TextPlayer {
   private final String name;
   final ArrayList<String> shipsToPlace;
   final HashMap<String, Function<Placement, Ship<Character>>> shipCreationFns;
-
 
   /**
    * Constructs a TextPlayer
@@ -110,7 +110,7 @@ public class TextPlayer {
    */
   public void doPlacementPhase() throws IOException {
     out.print(view.displayMyOwnBoard());
-    for (String s: shipsToPlace) {
+    for (String s : shipsToPlace) {
       printInstruction();
       doOnePlacement(s, shipCreationFns.get(s));
     }
