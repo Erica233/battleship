@@ -86,7 +86,7 @@ public class BattleShipBoard<T> implements Board<T> {
    * otherwise, return false
    * 
    * @param toAdd the ship to add
-   * @return true if the placement is valid, otherwise false
+   * @return null if the placement is valid, otherwise return exception information
    */
   @Override
   public String tryAddShip(Ship<T> toAdd) {

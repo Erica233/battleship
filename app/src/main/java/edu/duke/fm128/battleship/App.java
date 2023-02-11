@@ -5,6 +5,8 @@ package edu.duke.fm128.battleship;
 
 import java.io.*;
 
+import static java.lang.System.out;
+
 public class App {
   private final TextPlayer player1;
   private final TextPlayer player2;
@@ -30,16 +32,34 @@ public class App {
     player2.doPlacementPhase();
   }
 
+  public void doAttackingPhase() throws IOException {
+    TextPlayer currentPlayer = player1;
+    TextPlayer otherPlayer = player2;
+    while (true) {
+      currentPlayer.playOneTurn(otherPlayer.getTheBoard(), otherPlayer.getView(), otherPlayer.getName());
+      if (otherPlayer.isLose()) {
+        //print the result
+        out.print("Player " + currentPlayer.getName() + "wins!\n");
+        break;
+      }
+      //swap current and other player for next time around loop
+      TextPlayer temp = currentPlayer;
+      currentPlayer = otherPlayer;
+      otherPlayer = temp;
+    }
+  }
+
   public static void main(String[] args) throws IOException {
     Board<Character> b1 = new BattleShipBoard<>(10, 20, 'X');
     Board<Character> b2 = new BattleShipBoard<>(10, 20, 'X');
     BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
     V1ShipFactory factory = new V1ShipFactory();
 
-    TextPlayer p1 = new TextPlayer("A", b1, input, System.out, factory);
-    TextPlayer p2 = new TextPlayer("B", b2, input, System.out, factory);
+    TextPlayer p1 = new TextPlayer("A", b1, input, out, factory);
+    TextPlayer p2 = new TextPlayer("B", b2, input, out, factory);
 
     App app = new App(p1, p2);
     app.doPlacementPhase();
+    app.doAttackingPhase();
   }
 }

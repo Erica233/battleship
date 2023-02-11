@@ -97,8 +97,8 @@ public class TextPlayer {
         problem = "it does not have the correct format";
       }
       if (problem != null) {
-        String mesg = "That placement is invalid: " + problem + ".";
-        out.println(mesg);
+        String msg = "That placement is invalid: " + problem + ".";
+        out.println(msg);
       }
       out.print(view.displayMyOwnBoard());
     } while (problem != null);
@@ -107,7 +107,7 @@ public class TextPlayer {
   /**
    * A helper function to output instructions
    */
-  public void printInstruction() {
+  public void printPlacementInstruction() {
     out.print("Player " + name + ": you are going to place the following ships (which are all\n" +
         "rectangular). For each ship, type the coordinate of the upper left\n" +
         "side of the ship, followed by either H (for horizontal) or V (for\n" +
@@ -129,8 +129,77 @@ public class TextPlayer {
   public void doPlacementPhase() throws IOException {
     out.print(view.displayMyOwnBoard());
     for (String s : shipsToPlace) {
-      printInstruction();
+      printPlacementInstruction();
       doOnePlacement(s, shipCreationFns.get(s));
     }
+  }
+
+  /**
+   * Prints out the prompt message, creates a new Coordinate according to the input
+   *
+   * @param prompt the string that will be printed out
+   * @return the new constructed Coordinate according to input
+   * @throws IOException if input is empty
+   */
+  public Coordinate readCoordinate(String prompt) throws IOException {
+    while (true) {
+      try {
+        out.print(prompt);
+        String s = inputReader.readLine();
+        if (s == null) {
+          throw new EOFException();
+        }
+        return new Coordinate(s);
+      } catch (IllegalArgumentException iae) {
+        out.print("Please enter a valid attack!\n");
+      }
+    }
+  }
+
+  /**
+   * Lets the player play for one turn.
+   * It displays two boards side by side to the player first,
+   * one for the player's own board, the other for the enemy.
+   * Then prompts the player to fire at a coordinate.   If the
+   * coordinates are invalid, it prompts the player to enter a valid choice.
+   * It then reports the result.
+   *
+   * @param enemyBoard the enemy's board
+   * @param enemyView the enemy's BoardTextView
+   * @param enemyName the enemy's name
+   * @throws IOException if no input for coordinate
+   * @throws IllegalArgumentException if the input coordinate is invalid
+   */
+  public void playOneTurn(Board<Character> enemyBoard, BoardTextView enemyView, String enemyName) throws IOException, IllegalArgumentException {
+    out.print("Player " + name + "'s turn:\n");
+    out.print(view.displayMyBoardWithEnemyNextToIt(enemyView, "Your ocean", "Player " + enemyName + "'s ocean"));
+    String prompt = "Player " + name + ", please enter a coordinate where you want to fire at?\n";
+    Coordinate c = readCoordinate(prompt);
+    Ship<Character> s = enemyBoard.fireAt(c);
+    if (s == null) {
+      out.print("You missed!");
+    } else {
+      out.print("You hit a " + s.getName() + "!");
+    }
+  }
+
+  public boolean isLose() {
+    return theBoard.allSunk();
+  }
+
+  public void printWhoWin(String winnerName) {
+    out.print("Player " + winnerName + "wins!\n");
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public Board<Character> getTheBoard() {
+    return theBoard;
+  }
+
+  public BoardTextView getView() {
+    return view;
   }
 }

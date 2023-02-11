@@ -143,4 +143,44 @@ class TextPlayerTest {
         "  0|1\n";
     assertEquals(expected, bytes.toString());
   }
+
+  @Test
+  void test_readCoordinate() throws IOException {
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    TextPlayer player = createTextPlayer(10, 20, "a2\n", bytes);
+
+    String prompt = "Player A, please enter a coordinate where you want to fire at?\n";
+    Coordinate ec = new Coordinate(0, 2);
+    Coordinate rc = player.readCoordinate(prompt);
+    assertEquals(ec, rc); // did we get the right Placement back
+    assertEquals(prompt, bytes.toString()); // should have printed prompt and newline
+    bytes.reset();
+  }
+
+  @Test
+  void test_read_empty_coordinate() throws IOException {
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    TextPlayer player = createTextPlayer(10, 20, "", bytes);
+    String prompt = "Player A, please enter a coordinate where you want to fire at?\n";
+    assertThrows(EOFException.class, () -> player.readCoordinate(prompt));
+  }
+
+  @Test
+  void test_read_invalid_coordinate() throws IOException {
+    String inputData = "A0V\nA1\n";
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    BufferedReader input = new BufferedReader(new StringReader(inputData));
+    PrintStream output = new PrintStream(bytes, true);
+    Board<Character> board = new BattleShipBoard<>(2, 3, 'X');
+    V1ShipFactory shipFactory = new V1ShipFactory();
+    TextPlayer p = new TextPlayer("A", board, input, output, shipFactory);
+    String prompt = "Player A, please enter a coordinate where you want to fire at?\n";
+    p.readCoordinate(prompt);
+
+    String expected = prompt + "Please enter a valid attack!\n" + prompt;
+    assertEquals(expected, bytes.toString());
+    bytes.reset();
+  }
+
+
 }
