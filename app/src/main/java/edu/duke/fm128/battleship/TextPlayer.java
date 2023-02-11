@@ -108,7 +108,7 @@ public class TextPlayer {
    * A helper function to output instructions
    */
   public void printPlacementInstruction() {
-    out.print("Player " + name + ": you are going to place the following ships (which are all\n" +
+    out.println("Player " + name + ": you are going to place the following ships (which are all\n" +
         "rectangular). For each ship, type the coordinate of the upper left\n" +
         "side of the ship, followed by either H (for horizontal) or V (for\n" +
         "vertical).  For example M4H would place a ship horizontally starting\n" +

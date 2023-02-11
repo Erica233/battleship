@@ -118,7 +118,7 @@ class TextPlayerTest {
         "2 \"Submarines\" ships that are 1x2 \n" +
         "3 \"Destroyers\" that are 1x3\n" +
         "3 \"Battleships\" that are 1x4\n" +
-        "2 \"Carriers\" that are 1x6\n" +
+        "2 \"Carriers\" that are 1x6\n\n" +
         "Player test1 where do you want to place a Submarine?\n" +
         "  0|1\n" +
         "A s|  A\n" +
@@ -134,7 +134,7 @@ class TextPlayerTest {
         "2 \"Submarines\" ships that are 1x2 \n" +
         "3 \"Destroyers\" that are 1x3\n" +
         "3 \"Battleships\" that are 1x4\n" +
-        "2 \"Carriers\" that are 1x6\n" +
+        "2 \"Carriers\" that are 1x6\n\n" +
         "Player test1 where do you want to place a Destroyer?\n" +
         "  0|1\n" +
         "A s|d A\n" +
