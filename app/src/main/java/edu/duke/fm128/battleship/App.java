@@ -32,6 +32,13 @@ public class App {
     player2.doPlacementPhase();
   }
 
+  /**
+   * let player1 play a turn, then see if player 2 has lost.
+   * Then let player 2 play a turn and see if player 1 has lost.
+   * It should repeat this until one player has lost, then report the outcome.
+   *
+   * @throws IOException
+   */
   public void doAttackingPhase() throws IOException {
     TextPlayer currentPlayer = player1;
     TextPlayer otherPlayer = player2;

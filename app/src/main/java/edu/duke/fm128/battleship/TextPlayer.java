@@ -183,14 +183,25 @@ public class TextPlayer {
     }
   }
 
+  /**
+   * check if it's lose
+   *
+   * @return true if lose
+   */
   public boolean isLose() {
     return theBoard.allSunk();
   }
 
+  /**
+   * prints message about who wins
+   *
+   * @param winnerName the winner's name
+   */
   public void printWhoWin(String winnerName) {
     out.print("Player " + winnerName + "wins!\n");
   }
 
+  /** getters and setters **/
   public String getName() {
     return name;
   }
