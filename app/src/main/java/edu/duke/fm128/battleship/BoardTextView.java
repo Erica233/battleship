@@ -53,20 +53,22 @@ public class BoardTextView {
    * where "this" view's board's "my own board" on the left,
    * and enemyView's "enemy board" on the right
    *
-   * @param enemyView textual display of enemy's board
-   * @param myHeader the header above my board
+   * @param enemyView   textual display of enemy's board
+   * @param myHeader    the header above my board
    * @param enemyHeader the header above enemy's board
    * @return a String that is the textual display of both boards
    */
   public String displayMyBoardWithEnemyNextToIt(BoardTextView enemyView, String myHeader, String enemyHeader) {
     String myBoardMyView = displayMyOwnBoard();
     String enemyBoardEnemyView = enemyView.displayEnemyBoard();
-    String [] myViewLines = myBoardMyView.split("\n");
-    String [] enemyViewLines = enemyBoardEnemyView.split("\n");
+    String[] myViewLines = myBoardMyView.split("\n");
+    String[] enemyViewLines = enemyBoardEnemyView.split("\n");
     StringBuilder output = new StringBuilder();
-    output.append(" ".repeat(5)).append(myHeader).append(" ".repeat(2 * toDisplay.getWidth() + 22 - 5 - myHeader.length())).append(enemyHeader).append("\n");
+    output.append(" ".repeat(5)).append(myHeader)
+        .append(" ".repeat(2 * toDisplay.getWidth() + 22 - 5 - myHeader.length())).append(enemyHeader).append("\n");
     for (int i = 0; i < myViewLines.length; i++) {
-      output.append(myViewLines[i]).append(" ".repeat(2 * toDisplay.getWidth() + 19 - myViewLines[i].length())).append(enemyViewLines[i]).append("\n");
+      output.append(myViewLines[i]).append(" ".repeat(2 * toDisplay.getWidth() + 19 - myViewLines[i].length()))
+          .append(enemyViewLines[i]).append("\n");
     }
     return output.toString();
   }
