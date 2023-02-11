@@ -1,4 +1,3 @@
-
 package edu.duke.fm128.battleship;
 
 import java.io.*;
@@ -85,15 +84,15 @@ public class TextPlayer {
    *
    * @throws IOException
    */
-  public void doOnePlacement(String shipName, Function<Placement, Ship<Character>> createFn) throws IOException, IllegalArgumentException {
+  public void doOnePlacement(String shipName, Function<Placement, Ship<Character>> createFn)
+      throws IOException, IllegalArgumentException {
     String problem;
     do {
       try {
         Placement p = readPlacement("Player " + name + " where do you want to place a " + shipName + "?");
         Ship<Character> s = createFn.apply(p);
         problem = theBoard.tryAddShip(s);
-      }
-      catch (IllegalArgumentException iae) {
+      } catch (IllegalArgumentException iae) {
         problem = "it does not have the correct format";
       }
       if (problem != null) {
@@ -135,7 +134,8 @@ public class TextPlayer {
   }
 
   /**
-   * Prints out the prompt message, creates a new Coordinate according to the input
+   * Prints out the prompt message, creates a new Coordinate according to the
+   * input
    *
    * @param prompt the string that will be printed out
    * @return the new constructed Coordinate according to input
@@ -160,17 +160,18 @@ public class TextPlayer {
    * Lets the player play for one turn.
    * It displays two boards side by side to the player first,
    * one for the player's own board, the other for the enemy.
-   * Then prompts the player to fire at a coordinate.   If the
+   * Then prompts the player to fire at a coordinate. If the
    * coordinates are invalid, it prompts the player to enter a valid choice.
    * It then reports the result.
    *
    * @param enemyBoard the enemy's board
-   * @param enemyView the enemy's BoardTextView
-   * @param enemyName the enemy's name
-   * @throws IOException if no input for coordinate
+   * @param enemyView  the enemy's BoardTextView
+   * @param enemyName  the enemy's name
+   * @throws IOException              if no input for coordinate
    * @throws IllegalArgumentException if the input coordinate is invalid
    */
-  public void playOneTurn(Board<Character> enemyBoard, BoardTextView enemyView, String enemyName) throws IOException, IllegalArgumentException {
+  public void playOneTurn(Board<Character> enemyBoard, BoardTextView enemyView, String enemyName)
+      throws IOException, IllegalArgumentException {
     out.print("Player " + name + "'s turn:\n");
     out.print(view.displayMyBoardWithEnemyNextToIt(enemyView, "Your ocean", "Player " + enemyName + "'s ocean"));
     String prompt = "Player " + name + ", please enter a coordinate where you want to fire at?\n";

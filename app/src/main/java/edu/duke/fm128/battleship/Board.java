@@ -47,7 +47,7 @@ public interface Board<T> {
    *
    * @return true if my ships are all sunk, otherwise false
    */
-   boolean allSunk();
+  boolean allSunk();
 
   /**
    * Gets the width of the Board

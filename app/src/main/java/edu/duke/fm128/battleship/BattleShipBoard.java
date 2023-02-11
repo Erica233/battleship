@@ -56,7 +56,7 @@ public class BattleShipBoard<T> implements Board<T> {
    */
   @Override
   public boolean allSunk() {
-    for (Ship<T> s: myShips) {
+    for (Ship<T> s : myShips) {
       if (!s.isSunk()) {
         return false;
       }
@@ -86,7 +86,8 @@ public class BattleShipBoard<T> implements Board<T> {
    * otherwise, return false
    * 
    * @param toAdd the ship to add
-   * @return null if the placement is valid, otherwise return exception information
+   * @return null if the placement is valid, otherwise return exception
+   *         information
    */
   @Override
   public String tryAddShip(Ship<T> toAdd) {

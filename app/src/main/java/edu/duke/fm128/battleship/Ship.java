@@ -54,7 +54,7 @@ public interface Ship<T> {
    * Return the view-specific information at the given coordinate. This coordinate
    * must be part of the ship.
    * 
-   * @param where is the coordinate to return information for
+   * @param where  is the coordinate to return information for
    * @param myShip whether it is my ship
    * @throws IllegalArgumentException if where is not part of the Ship
    * @return The view-specific information at that coordinate.

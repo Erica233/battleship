@@ -96,7 +96,8 @@ class RectangleShipTest {
     assertEquals(onHit, recShip.getDisplayInfoAt(c1, true));
     assertEquals(onHit, recShip.getDisplayInfoAt(c2, true));
 
-    RectangleShip<Character> ship1 = new RectangleShip<>("submarine", c1, 1, 2, new SimpleShipDisplayInfo<>(data, onHit), new SimpleShipDisplayInfo<>(' ', data));
+    RectangleShip<Character> ship1 = new RectangleShip<>("submarine", c1, 1, 2,
+        new SimpleShipDisplayInfo<>(data, onHit), new SimpleShipDisplayInfo<>(' ', data));
     assertEquals(' ', ship1.getDisplayInfoAt(c1, false));
     assertEquals(' ', ship1.getDisplayInfoAt(c2, false));
     ship1.recordHitAt(c2);

@@ -22,7 +22,8 @@ public abstract class BasicShip<T> implements Ship<T> {
    * @param where          the coordinates where it is at
    * @param _myDisplayInfo my ShipDisplayInfo
    */
-  public BasicShip(Iterable<Coordinate> where, ShipDisplayInfo<T> _myDisplayInfo, ShipDisplayInfo<T> _enemyDisplayInfo) {
+  public BasicShip(Iterable<Coordinate> where, ShipDisplayInfo<T> _myDisplayInfo,
+      ShipDisplayInfo<T> _enemyDisplayInfo) {
     this.myPieces = new HashMap<>();
     for (Coordinate c : where) {
       this.myPieces.put(c, false);

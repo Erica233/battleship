@@ -45,11 +45,11 @@ public class App {
     while (true) {
       currentPlayer.playOneTurn(otherPlayer.getTheBoard(), otherPlayer.getView(), otherPlayer.getName());
       if (otherPlayer.isLose()) {
-        //print the result
+        // print the result
         out.print("Player " + currentPlayer.getName() + "wins!\n");
         break;
       }
-      //swap current and other player for next time around loop
+      // swap current and other player for next time around loop
       TextPlayer temp = currentPlayer;
       currentPlayer = otherPlayer;
       otherPlayer = temp;
