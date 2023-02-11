@@ -181,6 +181,4 @@ class TextPlayerTest {
     assertEquals(expected, bytes.toString());
     bytes.reset();
   }
-
-
 }

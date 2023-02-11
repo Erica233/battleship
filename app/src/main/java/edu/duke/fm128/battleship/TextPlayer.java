@@ -177,9 +177,9 @@ public class TextPlayer {
     Coordinate c = readCoordinate(prompt);
     Ship<Character> s = enemyBoard.fireAt(c);
     if (s == null) {
-      out.print("You missed!");
+      out.print("You missed!\n");
     } else {
-      out.print("You hit a " + s.getName() + "!");
+      out.print("You hit a " + s.getName() + "!\n");
     }
   }
 
