@@ -57,8 +57,9 @@ public class App {
   }
 
   public static void main(String[] args) throws IOException {
-    Board<Character> b1 = new BattleShipBoard<>(10, 20, 'X');
-    Board<Character> b2 = new BattleShipBoard<>(10, 20, 'X');
+    InBoundsRuleChecker<Character> checker = new InBoundsRuleChecker<>(new NoCollisionRuleChecker<>(null));
+    Board<Character> b1 = new BattleShipBoard<>(10, 20, checker, 'X');
+    Board<Character> b2 = new BattleShipBoard<>(10, 20, checker, 'X');
     BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
     V1ShipFactory factory = new V1ShipFactory();
 
