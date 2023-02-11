@@ -34,13 +34,28 @@ public class V2ShipFactory implements AbstractShipFactory<Character> {
      * @param where  the placement
      * @param letter the symbol letter
      * @param name   the name of the ship type
-     * @return a newly constructed RectangleShip
+     * @return a newly constructed T-Shaped ships
      */
     protected Ship<Character> createTShapedShip(Placement where, char letter, String name) {
         if (where.getOrientation() != 'U' && where.getOrientation() != 'R' && where.getOrientation() != 'D' && where.getOrientation() != 'L') {
             throw new IllegalArgumentException("The orientation of the placement should be up (U), right (R), down (D), and left (L)!");
         }
         return new TShapedShip<>(name, where.getWhere(), where.getOrientation(), letter, '*');
+    }
+
+    /**
+     * A helper function that creates Z-Shaped ships
+     *
+     * @param where  the placement
+     * @param letter the symbol letter
+     * @param name   the name of the ship type
+     * @return a newly constructed Z-Shaped ships
+     */
+    protected Ship<Character> createZShapedShip(Placement where, char letter, String name) {
+        if (where.getOrientation() != 'U' && where.getOrientation() != 'R' && where.getOrientation() != 'D' && where.getOrientation() != 'L') {
+            throw new IllegalArgumentException("The orientation of the placement should be up (U), right (R), down (D), and left (L)!");
+        }
+        return new ZShapedShip<>(name, where.getWhere(), where.getOrientation(), letter, '*');
     }
 
     @Override
@@ -68,11 +83,11 @@ public class V2ShipFactory implements AbstractShipFactory<Character> {
      * Makes Zshaped Carrier
      *
      * @param where specifies the location and orientation of the ship to make
-     * @return a newly constructed Carrier Battleships
+     * @return a newly constructed Zshaped Carrier Battleships
      */
     @Override
     public Ship<Character> makeCarrier(Placement where) {
-        return createTShapedShip(where, 'c', "Carrier");
+        return createZShapedShip(where, 'c', "Carrier");
     }
 
 }
