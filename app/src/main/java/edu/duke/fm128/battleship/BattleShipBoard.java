@@ -9,10 +9,10 @@ import java.util.HashSet;
 public class BattleShipBoard<T> implements Board<T> {
   private final int width;
   private final int height;
-  final ArrayList<Ship<T>> myShips;
+  private final ArrayList<Ship<T>> myShips;
   private final PlacementRuleChecker<T> placementChecker;
-  HashSet<Coordinate> enemyMisses;
-  final T missInfo;
+  private final HashSet<Coordinate> enemyMisses;
+  private final T missInfo;
 
   /**
    * Constructs a BattleShipBoard with the specified width and height
@@ -47,6 +47,21 @@ public class BattleShipBoard<T> implements Board<T> {
     this.placementChecker = prc;
     this.enemyMisses = new HashSet<>();
     this.missInfo = _missInfo;
+  }
+
+  /**
+   * checks if all myShips have sunk
+   *
+   * @return true if my ships are all sunk, otherwise false
+   */
+  @Override
+  public boolean allSunk() {
+    for (Ship<T> s: myShips) {
+      if (!s.isSunk()) {
+        return false;
+      }
+    }
+    return true;
   }
 
   @Override

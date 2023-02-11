@@ -105,4 +105,21 @@ public class BattleShipBoardTest {
     assertNull(b1.fireAt(c2));
   }
 
+  @Test
+  void test_allSunk() {
+    InBoundsRuleChecker<Character> checker = new InBoundsRuleChecker<>(new NoCollisionRuleChecker<>(null));
+    BattleShipBoard<Character> b1 = new BattleShipBoard<>(3, 2, checker, 'X');
+    V1ShipFactory f = new V1ShipFactory();
+    Coordinate c0 = new Coordinate(0, 0);
+    Coordinate c1 = new Coordinate(0, 1);
+    Placement p0 = new Placement(new Coordinate(0, 0), 'H');
+    Ship<Character> sub0 = f.makeSubmarine(p0);
+    b1.tryAddShip(sub0);
+    assertFalse(b1.allSunk());
+    b1.fireAt(c0);
+    assertFalse(b1.allSunk());
+    b1.fireAt(c1);
+    assertTrue(b1.allSunk());
+  }
+
 }

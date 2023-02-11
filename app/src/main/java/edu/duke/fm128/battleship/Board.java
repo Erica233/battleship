@@ -43,6 +43,13 @@ public interface Board<T> {
   T whatIsAtForEnemy(Coordinate where);
 
   /**
+   * checks if all myShips have sunk
+   *
+   * @return true if my ships are all sunk, otherwise false
+   */
+   boolean allSunk();
+
+  /**
    * Gets the width of the Board
    * 
    * @return the width of the Board
