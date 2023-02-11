@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
 
-  @Disabled
+  //@Disabled
   @Test
   @ResourceLock(value = Resources.SYSTEM_OUT, mode = ResourceAccessMode.READ_WRITE)
   void test_main() throws IOException {
@@ -23,9 +23,9 @@ class AppTest {
     PrintStream out = new PrintStream(bytes, true);
 
     // get an InputStream for our input.txt file, and the expected output
-    InputStream input = getClass().getClassLoader().getResourceAsStream("input.txt");
+    InputStream input = getClass().getClassLoader().getResourceAsStream("input_g5.txt");
     assertNotNull(input);
-    InputStream expectedStream = getClass().getClassLoader().getResourceAsStream("output.txt");
+    InputStream expectedStream = getClass().getClassLoader().getResourceAsStream("output_g5.txt");
     assertNotNull(expectedStream);
     // remember the current System.in and System.out
     InputStream oldIn = System.in;
