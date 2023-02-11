@@ -34,7 +34,7 @@ public class Placement {
     }
     this.where = new Coordinate(descr.substring(0, 2));
     char orient = descr.toUpperCase(Locale.ROOT).charAt(2);
-    if (orient != 'H' && orient != 'V') {
+    if ((orient != 'H' && orient != 'V') && (orient != 'U' && orient != 'R' && orient != 'D' && orient != 'L')) {
       throw new IllegalArgumentException("it does not have the correct format.");
     }
     this.orientation = descr.toUpperCase(Locale.ROOT).charAt(2);

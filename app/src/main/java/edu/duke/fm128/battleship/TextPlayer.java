@@ -28,12 +28,12 @@ public class TextPlayer {
    * @param out         output
    */
   public TextPlayer(String theName, Board<Character> theBoard, Reader inputSource, PrintStream out,
-      V1ShipFactory v1_shipFact) {
+      AbstractShipFactory v_shipFact) {
     this.theBoard = theBoard;
     this.view = new BoardTextView(theBoard);
     this.inputReader = (BufferedReader) inputSource;
     this.out = out;
-    this.shipFactory = v1_shipFact;
+    this.shipFactory = v_shipFact;
     this.name = theName;
     this.shipsToPlace = new ArrayList<>();
     this.shipCreationFns = new HashMap<>();

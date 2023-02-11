@@ -23,9 +23,9 @@ class AppTest {
     PrintStream out = new PrintStream(bytes, true);
 
     // get an InputStream for our input.txt file, and the expected output
-    InputStream input = getClass().getClassLoader().getResourceAsStream("input_v2g1.txt");
+    InputStream input = getClass().getClassLoader().getResourceAsStream("v2_input_g1.txt");
     assertNotNull(input);
-    InputStream expectedStream = getClass().getClassLoader().getResourceAsStream("output_v2g1.txt");
+    InputStream expectedStream = getClass().getClassLoader().getResourceAsStream("v2_output_g1.txt");
     assertNotNull(expectedStream);
     // remember the current System.in and System.out
     InputStream oldIn = System.in;

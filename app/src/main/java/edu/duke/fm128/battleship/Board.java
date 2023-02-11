@@ -16,6 +16,18 @@ public interface Board<T> {
    */
   Ship<T> fireAt(Coordinate c);
 
+//  /**
+//   * search for any ship that occupies coordinate c.
+//   * If one is found, that Ship is "hit" by the attack and should record it, then
+//   * return this ship.
+//   * If no ships are at this coordinate, record the miss in the enemyMisses, and
+//   * return null.
+//   *
+//   * @param c coordinate which the enemy tries to fire at
+//   * @return the ship that is fired at
+//   */
+//  Ship<T> moveTo(Coordinate c);
+
   /**
    * Adds the ship to the list of myShips and return true
    * 
