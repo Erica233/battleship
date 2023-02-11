@@ -30,12 +30,12 @@ public class Placement {
    */
   public Placement(String descr) {
     if (descr.length() != 3) {
-      throw new IllegalArgumentException("That placement is invalid: it does not have the correct format.");
+      throw new IllegalArgumentException("it does not have the correct format.");
     }
     this.where = new Coordinate(descr.substring(0, 2));
     char orient = descr.toUpperCase(Locale.ROOT).charAt(2);
     if (orient != 'H' && orient != 'V') {
-      throw new IllegalArgumentException("That placement is invalid: it does not have the correct format.");
+      throw new IllegalArgumentException("it does not have the correct format.");
     }
     this.orientation = descr.toUpperCase(Locale.ROOT).charAt(2);
   }

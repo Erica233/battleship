@@ -73,7 +73,7 @@ class TextPlayerTest {
     TextPlayer player = createTextPlayer(4, 3, "2v\nA2v\n", bytes);
     player.doOnePlacement("Destroyer", player.shipCreationFns.get("Destroyer"));
     String expected = "Player A where do you want to place a Destroyer?\n" +
-        "That placement is invalid: it does not have the correct format.\n" +
+        "That placement is invalid: it does not have the correct format\n" +
         "  0|1|2|3\n" +
         "A  | | |  A\n" +
         "B  | | |  B\n" +

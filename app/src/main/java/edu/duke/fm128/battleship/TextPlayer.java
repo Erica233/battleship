@@ -96,7 +96,7 @@ public class TextPlayer {
         problem = "it does not have the correct format";
       }
       if (problem != null) {
-        String msg = "That placement is invalid: " + problem + ".";
+        String msg = "That placement is invalid: " + problem;
         out.println(msg);
       }
       out.print(view.displayMyOwnBoard());
@@ -199,7 +199,7 @@ public class TextPlayer {
    * @param winnerName the winner's name
    */
   public void printWhoWin(String winnerName) {
-    out.print("Player " + winnerName + "wins!\n");
+    out.print("Player " + winnerName + " wins!\n");
   }
 
   /** getters and setters **/
