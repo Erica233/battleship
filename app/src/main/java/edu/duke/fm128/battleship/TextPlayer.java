@@ -28,7 +28,7 @@ public class TextPlayer {
    * @param out         output
    */
   public TextPlayer(String theName, Board<Character> theBoard, Reader inputSource, PrintStream out,
-      V1ShipFactory v_shipFact) {
+      AbstractShipFactory v_shipFact) {
     this.theBoard = theBoard;
     this.view = new BoardTextView(theBoard);
     this.inputReader = (BufferedReader) inputSource;
@@ -131,7 +131,6 @@ public class TextPlayer {
     for (String s : shipsToPlace) {
       printPlacementInstruction();
       doOnePlacement(s, shipCreationFns.get(s));
-      //out.print(view.displayMyOwnBoard());
     }
   }
 
@@ -194,10 +193,6 @@ public class TextPlayer {
         out.println(msg);
       }
     } while (problem != null);
-
-
-
-
   }
 
   /**

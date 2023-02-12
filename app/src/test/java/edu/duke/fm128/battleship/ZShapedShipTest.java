@@ -21,6 +21,6 @@ class ZShapedShipTest {
         helpTestZShapeShip('U', new String[] {"b0", "c0", "d0", "e0", "d1", "e1", "f1"});
         helpTestZShapeShip('R', new String[] {"b1", "b2", "b3", "b4", "c0", "c1", "c2"});
         helpTestZShapeShip('D', new String[] {"b0", "c0", "d0", "c1", "d1", "e1", "f1"});
-        helpTestZShapeShip('L', new String[] {"b1", "b2", "b3", "c0", "c1", "c2", "c3"});
+        helpTestZShapeShip('L', new String[] {"b2", "b3", "b4", "c0", "c1", "c2", "c3"});
     }
 }

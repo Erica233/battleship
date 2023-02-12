@@ -80,7 +80,7 @@ public class ZShapedShip<T> extends BasicShip<T>  {
                 coordsSet.add(new Coordinate(upperLeft.getRow() + 1, upperLeft.getColumn() + i));
             }
             for (int i = 0; i < 3; i++) {
-                coordsSet.add(new Coordinate(upperLeft.getRow(), upperLeft.getColumn() + 1 + i));
+                coordsSet.add(new Coordinate(upperLeft.getRow(), upperLeft.getColumn() + 2 + i));
             }
         }
         return coordsSet;
