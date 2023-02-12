@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.function.Function;
 
 /**
@@ -19,6 +20,7 @@ public class TextPlayer {
   private final String name;
   final ArrayList<String> shipsToPlace;
   final HashMap<String, Function<Placement, Ship<Character>>> shipCreationFns;
+  final HashMap<String, Integer> availableActions;
 
   /**
    * Constructs a TextPlayer
@@ -37,9 +39,18 @@ public class TextPlayer {
     this.name = theName;
     this.shipsToPlace = new ArrayList<>();
     this.shipCreationFns = new HashMap<>();
+    this.availableActions = new HashMap<>();
     setupShipCreationMap();
     setupShipCreationList();
+    setupAvailableActionsList();
   }
+
+  protected void setupAvailableActionsList() {
+    availableActions.put("F", 1); //inifinity, it will increase every time you finish it
+    availableActions.put("M", 3);
+    availableActions.put("S", 3);
+  }
+
 
   /**
    * set up ships creation function
@@ -105,7 +116,7 @@ public class TextPlayer {
   }
 
   /**
-   * A helper function to output instructions
+   * A helper function to output placement instructions
    */
   public void printPlacementInstruction() {
     out.println("Player " + name + ": you are going to place the following ships (which are all\n" +
@@ -132,6 +143,97 @@ public class TextPlayer {
       printPlacementInstruction();
       doOnePlacement(s, shipCreationFns.get(s));
     }
+  }
+
+  /**
+   * A helper function to generate action choices instructions
+   *
+   * @return a string contains possible actions
+   */
+  public String generateActionInstruction() {
+    String actionPrompt = "Possible actions for Player " + name + ":\n" +
+            " F Fire at a square\n" +
+            " M Move a ship to another square (" + availableActions.get("M") + " remaining)\n" +
+            " S Sonar scan (" + availableActions.get("M") + " remaining)\n" +
+            "\n" +
+            "Player " + name + ", what would you like to do?\n";
+    return actionPrompt;
+  }
+
+
+  /**
+   * Prints out the prompt message, creates a new Coordinate according to the
+   * input
+   *
+   * @param prompt the string that will be printed out
+   * @return the new constructed Coordinate according to input
+   * @throws IOException if input is empty
+   */
+  public String readAction(String prompt) throws IOException, IllegalArgumentException {
+    if (availableActions.size() == 1 && availableActions.get("F") != null) {
+      return "F";
+    }
+    out.print(prompt);
+    String s = inputReader.readLine();
+    if (s == null) {
+      throw new EOFException();
+    }
+    s = s.toUpperCase(Locale.ROOT);
+    if (availableActions.get(s) == null || availableActions.get(s) ==0) {
+      throw new IllegalArgumentException("Please enter a valid action!");
+    }
+    return s;
+  }
+
+  /**
+   * Lets the player play for one turn.
+   * It displays two boards side by side to the player first,
+   * one for the player's own board, the other for the enemy.
+   * Then prompts the player to fire at a coordinate. If the
+   * coordinates are invalid, it prompts the player to enter a valid choice.
+   * It then reports the result.
+   *
+   * @param enemyBoard the enemy's board
+   * @param enemyView  the enemy's BoardTextView
+   * @param enemyName  the enemy's name
+   * @throws IOException              if no input for coordinate
+   * @throws IllegalArgumentException if the input coordinate is invalid
+   */
+  public void playOneTurn(Board<Character> enemyBoard, BoardTextView enemyView, String enemyName)
+          throws IOException, IllegalArgumentException {
+    out.print("Player " + name + "'s turn:\n");
+    out.print(view.displayMyBoardWithEnemyNextToIt(enemyView, "Your ocean", "Player " + enemyName + "'s ocean"));
+    String problem;
+    do {
+      try {
+        //choose action
+        String actionInstruction = generateActionInstruction();
+        String action = readAction(actionInstruction);
+        if (action.equals("F")) {
+          tryFireAction(enemyBoard, enemyView, enemyName);
+        }
+        if (action.equals("M")) {
+          tryMoveAction();
+        }
+        if (action.equals("S")) {
+          trySonarScanAction();
+        }
+
+
+        problem = null;
+        if (s == null) {
+          out.print("You missed!\n");
+        } else {
+          out.print("You hit a " + s.getName() + "!\n");
+        }
+      } catch (IllegalArgumentException iae) {
+        problem = "it does not have the correct format";
+      }
+      if (problem != null) {
+        String msg = "That placement is invalid: " + problem;
+        out.println(msg);
+      }
+    } while (problem != null);
   }
 
   /**
@@ -169,10 +271,50 @@ public class TextPlayer {
    * @throws IOException              if no input for coordinate
    * @throws IllegalArgumentException if the input coordinate is invalid
    */
-  public void playOneTurn(Board<Character> enemyBoard, BoardTextView enemyView, String enemyName)
+  public void tryFireAction(Board<Character> enemyBoard, BoardTextView enemyView, String enemyName)
       throws IOException, IllegalArgumentException {
-    out.print("Player " + name + "'s turn:\n");
-    out.print(view.displayMyBoardWithEnemyNextToIt(enemyView, "Your ocean", "Player " + enemyName + "'s ocean"));
+    //out.print("Player " + name + "'s turn:\n");
+    //out.print(view.displayMyBoardWithEnemyNextToIt(enemyView, "Your ocean", "Player " + enemyName + "'s ocean"));
+    String problem;
+    //do {
+      try {
+        String prompt = "Player " + name + ", please enter a coordinate where you want to fire at?\n";
+        Coordinate c = readCoordinate(prompt);
+        Ship<Character> s = enemyBoard.fireAt(c);
+        problem = null;
+        if (s == null) {
+          out.print("You missed!\n");
+        } else {
+          out.print("You hit a " + s.getName() + "!\n");
+        }
+      } catch (IllegalArgumentException iae) {
+        problem = "it does not have the correct format";
+      }
+      if (problem != null) {
+        String msg = "That placement is invalid: " + problem;
+        out.println(msg);
+      }
+    //} while (problem != null);
+  }
+
+  /**
+   * Lets the player play for one turn.
+   * It displays two boards side by side to the player first,
+   * one for the player's own board, the other for the enemy.
+   * Then prompts the player to fire at a coordinate. If the
+   * coordinates are invalid, it prompts the player to enter a valid choice.
+   * It then reports the result.
+   *
+   * @param enemyBoard the enemy's board
+   * @param enemyView  the enemy's BoardTextView
+   * @param enemyName  the enemy's name
+   * @throws IOException              if no input for coordinate
+   * @throws IllegalArgumentException if the input coordinate is invalid
+   */
+  public void tryMoveAction(Board<Character> enemyBoard, BoardTextView enemyView, String enemyName)
+          throws IOException, IllegalArgumentException {
+    //out.print("Player " + name + "'s turn:\n");
+    //out.print(view.displayMyBoardWithEnemyNextToIt(enemyView, "Your ocean", "Player " + enemyName + "'s ocean"));
     String problem;
     do {
       try {
