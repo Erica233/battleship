@@ -212,25 +212,25 @@ public class TextPlayer {
         if (action.equals("F")) {
           tryFireAction(enemyBoard, enemyView, enemyName);
         }
-        if (action.equals("M")) {
-          tryMoveAction();
-        }
-        if (action.equals("S")) {
-          trySonarScanAction();
-        }
+//        if (action.equals("M")) {
+//          tryMoveAction();
+//        }
+//        if (action.equals("S")) {
+//          trySonarScanAction();
+//        }
 
 
         problem = null;
-        if (s == null) {
-          out.print("You missed!\n");
-        } else {
-          out.print("You hit a " + s.getName() + "!\n");
-        }
+//        if (s == null) {
+//          out.print("You missed!\n");
+//        } else {
+//          out.print("You hit a " + s.getName() + "!\n");
+//        }
       } catch (IllegalArgumentException iae) {
         problem = "it does not have the correct format";
       }
       if (problem != null) {
-        String msg = "That placement is invalid: " + problem;
+        String msg = "That action is invalid: " + problem;
         out.println(msg);
       }
     } while (problem != null);
@@ -277,7 +277,7 @@ public class TextPlayer {
     //out.print(view.displayMyBoardWithEnemyNextToIt(enemyView, "Your ocean", "Player " + enemyName + "'s ocean"));
     String problem;
     //do {
-      try {
+      //try {
         String prompt = "Player " + name + ", please enter a coordinate where you want to fire at?\n";
         Coordinate c = readCoordinate(prompt);
         Ship<Character> s = enemyBoard.fireAt(c);
@@ -287,13 +287,13 @@ public class TextPlayer {
         } else {
           out.print("You hit a " + s.getName() + "!\n");
         }
-      } catch (IllegalArgumentException iae) {
-        problem = "it does not have the correct format";
-      }
-      if (problem != null) {
-        String msg = "That placement is invalid: " + problem;
-        out.println(msg);
-      }
+//      } catch (IllegalArgumentException iae) {
+//        problem = "it does not have the correct format";
+//      }
+//      if (problem != null) {
+//        String msg = "That placement is invalid: " + problem;
+//        out.println(msg);
+//      }
     //} while (problem != null);
   }
 
@@ -311,31 +311,20 @@ public class TextPlayer {
    * @throws IOException              if no input for coordinate
    * @throws IllegalArgumentException if the input coordinate is invalid
    */
-  public void tryMoveAction(Board<Character> enemyBoard, BoardTextView enemyView, String enemyName)
-          throws IOException, IllegalArgumentException {
-    //out.print("Player " + name + "'s turn:\n");
-    //out.print(view.displayMyBoardWithEnemyNextToIt(enemyView, "Your ocean", "Player " + enemyName + "'s ocean"));
-    String problem;
-    do {
-      try {
-        String prompt = "Player " + name + ", please enter a coordinate where you want to fire at?\n";
-        Coordinate c = readCoordinate(prompt);
-        Ship<Character> s = enemyBoard.fireAt(c);
-        problem = null;
-        if (s == null) {
-          out.print("You missed!\n");
-        } else {
-          out.print("You hit a " + s.getName() + "!\n");
-        }
-      } catch (IllegalArgumentException iae) {
-        problem = "it does not have the correct format";
-      }
-      if (problem != null) {
-        String msg = "That placement is invalid: " + problem;
-        out.println(msg);
-      }
-    } while (problem != null);
-  }
+//  public void tryMoveAction(Board<Character> enemyBoard, BoardTextView enemyView, String enemyName)
+//          throws IOException, IllegalArgumentException {
+//    //out.print("Player " + name + "'s turn:\n");
+//    //out.print(view.displayMyBoardWithEnemyNextToIt(enemyView, "Your ocean", "Player " + enemyName + "'s ocean"));
+//    String prompt = "Player " + name + ", please enter a coordinate where you want to fire at?\n";
+//    Coordinate c = readCoordinate(prompt);
+//    Ship<Character> s = enemyBoard.fireAt(c);
+//    problem = null;
+//    if (s == null) {
+//      out.print("You missed!\n");
+//    } else {
+//      out.print("You hit a " + s.getName() + "!\n");
+//    }
+//  }
 
   /**
    * check if it's lose
