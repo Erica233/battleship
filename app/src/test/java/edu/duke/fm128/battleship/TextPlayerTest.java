@@ -1,7 +1,6 @@
 package edu.duke.fm128.battleship;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Disabled;
 import java.io.*;
 import java.util.Collections;
 
@@ -74,11 +73,6 @@ class TextPlayerTest {
     player.doOnePlacement("Destroyer", player.shipCreationFns.get("Destroyer"));
     String expected = "Player A where do you want to place a Destroyer?\n" +
         "That placement is invalid: it does not have the correct format\n" +
-        "  0|1|2|3\n" +
-        "A  | | |  A\n" +
-        "B  | | |  B\n" +
-        "C  | | |  C\n" +
-        "  0|1|2|3\n" +
         "Player A where do you want to place a Destroyer?\n" +
         "  0|1|2|3\n" +
         "A  | |d|  A\n" +
@@ -175,10 +169,66 @@ class TextPlayerTest {
     V1ShipFactory shipFactory = new V1ShipFactory();
     TextPlayer p = new TextPlayer("A", board, input, output, shipFactory);
     String prompt = "Player A, please enter a coordinate where you want to fire at?\n";
-    p.readCoordinate(prompt);
+    assertThrows(IllegalArgumentException.class, () -> p.readCoordinate(prompt));
 
-    String expected = prompt + "Please enter a valid attack!\n" + prompt;
+    String expected = "Player A, please enter a coordinate where you want to fire at?\n";
     assertEquals(expected, bytes.toString());
     bytes.reset();
   }
+
+  @Test
+  void test_read_outbound_coordinate() throws IOException {
+    String inputData = "z1\nA1\n";
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    BufferedReader input = new BufferedReader(new StringReader(inputData));
+    PrintStream output = new PrintStream(bytes, true);
+    Board<Character> board = new BattleShipBoard<>(2, 3, 'X');
+    V1ShipFactory shipFactory = new V1ShipFactory();
+    TextPlayer p = new TextPlayer("A", board, input, output, shipFactory);
+    String prompt = "Player A, please enter a coordinate where you want to fire at?\n";
+    assertThrows(IllegalArgumentException.class, () -> p.readCoordinate(prompt));
+  }
+
+  @Test
+  void test_playOneTurn() throws IOException {
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    TextPlayer p1 = createTextPlayer(2, 3, "a1\n", bytes);
+    TextPlayer p2 = createTextPlayer(2, 3, "b1\n", bytes);
+    V1ShipFactory f = new V1ShipFactory();
+    Ship<Character> s1 = f.makeSubmarine(new Placement("b0h"));
+    Ship<Character> s2 = f.makeSubmarine(new Placement("a0v"));
+    p1.getTheBoard().tryAddShip(s1);
+    p2.getTheBoard().tryAddShip(s2);
+    String expected1 = "Player A's turn:\n" +
+            "     Your ocean           Player A's ocean\n" +
+            "  0|1                    0|1\n" +
+            "A  |  A                A  |  A\n" +
+            "B s|s B                B  |  B\n" +
+            "C  |  C                C  |  C\n" +
+            "  0|1                    0|1\n" +
+            "Player A, please enter a coordinate where you want to fire at?\n" +
+            "You missed!\n";
+    p1.playOneTurn(p2.getTheBoard(), p2.getView(), p2.getName());
+    assertEquals(expected1, bytes.toString());
+    bytes.reset();
+    String expected2 = "Player A's turn:\n" +
+            "     Your ocean           Player A's ocean\n" +
+            "  0|1                    0|1\n" +
+            "A s|  A                A  |  A\n" +
+            "B s|  B                B  |  B\n" +
+            "C  |  C                C  |  C\n" +
+            "  0|1                    0|1\n" +
+            "Player A, please enter a coordinate where you want to fire at?\n" +
+            "You hit a Submarine!\n";
+    p2.playOneTurn(p1.getTheBoard(), p1.getView(), p1.getName());
+    assertEquals(expected2, bytes.toString());
+  }
+
+  @Test
+  public void test_isLose() {
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    TextPlayer p = createTextPlayer(2, 3, "", bytes);
+    assertTrue(p.isLose());
+  }
+
 }

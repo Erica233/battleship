@@ -28,7 +28,7 @@ public class TextPlayer {
    * @param out         output
    */
   public TextPlayer(String theName, Board<Character> theBoard, Reader inputSource, PrintStream out,
-      AbstractShipFactory v_shipFact) {
+      V1ShipFactory v_shipFact) {
     this.theBoard = theBoard;
     this.view = new BoardTextView(theBoard);
     this.inputReader = (BufferedReader) inputSource;
@@ -98,8 +98,9 @@ public class TextPlayer {
       if (problem != null) {
         String msg = "That placement is invalid: " + problem;
         out.println(msg);
+      } else {
+        out.print(view.displayMyOwnBoard());
       }
-      out.print(view.displayMyOwnBoard());
     } while (problem != null);
   }
 
@@ -130,6 +131,7 @@ public class TextPlayer {
     for (String s : shipsToPlace) {
       printPlacementInstruction();
       doOnePlacement(s, shipCreationFns.get(s));
+      //out.print(view.displayMyOwnBoard());
     }
   }
 
@@ -141,19 +143,17 @@ public class TextPlayer {
    * @return the new constructed Coordinate according to input
    * @throws IOException if input is empty
    */
-  public Coordinate readCoordinate(String prompt) throws IOException {
-    while (true) {
-      try {
-        out.print(prompt);
-        String s = inputReader.readLine();
-        if (s == null) {
-          throw new EOFException();
-        }
-        return new Coordinate(s);
-      } catch (IllegalArgumentException iae) {
-        out.print("Please enter a valid attack!\n");
-      }
+  public Coordinate readCoordinate(String prompt) throws IOException, IllegalArgumentException {
+    out.print(prompt);
+    String s = inputReader.readLine();
+    if (s == null) {
+      throw new EOFException();
     }
+    Coordinate c = new Coordinate(s);
+    if (!theBoard.checkContain(c)) {
+      throw new IllegalArgumentException("The Coordinate is out of board!");
+    }
+    return c;
   }
 
   /**
@@ -174,14 +174,30 @@ public class TextPlayer {
       throws IOException, IllegalArgumentException {
     out.print("Player " + name + "'s turn:\n");
     out.print(view.displayMyBoardWithEnemyNextToIt(enemyView, "Your ocean", "Player " + enemyName + "'s ocean"));
-    String prompt = "Player " + name + ", please enter a coordinate where you want to fire at?\n";
-    Coordinate c = readCoordinate(prompt);
-    Ship<Character> s = enemyBoard.fireAt(c);
-    if (s == null) {
-      out.print("You missed!\n");
-    } else {
-      out.print("You hit a " + s.getName() + "!\n");
-    }
+    String problem;
+    do {
+      try {
+        String prompt = "Player " + name + ", please enter a coordinate where you want to fire at?\n";
+        Coordinate c = readCoordinate(prompt);
+        Ship<Character> s = enemyBoard.fireAt(c);
+        problem = null;
+        if (s == null) {
+          out.print("You missed!\n");
+        } else {
+          out.print("You hit a " + s.getName() + "!\n");
+        }
+      } catch (IllegalArgumentException iae) {
+        problem = "it does not have the correct format";
+      }
+      if (problem != null) {
+        String msg = "That placement is invalid: " + problem;
+        out.println(msg);
+      }
+    } while (problem != null);
+
+
+
+
   }
 
   /**

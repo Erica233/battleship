@@ -151,4 +151,13 @@ public class BattleShipBoard<T> implements Board<T> {
   public int getWidth() {
     return width;
   }
+
+  @Override
+  public boolean checkContain(Coordinate c) {
+    if (c.getColumn() < 0 || c.getColumn() >= width || c.getRow() < 0 || c.getRow() >= height) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 }

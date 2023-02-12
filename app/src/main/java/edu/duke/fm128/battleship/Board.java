@@ -74,4 +74,12 @@ public interface Board<T> {
    * @return the height of the Board
    */
   int getHeight();
+
+  /**
+   * checks if the input coordinate is within the board's boundary
+   *
+   * @param c coordinate
+   * @return true if coordinates is within the board, otherwise false
+   */
+  boolean checkContain(Coordinate c);
 }
