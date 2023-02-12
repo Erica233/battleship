@@ -1,7 +1,10 @@
 package edu.duke.fm128.battleship;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Locale;
 import java.util.function.Function;
 
 /**
@@ -18,6 +21,9 @@ public class TextPlayer {
   final ArrayList<String> shipsToPlace;
   final HashMap<String, Function<Placement, Ship<Character>>> shipCreationFns;
   final HashMap<String, Integer> availableActions;
+  private boolean isComputer;
+  private int col_currCompFireAt = -1;
+  private int row_currCompFireAt = 0;
 
   /**
    * Constructs a TextPlayer
@@ -43,7 +49,7 @@ public class TextPlayer {
   }
 
   protected void setupAvailableActionsList() {
-    availableActions.put("F", 1); //inifinity, it will increase every time you finish it
+    availableActions.put("F", 1); //infinity, it will increase every time you finish it
     availableActions.put("M", 3);
     availableActions.put("S", 3);
   }
@@ -66,6 +72,35 @@ public class TextPlayer {
     shipsToPlace.addAll(Collections.nCopies(3, "Destroyer"));
     shipsToPlace.addAll(Collections.nCopies(3, "Battleship"));
     shipsToPlace.addAll(Collections.nCopies(2, "Carrier"));
+  }
+
+  public boolean chooseAsComputer(String prompt) throws IOException {
+    out.println(prompt);
+    String choice = inputReader.readLine();
+    if (choice == null) {
+      throw new EOFException();
+    }
+    choice = choice.toUpperCase(Locale.ROOT);
+    if (!choice.equals("H") && !choice.equals("C")) {
+      throw new IllegalArgumentException("Please enter a valid choice!");
+    }
+    return choice.equals("C");
+  }
+
+  public void choosePlayer() throws IOException {
+    String problem;
+    do {
+      try {
+        isComputer = chooseAsComputer("Player " + name + ", do you want to play as a Human (H) or as a Computer (C)?\n");
+        problem = null;
+      } catch (IllegalArgumentException iae) {
+        problem = "choose A (Human) or B (Computer).";
+      }
+      if (problem != null) {
+        String msg = "That choice is invalid: " + problem;
+        out.println(msg);
+      }
+    } while (problem != null);
   }
 
   /**
@@ -127,6 +162,26 @@ public class TextPlayer {
         "2 \"Carriers\" that are 1x6\n");
   }
 
+  public ArrayList<Placement> generatePlacementsAsComputer() {
+    ArrayList<Placement> placeListComp = new ArrayList<>();
+    for (int i = 0; i < 5; i++) {
+      Coordinate c = new Coordinate(i, 0);
+      Placement p = new Placement(c, 'H');
+      placeListComp.add(p);
+    }
+    for (int i = 5; i < 10; i = i + 2) {
+      Coordinate c = new Coordinate(i, 0);
+      Placement p = new Placement(c, 'U');
+      placeListComp.add(p);
+    }
+    for (int i = 11; i < 14; i = i + 2) {
+      Coordinate c = new Coordinate(i, 0);
+      Placement p = new Placement(c, 'R');
+      placeListComp.add(p);
+    }
+    return placeListComp;
+  }
+
   /**
    * display the starting (empty) board, print the instructions message, and place
    * one ship
@@ -134,10 +189,20 @@ public class TextPlayer {
    * @throws IOException
    */
   public void doPlacementPhase() throws IOException {
-    out.print(view.displayMyOwnBoard());
-    for (String s : shipsToPlace) {
-      printPlacementInstruction();
-      doOnePlacement(s, shipCreationFns.get(s));
+    if (isComputer) {
+      ArrayList<Placement> placeList = generatePlacementsAsComputer();
+      int i = 0;
+      for (String s : shipsToPlace) {
+        Ship<Character> newShip = shipCreationFns.get(s).apply(placeList.get(i));
+        theBoard.tryAddShip(newShip);
+        i++;
+      }
+    } else {
+      out.print(view.displayMyOwnBoard());
+      for (String s : shipsToPlace) {
+        printPlacementInstruction();
+        doOnePlacement(s, shipCreationFns.get(s));
+      }
     }
   }
 
@@ -177,6 +242,28 @@ public class TextPlayer {
     return s;
   }
 
+  public Coordinate generateCoordinate() {
+    col_currCompFireAt++;
+    Coordinate newCoord = new Coordinate(row_currCompFireAt, col_currCompFireAt);
+    if (theBoard.checkContain(newCoord)) {
+      return newCoord;
+    }
+    row_currCompFireAt++;
+    col_currCompFireAt = 0;
+    return new Coordinate(row_currCompFireAt, col_currCompFireAt);
+  }
+
+  public void playOneTurnAsComputer(Board<Character> enemyBoard)
+          throws IllegalArgumentException {
+    Coordinate c = generateCoordinate();
+    Ship<Character> s = enemyBoard.fireAt(c);
+    if (s == null) {
+      out.print(name + " missed!\n");
+    } else {
+      out.print(name + " hit a " + s.getName() + " at " + c + "!\n");
+    }
+  }
+
   /**
    * Lets the player play for one turn.
    * It displays two boards side by side to the player first,
@@ -193,6 +280,10 @@ public class TextPlayer {
    */
   public void playOneTurn(Board<Character> enemyBoard, BoardTextView enemyView, String enemyName)
           throws IOException, IllegalArgumentException {
+    if (isComputer) {
+      playOneTurnAsComputer(enemyBoard);
+      return;
+    }
     out.print("Player " + name + "'s turn:\n");
     out.print(view.displayMyBoardWithEnemyNextToIt(enemyView, "Your ocean", "Player " + enemyName + "'s ocean"));
     String problem;

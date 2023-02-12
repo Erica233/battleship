@@ -1,3 +1,7 @@
+Player A, do you want to play as a Human (H) or as a Computer (C)?
+
+Player B, do you want to play as a Human (H) or as a Computer (C)?
+
   0|1|2|3|4|5|6|7|8|9
 A  | | | | | | | | |  A
 B  | | | | | | | | |  B

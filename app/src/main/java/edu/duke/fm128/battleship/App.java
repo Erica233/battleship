@@ -4,6 +4,7 @@
 package edu.duke.fm128.battleship;
 
 import java.io.*;
+import java.util.Locale;
 
 import static java.lang.System.out;
 
@@ -56,6 +57,11 @@ public class App {
     }
   }
 
+  public void doChoosePlayerPhase() throws IOException {
+    player1.choosePlayer();
+    player2.choosePlayer();
+  }
+
   public static void main(String[] args) throws IOException {
     InBoundsRuleChecker<Character> checker = new InBoundsRuleChecker<>(new NoCollisionRuleChecker<>(null));
     Board<Character> b1 = new BattleShipBoard<>(10, 20, checker, 'X');
@@ -67,6 +73,7 @@ public class App {
     TextPlayer p2 = new TextPlayer("B", b2, input, out, factory);
 
     App app = new App(p1, p2);
+    app.doChoosePlayerPhase();
     app.doPlacementPhase();
     app.doAttackingPhase();
   }
