@@ -191,7 +191,7 @@ class TextPlayerTest {
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     TextPlayer player = createTextPlayer(10, 20, "", bytes);
     String prompt = "Player A, please enter a coordinate where you want to fire at?\n";
-    assertThrows(IllegalArgumentException.class, () -> player.readCoordinate(prompt));
+    assertThrows(EOFException.class, () -> player.readCoordinate(prompt));
   }
 
   @Test

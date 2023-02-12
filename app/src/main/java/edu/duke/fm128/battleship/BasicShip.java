@@ -107,16 +107,8 @@ public abstract class BasicShip<T> implements Ship<T> {
     return enemyDisplayInfo.getInfo(where, wasHitAt(where));
   }
 
-  public void setMyPieces(HashMap<Coordinate, Boolean> myPieces) {
-    this.myPieces = myPieces;
-  }
-
   public HashMap<Coordinate, Boolean> getMyPieces() {
     return myPieces;
-  }
-
-  public HashMap<Coordinate, Integer> getCoordinateToOrder() {
-    return coordinateToOrder;
   }
 
   public HashMap<Integer, Coordinate> getOrderToCoordinate() {

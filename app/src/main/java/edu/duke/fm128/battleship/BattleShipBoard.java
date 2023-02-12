@@ -231,8 +231,4 @@ public class BattleShipBoard<T> implements Board<T> {
   public int getWidth() {
     return width;
   }
-
-  public ArrayList<Ship<T>> getMyShips() {
-    return myShips;
-  }
 }

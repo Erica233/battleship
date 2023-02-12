@@ -312,11 +312,7 @@ public class TextPlayer {
     Placement p = readPlacement("Player " + name + " where do you want to place the " + theShipToMove.getName() + " you selected?");
     Ship<Character> newShip = shipCreationFns.get(theShipToMove.getName()).apply(p);
     theBoard.removeShip(theShipToMove);
-    String problem = theBoard.tryAddShip(newShip);
-    if (problem != null) {
-      theBoard.tryAddShip(theShipToMove);
-      throw new IllegalArgumentException(problem);
-    }
+    theBoard.tryAddShip(newShip);
     theBoard.substituteShip(theShipToMove, newShip);
   }
 
