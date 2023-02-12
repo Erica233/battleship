@@ -1,5 +1,0 @@
-package edu.duke.fm128.battleship;
-
-public class V1ShipFactory implements AbstractShipFactory<Character> {
-
-}

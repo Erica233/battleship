@@ -37,6 +37,15 @@ public interface Board<T> {
   String tryAddShip(Ship<T> toAdd);
 
   /**
+   * Move the ship to the another coordinate according to the input placement
+   *
+   * @param myShip the ship to move
+   * @param p the placement details
+   * @return a String that shows the validity of the add operation
+   */
+   String tryMoveShip(Ship<T> myShip, Placement p);
+
+  /**
    * Gives the information of the given coordinate if it is occupied.
    * 
    * @param where the coordinate
@@ -60,6 +69,14 @@ public interface Board<T> {
    * @return true if my ships are all sunk, otherwise false
    */
   boolean allSunk();
+
+  /**
+   * find the ship that the input coordinate belongs to
+   *
+   * @param c the coordinate to check if it is part of one of my ships
+   * @return ship if the coordinate is part of one of my ships, otherwise return null
+   */
+  Ship<T> findShip(Coordinate c);
 
   /**
    * Gets the width of the Board

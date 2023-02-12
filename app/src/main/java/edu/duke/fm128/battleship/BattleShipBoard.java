@@ -49,11 +49,16 @@ public class BattleShipBoard<T> implements Board<T> {
     this.missInfo = _missInfo;
   }
 
-  /**
-   * checks if all myShips have sunk
-   *
-   * @return true if my ships are all sunk, otherwise false
-   */
+  @Override
+  public Ship<T> findShip(Coordinate c) {
+    for (Ship<T> s : myShips) {
+      if (s.occupiesCoordinates(c)) {
+        return s;
+      }
+    }
+    return null;
+  }
+
   @Override
   public boolean allSunk() {
     for (Ship<T> s : myShips) {
@@ -80,10 +85,21 @@ public class BattleShipBoard<T> implements Board<T> {
     return null;
   }
 
+  @Override
+  public String tryMoveShip(Ship<T> myShip, Placement p) {
+    String info = placementChecker.checkPlacement(myShip, this);
+    if (info == null) {
+      myShips.add(toAdd);
+      return null;
+    }
+    return info;
+
+  }
+
   /**
    * Checks the validity of the placement,
-   * if it is valid, adds a ship to the list of myShips and returns true,
-   * otherwise, return false
+   * if it is valid, adds a ship to the list of myShips and returns null,
+   * otherwise, return exception information
    * 
    * @param toAdd the ship to add
    * @return null if the placement is valid, otherwise return exception
