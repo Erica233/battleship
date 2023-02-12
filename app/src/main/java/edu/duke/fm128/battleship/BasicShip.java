@@ -40,10 +40,11 @@ public abstract class BasicShip<T> implements Ship<T> {
     this.enemyDisplayInfo = _enemyDisplayInfo;
   }
 
+  @Override
   public void moveTo(Ship<Character> newShip) {
     for (Coordinate c: myPieces.keySet()) {
       if (myPieces.get(c)) {
-        int oldId = coordinateToOrder.get(c);
+        int oldId = this.coordinateToOrder.get(c);
         Coordinate newCoord = newShip.getOrderToCoordinate().get(oldId);
         newShip.getMyPieces().put(newCoord, true);
       }
@@ -121,4 +122,5 @@ public abstract class BasicShip<T> implements Ship<T> {
   public HashMap<Integer, Coordinate> getOrderToCoordinate() {
     return orderToCoordinate;
   }
+
 }

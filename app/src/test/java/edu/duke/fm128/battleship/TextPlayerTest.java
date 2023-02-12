@@ -153,11 +153,45 @@ class TextPlayerTest {
   }
 
   @Test
+  void test_read_null_action() throws IOException {
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    TextPlayer player = createTextPlayer(10, 20, "", bytes);
+
+    String prompt = "Player A, what would you like to do?\n";
+    assertThrows(EOFException.class, () -> player.readAction(prompt));
+  }
+
+  @Test
+  void test_read_unavailable_action() throws IOException {
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    TextPlayer player = createTextPlayer(10, 20, "a\n", bytes);
+
+    String prompt = "Player A, what would you like to do?\n";
+    assertThrows(IllegalArgumentException.class, () -> player.readAction(prompt));
+  }
+
+  @Test
+  void test_no_ship_to_move_action() throws IOException {
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    TextPlayer player = createTextPlayer(10, 20, "a0\n", bytes);
+    assertThrows(IllegalArgumentException.class, () -> player.tryMoveAction());
+  }
+
+  @Test
+  void test_place_ship_at_another_ship() throws IOException {
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    TextPlayer player = createTextPlayer(10, 20, "b2v\nA2h\nm\nb2\na2\n", bytes);
+    player.doOnePlacement("Destroyer", player.shipCreationFns.get("Destroyer"));
+    player.doOnePlacement("Destroyer", player.shipCreationFns.get("Destroyer"));
+    assertThrows(IllegalArgumentException.class, () -> player.tryMoveAction());
+  }
+
+  @Test
   void test_read_empty_coordinate() throws IOException {
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     TextPlayer player = createTextPlayer(10, 20, "", bytes);
     String prompt = "Player A, please enter a coordinate where you want to fire at?\n";
-    assertThrows(EOFException.class, () -> player.readCoordinate(prompt));
+    assertThrows(IllegalArgumentException.class, () -> player.readCoordinate(prompt));
   }
 
   @Test
@@ -190,13 +224,13 @@ class TextPlayerTest {
     assertThrows(IllegalArgumentException.class, () -> p.readCoordinate(prompt));
   }
 
-  @Disabled
+  //@Disabled
   @Test
-  void test_playOneTurn() throws IOException {
+  void test_playOneTurn_V2() throws IOException {
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-    TextPlayer p1 = createTextPlayer(2, 3, "a1\n", bytes);
-    TextPlayer p2 = createTextPlayer(2, 3, "b1\n", bytes);
-    V1ShipFactory f = new V1ShipFactory();
+    TextPlayer p1 = createTextPlayer(2, 3, "f\na1\n", bytes);
+    TextPlayer p2 = createTextPlayer(2, 3, "s\nb1\n", bytes);
+    V2ShipFactory f = new V2ShipFactory();
     Ship<Character> s1 = f.makeSubmarine(new Placement("b0h"));
     Ship<Character> s2 = f.makeSubmarine(new Placement("a0v"));
     p1.getTheBoard().tryAddShip(s1);
@@ -208,6 +242,12 @@ class TextPlayerTest {
             "B s|s B                B  |  B\n" +
             "C  |  C                C  |  C\n" +
             "  0|1                    0|1\n" +
+            "Possible actions for Player A:\n" +
+            " F Fire at a square\n" +
+            " M Move a ship to another square (3 remaining)\n" +
+            " S Sonar scan (3 remaining)\n" +
+            "\n" +
+            "Player A, what would you like to do?\n" +
             "Player A, please enter a coordinate where you want to fire at?\n" +
             "You missed!\n";
     p1.playOneTurn(p2.getTheBoard(), p2.getView(), p2.getName());
@@ -220,8 +260,17 @@ class TextPlayerTest {
             "B s|  B                B  |  B\n" +
             "C  |  C                C  |  C\n" +
             "  0|1                    0|1\n" +
-            "Player A, please enter a coordinate where you want to fire at?\n" +
-            "You hit a Submarine!\n";
+            "Possible actions for Player A:\n" +
+            " F Fire at a square\n" +
+            " M Move a ship to another square (3 remaining)\n" +
+            " S Sonar scan (3 remaining)\n" +
+            "\n" +
+            "Player A, what would you like to do?\n" +
+            "Player A, where do you want to do sonar scan? Please enter a center coordinate.\n" +
+            "Submarine occupy 2 squares\n" +
+            "Destroyer occupy 0 squares\n" +
+            "Carrier occupy 0 squares\n" +
+            "Battleship occupy 0 squares\n";
     p2.playOneTurn(p1.getTheBoard(), p1.getView(), p1.getName());
     assertEquals(expected2, bytes.toString());
   }

@@ -2,14 +2,15 @@ package edu.duke.fm128.battleship;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TShapedShipTest {
     void helpTestTShapeShip(Character orientation, String[] ps) {
-        HashSet<Coordinate> realSet = TShapedShip.makeCoords(new Coordinate(1, 0), orientation);
-        HashSet<Coordinate> expectedSet = new HashSet<>();
+        ArrayList<Coordinate> realSet = TShapedShip.makeCoords(new Coordinate(1, 0), orientation);
+        ArrayList<Coordinate> expectedSet = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             expectedSet.add(new Coordinate(ps[i]));
         }
@@ -20,8 +21,8 @@ class TShapedShipTest {
     void test_make_coords() {
         helpTestTShapeShip('U', new String[] {"c0", "c1", "c2", "b1"});
         helpTestTShapeShip('R', new String[] {"b0", "c0", "d0", "c1"});
-        helpTestTShapeShip('D', new String[] {"b0", "b1", "b2", "c1"});
-        helpTestTShapeShip('L', new String[] {"c0", "b1", "c1", "d1"});
+        helpTestTShapeShip('D', new String[] {"b2", "b1", "b0", "c1"});
+        helpTestTShapeShip('L', new String[] {"d1", "c1", "b1", "c0"});
     }
 
     @Test

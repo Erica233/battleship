@@ -1,6 +1,5 @@
 package edu.duke.fm128.battleship;
 
-import java.awt.image.ColorConvertOp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -15,6 +14,7 @@ public class BattleShipBoard<T> implements Board<T> {
   private final ArrayList<Ship<T>> myShips;
   private final PlacementRuleChecker<T> placementChecker;
   private final HashSet<Coordinate> enemyMisses;
+  private final HashMap<Coordinate, T> enemyHits;
   private final T missInfo;
 
   /**
@@ -49,6 +49,7 @@ public class BattleShipBoard<T> implements Board<T> {
     this.myShips = new ArrayList<>();
     this.placementChecker = prc;
     this.enemyMisses = new HashSet<>();
+    this.enemyHits = new HashMap<>();
     this.missInfo = _missInfo;
   }
 
@@ -85,6 +86,8 @@ public class BattleShipBoard<T> implements Board<T> {
       // If one is found, that Ship is "hit" by the attack and should record it
       if (ship.occupiesCoordinates(c)) {
         ship.recordHitAt(c);
+        enemyHits.put(c, ship.getDisplayInfoAt(c, false));
+        enemyMisses.remove(c);
         return ship;
       }
     }
@@ -160,6 +163,11 @@ public class BattleShipBoard<T> implements Board<T> {
   }
 
   @Override
+  public void removeShip(Ship<T> toRemove) {
+    myShips.remove(toRemove);
+  }
+
+  @Override
   public void substituteShip(Ship<Character> oldShip, Ship<Character> newShip) {
     oldShip.moveTo(newShip);
   }
@@ -184,17 +192,24 @@ public class BattleShipBoard<T> implements Board<T> {
    *         coordinate, or return null if it is not occupied by any ships
    */
   protected T whatIsAt(Coordinate where, boolean isSelf) {
-    // if the specified coordinate cooresponds to a ship,
-    // use its display info.
-    for (Ship<T> s : myShips) {
-      if (s.occupiesCoordinates(where)) {
-        return s.getDisplayInfoAt(where, isSelf);
+    if (isSelf) {
+      // if the specified coordinate cooresponds to a ship,
+      // use its display info.
+      for (Ship<T> s : myShips) {
+        if (s.occupiesCoordinates(where)) {
+          return s.getDisplayInfoAt(where, isSelf);
+        }
       }
     }
     // However, if it does not, and we are doing this for an enemy board,
     // then check for a miss before return null.
-    if (!isSelf && enemyMisses.contains(where)) {
-      return missInfo;
+    else {
+      if (enemyHits.get(where) != null) {
+        return enemyHits.get(where);
+      }
+      if (enemyMisses.contains(where)) {
+        return missInfo;
+      }
     }
     return null;
   }

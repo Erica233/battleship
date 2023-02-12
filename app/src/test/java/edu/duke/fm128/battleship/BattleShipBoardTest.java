@@ -122,4 +122,12 @@ public class BattleShipBoardTest {
     assertTrue(b1.allSunk());
   }
 
+  @Test
+  void test_not_findShip() {
+    InBoundsRuleChecker<Character> checker = new InBoundsRuleChecker<>(new NoCollisionRuleChecker<>(null));
+    BattleShipBoard<Character> b1 = new BattleShipBoard<>(3, 2, checker, 'X');
+    V2ShipFactory f = new V2ShipFactory();
+    assertNull(b1.findShip(new Coordinate(0,0)));
+  }
+
 }

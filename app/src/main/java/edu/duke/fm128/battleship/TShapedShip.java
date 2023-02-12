@@ -2,6 +2,8 @@ package edu.duke.fm128.battleship;
 
 import org.checkerframework.checker.units.qual.C;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 /**
@@ -48,8 +50,8 @@ public class TShapedShip<T> extends BasicShip<T>  {
      * @param orientation   the orientation of the ship, up (U), right (R), down (D), and left (L))
      * @return the set of coordinates occupied by the ship
      */
-    public static HashSet<Coordinate> makeCoords(Coordinate upperLeft, Character orientation) {
-        HashSet<Coordinate> coordsSet = new HashSet<>();
+    public static ArrayList<Coordinate> makeCoords(Coordinate upperLeft, Character orientation) {
+        ArrayList<Coordinate> coordsSet = new ArrayList<>();
         if (orientation == 'U') {
             coordsSet.add(new Coordinate(upperLeft.getRow() + 1, upperLeft.getColumn()));
             coordsSet.add(new Coordinate(upperLeft.getRow() + 1, upperLeft.getColumn() + 1));
@@ -63,15 +65,15 @@ public class TShapedShip<T> extends BasicShip<T>  {
             coordsSet.add(new Coordinate(upperLeft.getRow() + 1, upperLeft.getColumn() + 1));
         }
         if (orientation == 'D') {
-            coordsSet.add(new Coordinate(upperLeft.getRow(), upperLeft.getColumn()));
-            coordsSet.add(new Coordinate(upperLeft.getRow(), upperLeft.getColumn() + 1));
             coordsSet.add(new Coordinate(upperLeft.getRow(), upperLeft.getColumn() + 2));
+            coordsSet.add(new Coordinate(upperLeft.getRow(), upperLeft.getColumn() + 1));
+            coordsSet.add(new Coordinate(upperLeft.getRow(), upperLeft.getColumn()));
             coordsSet.add(new Coordinate(upperLeft.getRow() + 1, upperLeft.getColumn() + 1));
         }
         if (orientation == 'L') {
-            coordsSet.add(new Coordinate(upperLeft.getRow(), upperLeft.getColumn() + 1));
-            coordsSet.add(new Coordinate(upperLeft.getRow() + 1, upperLeft.getColumn() + 1));
             coordsSet.add(new Coordinate(upperLeft.getRow() + 2, upperLeft.getColumn() + 1));
+            coordsSet.add(new Coordinate(upperLeft.getRow() + 1, upperLeft.getColumn() + 1));
+            coordsSet.add(new Coordinate(upperLeft.getRow(), upperLeft.getColumn() + 1));
             coordsSet.add(new Coordinate(upperLeft.getRow() + 1, upperLeft.getColumn()));
         }
         return coordsSet;

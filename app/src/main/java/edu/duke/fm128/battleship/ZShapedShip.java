@@ -2,6 +2,7 @@ package edu.duke.fm128.battleship;
 
 import org.checkerframework.checker.units.qual.C;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
@@ -48,8 +49,8 @@ public class ZShapedShip<T> extends BasicShip<T>  {
      * @param orientation   the orientation of the ship, up (U), right (R), down (D), and left (L))
      * @return the set of coordinates occupied by the ship
      */
-    public static HashSet<Coordinate> makeCoords(Coordinate upperLeft, Character orientation) {
-        HashSet<Coordinate> coordsSet = new HashSet<>();
+    public static ArrayList<Coordinate> makeCoords(Coordinate upperLeft, Character orientation) {
+        ArrayList<Coordinate> coordsSet = new ArrayList<>();
         if (orientation == 'U') {
             for (int i = 0; i < 4; i++) {
                 coordsSet.add(new Coordinate(upperLeft.getRow() + i, upperLeft.getColumn()));

@@ -61,7 +61,7 @@ public interface Ship<T> {
    * @throws IllegalArgumentException if where is not part of the Ship
    * @return The view-specific information at that coordinate.
    */
-  public T getDisplayInfoAt(Coordinate where, boolean myShip);
+   T getDisplayInfoAt(Coordinate where, boolean myShip);
 
   /**
    * Get the name of this Ship, such as "submarine".
@@ -72,11 +72,7 @@ public interface Ship<T> {
 
   void moveTo(Ship<Character> newShip);
 
-  void setMyPieces(HashMap<Coordinate, Boolean> myPieces);
-
   HashMap<Coordinate, Boolean> getMyPieces();
-
-  HashMap<Coordinate, Integer> getCoordinateToOrder();
 
   HashMap<Integer, Coordinate> getOrderToCoordinate();
 }

@@ -27,7 +27,7 @@ public class TextPlayer {
    * @param out         output
    */
   public TextPlayer(String theName, Board<Character> theBoard, Reader inputSource, PrintStream out,
-      AbstractShipFactory v_shipFact) {
+      AbstractShipFactory<Character> v_shipFact) {
     this.theBoard = theBoard;
     this.view = new BoardTextView(theBoard);
     this.inputReader = (BufferedReader) inputSource;
@@ -165,16 +165,13 @@ public class TextPlayer {
    * @throws IOException if input is empty
    */
   public String readAction(String prompt) throws IOException, IllegalArgumentException {
-    if (availableActions.size() == 1 && availableActions.get("F") != null) {
-      return "F";
-    }
     out.print(prompt);
     String s = inputReader.readLine();
     if (s == null) {
       throw new EOFException();
     }
     s = s.toUpperCase(Locale.ROOT);
-    if (availableActions.get(s) == null || availableActions.get(s) ==0) {
+    if (availableActions.get(s) == null || availableActions.get(s) == 0) {
       throw new IllegalArgumentException("Please enter a valid action!");
     }
     return s;
@@ -217,14 +214,8 @@ public class TextPlayer {
         if (!action.equals("F")) {
           availableActions.put(action, availableActions.get(action) - 1);
         }
-
-//        if (s == null) {
-//          out.print("You missed!\n");
-//        } else {
-//          out.print("You hit a " + s.getName() + "!\n");
-//        }
       } catch (IllegalArgumentException iae) {
-        problem = "it does not have the correct format";
+        problem = "it does not have the correct format!" + iae;
         out.println("Invalid action!");
       }
       if (problem != null) {
@@ -236,17 +227,18 @@ public class TextPlayer {
 
   /**
    * Prints out the prompt message, creates a new Coordinate according to the
-   * input
+   * input,
    *
    * @param prompt the string that will be printed out
    * @return the new constructed Coordinate according to input
    * @throws IOException if input is empty
+   * @throws IllegalArgumentException if the coordinate is not within board
    */
   public Coordinate readCoordinate(String prompt) throws IOException, IllegalArgumentException {
     out.print(prompt);
     String s = inputReader.readLine();
     if (s == null) {
-      throw new EOFException();
+      throw new EOFException("The coordinate is empty!");
     }
     Coordinate c = new Coordinate(s);
     if (!theBoard.checkContain(c)) {
@@ -319,14 +311,12 @@ public class TextPlayer {
     //read placement
     Placement p = readPlacement("Player " + name + " where do you want to place the " + theShipToMove.getName() + " you selected?");
     Ship<Character> newShip = shipCreationFns.get(theShipToMove.getName()).apply(p);
-    Ship<Character> oldShip = theBoard.getMyShips().get(theBoard.getMyShips().indexOf(theShipToMove));
-    theBoard.getMyShips().remove(oldShip);
+    theBoard.removeShip(theShipToMove);
     String problem = theBoard.tryAddShip(newShip);
     if (problem != null) {
-      theBoard.getMyShips().add(oldShip);
+      theBoard.tryAddShip(theShipToMove);
       throw new IllegalArgumentException(problem);
     }
-    //theBoard.getMyShips().remove(newShip);
     theBoard.substituteShip(theShipToMove, newShip);
   }
 

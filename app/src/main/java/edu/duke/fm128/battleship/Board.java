@@ -20,8 +20,6 @@ public interface Board<T> {
    */
   Ship<T> fireAt(Coordinate c);
 
-  ArrayList<Ship<T>> getMyShips();
-
   HashMap<String, Integer> scanAt(Coordinate c, Set<String> shipNames);
 
   /**
@@ -31,6 +29,14 @@ public interface Board<T> {
    * @return a String that shows the validity of the add operation
    */
   String tryAddShip(Ship<T> toAdd);
+
+  /**
+   * removes the ship within board,
+   * notice: the input must be a ship within board
+   *
+   * @param toRemove the ship to remove
+   */
+  void removeShip(Ship<T> toRemove);
 
   void substituteShip(Ship<Character> oldShip, Ship<Character> newShip);
 

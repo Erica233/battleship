@@ -43,6 +43,5 @@ class V1ShipFactoryTest {
 
     assertThrows(IllegalArgumentException.class,
         () -> new V1ShipFactory().makeSubmarine(p));
-
   }
 }

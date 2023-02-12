@@ -1,5 +1,6 @@
 package edu.duke.fm128.battleship;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
@@ -60,8 +61,8 @@ public class RectangleShip<T> extends BasicShip<T> {
    * @param height    the height of the ship
    * @return the set of coordinates occupied by the ship
    */
-  public static HashSet<Coordinate> makeCoords(Coordinate upperLeft, int width, int height) {
-    HashSet<Coordinate> coordsSet = new HashSet<>();
+  public static ArrayList<Coordinate> makeCoords(Coordinate upperLeft, int width, int height) {
+    ArrayList<Coordinate> coordsSet = new ArrayList<>();
     for (int r = 0; r < height; r++) {
       for (int c = 0; c < width; c++) {
         coordsSet.add(new Coordinate(upperLeft.getRow() + r, upperLeft.getColumn() + c));
