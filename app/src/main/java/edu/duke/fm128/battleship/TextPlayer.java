@@ -48,6 +48,10 @@ public class TextPlayer {
     setupAvailableActionsList();
   }
 
+  /**
+   * set up available action list
+   *
+   */
   protected void setupAvailableActionsList() {
     availableActions.put("F", 1); //infinity, it will increase every time you finish it
     availableActions.put("M", 3);
@@ -74,6 +78,12 @@ public class TextPlayer {
     shipsToPlace.addAll(Collections.nCopies(2, "Carrier"));
   }
 
+  /** read choice about want as a human player or computer player
+   *
+   * @param prompt string
+   * @return true if want to play as a computer player
+   * @throws IOException
+   */
   public boolean chooseAsComputer(String prompt) throws IOException {
     out.println(prompt);
     String choice = inputReader.readLine();
@@ -87,6 +97,11 @@ public class TextPlayer {
     return choice.equals("C");
   }
 
+  /**
+   * choose want to be huaman player or computer player
+   *
+   * @throws IOException
+   */
   public void choosePlayer() throws IOException {
     String problem;
     do {
@@ -94,7 +109,7 @@ public class TextPlayer {
         isComputer = chooseAsComputer("Player " + name + ", do you want to play as a Human (H) or as a Computer (C)?\n");
         problem = null;
       } catch (IllegalArgumentException iae) {
-        problem = "choose A (Human) or B (Computer).";
+        problem = "choose H (Human) or C (Computer).";
       }
       if (problem != null) {
         String msg = "That choice is invalid: " + problem;
@@ -162,6 +177,11 @@ public class TextPlayer {
         "2 \"Carriers\" that are 1x6\n");
   }
 
+  /**
+   * a helper method to generate placements for a computer player
+   *
+   * @return the list of placement for a computer to play
+   */
   public ArrayList<Placement> generatePlacementsAsComputer() {
     ArrayList<Placement> placeListComp = new ArrayList<>();
     for (int i = 0; i < 5; i++) {
@@ -242,6 +262,11 @@ public class TextPlayer {
     return s;
   }
 
+  /**
+   * generate coordinate for a computer player to fire at at each turn
+   *
+   * @return a coordinate to fire at
+   */
   public Coordinate generateCoordinate() {
     col_currCompFireAt++;
     Coordinate newCoord = new Coordinate(row_currCompFireAt, col_currCompFireAt);
@@ -253,6 +278,12 @@ public class TextPlayer {
     return new Coordinate(row_currCompFireAt, col_currCompFireAt);
   }
 
+  /**
+   * play one turn as a computer player. It will only prints out the action results
+   *
+   * @param enemyBoard the enemy board
+   * @throws IllegalArgumentException
+   */
   public void playOneTurnAsComputer(Board<Character> enemyBoard)
           throws IllegalArgumentException {
     Coordinate c = generateCoordinate();
@@ -352,28 +383,15 @@ public class TextPlayer {
    */
   public void tryFireAction(Board<Character> enemyBoard)
       throws IOException, IllegalArgumentException {
-    //out.print("Player " + name + "'s turn:\n");
-    //out.print(view.displayMyBoardWithEnemyNextToIt(enemyView, "Your ocean", "Player " + enemyName + "'s ocean"));
-    //String problem;
-    //do {
-      //try {
-        String prompt = "Player " + name + ", please enter a coordinate where you want to fire at?\n";
-        Coordinate c = readCoordinate(prompt);
-        Ship<Character> s = enemyBoard.fireAt(c);
-        //problem = null;
-        if (s == null) {
-          out.print("You missed!\n");
-        } else {
-          out.print("You hit a " + s.getName() + "!\n");
-        }
-//      } catch (IllegalArgumentException iae) {
-//        problem = "it does not have the correct format";
-//      }
-//      if (problem != null) {
-//        String msg = "That placement is invalid: " + problem;
-//        out.println(msg);
-//      }
-    //} while (problem != null);
+      String prompt = "Player " + name + ", please enter a coordinate where you want to fire at?\n";
+      Coordinate c = readCoordinate(prompt);
+      Ship<Character> s = enemyBoard.fireAt(c);
+      //problem = null;
+      if (s == null) {
+        out.print("You missed!\n");
+      } else {
+        out.print("You hit a " + s.getName() + "!\n");
+      }
   }
 
   /**
@@ -389,8 +407,6 @@ public class TextPlayer {
    */
   public void tryMoveAction()
           throws IOException, IllegalArgumentException {
-    //out.print("Player " + name + "'s turn:\n");
-    //out.print(view.displayMyBoardWithEnemyNextToIt(enemyView, "Your ocean", "Player " + enemyName + "'s ocean"));
     //read coordinate
     String prompt = "Player " + name + ", which ship do you want to move? Please enter a coordinate!\n";
     Coordinate c = readCoordinate(prompt);
@@ -408,6 +424,14 @@ public class TextPlayer {
   }
 
 
+  /**
+   * try to do sonar scan action, and print out results about
+   * how many of each type of ship within that sonar scan area
+   *
+   * @param enemyBoard the enemy board to scan
+   * @throws IOException
+   * @throws IllegalArgumentException
+   */
   public void trySonarScanAction(Board<Character> enemyBoard)
           throws IOException, IllegalArgumentException {
     String prompt = "Player " + name + ", where do you want to do sonar scan? Please enter a center coordinate.\n";

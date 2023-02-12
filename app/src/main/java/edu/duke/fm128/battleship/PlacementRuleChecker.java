@@ -3,7 +3,7 @@ package edu.duke.fm128.battleship;
 /**
  * A abstract class that is a PlacementRuleChecker
  *
- * @param <T>
+ * @param <T> Character
  */
 public abstract class PlacementRuleChecker<T> {
   private final PlacementRuleChecker<T> next;

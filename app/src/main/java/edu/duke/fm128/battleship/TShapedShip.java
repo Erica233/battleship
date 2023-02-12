@@ -1,10 +1,6 @@
 package edu.duke.fm128.battleship;
 
-import org.checkerframework.checker.units.qual.C;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 
 /**
  * A ship that is T-shaped, which extends a BasicShip, e.g.BattleShip
@@ -43,8 +39,9 @@ public class TShapedShip<T> extends BasicShip<T>  {
     }
 
     /**
-     * Generates the set of coordinates for a rectangle starting at upperLeft
-     * whose width and height are as specified
+     * Generates the set of coordinates for a T-shaped ship starting at upperLeft
+     * whose upperleft point and orientation are as specified,
+     * following some specific order
      *
      * @param upperLeft     the coordinate of the upper left part of the ship
      * @param orientation   the orientation of the ship, up (U), right (R), down (D), and left (L))

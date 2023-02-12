@@ -15,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
 
-  //@Disabled
   @Test
   @ResourceLock(value = Resources.SYSTEM_OUT, mode = ResourceAccessMode.READ_WRITE)
   void test_main() throws IOException {
@@ -46,7 +45,7 @@ class AppTest {
     assertEquals(expected, actual);
   }
 
-  @Disabled
+  //@Disabled
   @Test
   @ResourceLock(value = Resources.SYSTEM_OUT, mode = ResourceAccessMode.READ_WRITE)
   void test_main2() throws IOException {
@@ -54,9 +53,9 @@ class AppTest {
     PrintStream out = new PrintStream(bytes, true);
 
     // get an InputStream for our input.txt file, and the expected output
-    InputStream input = getClass().getClassLoader().getResourceAsStream("v2_input_g2_2.txt");
+    InputStream input = getClass().getClassLoader().getResourceAsStream("v2_input_g3_2.txt");
     assertNotNull(input);
-    InputStream expectedStream = getClass().getClassLoader().getResourceAsStream("v2_output_g2_2.txt");
+    InputStream expectedStream = getClass().getClassLoader().getResourceAsStream("v2_output_g3_2.txt");
     assertNotNull(expectedStream);
     // remember the current System.in and System.out
     InputStream oldIn = System.in;

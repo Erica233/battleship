@@ -282,4 +282,22 @@ class TextPlayerTest {
     assertTrue(p.isLose());
   }
 
+  @Test
+  public void test_chooseAsComputer() {
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    TextPlayer player = createTextPlayer(10, 20, "", bytes);
+
+    String prompt = "Player A, do you want to play as a Human (H) or as a Computer (C)?\n";
+    assertThrows(EOFException.class, () -> player.chooseAsComputer(prompt));
+  }
+
+  @Test
+  public void test_chooseAsNullComputer() {
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    TextPlayer player = createTextPlayer(10, 20, "f", bytes);
+    String prompt = "Player A, do you want to play as a Human (H) or as a Computer (C)?\n";
+    assertThrows(IllegalArgumentException.class, () -> player.chooseAsComputer(prompt));
+  }
+
+
 }

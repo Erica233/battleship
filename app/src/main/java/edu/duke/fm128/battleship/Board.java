@@ -20,6 +20,15 @@ public interface Board<T> {
    */
   Ship<T> fireAt(Coordinate c);
 
+  /**
+   * do the sonar scan given the center coordinate and ship names to find,
+   * and generate the results in a map, with shipName as key,
+   * and the number of ship as value
+   *
+   * @param c center coordinate
+   * @param shipNames ship names
+   * @return a hashmap about how many ships of each type within the area
+   */
   HashMap<String, Integer> scanAt(Coordinate c, Set<String> shipNames);
 
   /**
@@ -38,6 +47,12 @@ public interface Board<T> {
    */
   void removeShip(Ship<T> toRemove);
 
+  /**
+   * substitute the old ship with the new ship in the board
+   *
+   * @param oldShip the old ship
+   * @param newShip the new ship
+   */
   void substituteShip(Ship<Character> oldShip, Ship<Character> newShip);
 
   /**

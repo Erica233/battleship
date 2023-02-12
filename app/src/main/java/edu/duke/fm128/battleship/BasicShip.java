@@ -52,9 +52,9 @@ public abstract class BasicShip<T> implements Ship<T> {
   }
 
   /**
-   * Get all of the Coordinates that this Ship occupies.
+   * Get all the Coordinates that this Ship occupies.
    *
-   * @return An Set with the coordinates that this Ship occupies
+   * @return A Set with the coordinates that this Ship occupies
    */
   public Set<Coordinate> getCoordinates() {
     return myPieces.keySet();
@@ -73,7 +73,6 @@ public abstract class BasicShip<T> implements Ship<T> {
 
   @Override
   public boolean occupiesCoordinates(Coordinate where) {
-    // return myPieces.get(where) != null;
     return myPieces.containsKey(where);
   }
 

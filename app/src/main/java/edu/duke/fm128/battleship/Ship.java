@@ -70,8 +70,14 @@ public interface Ship<T> {
    */
   String getName();
 
+    /**
+     * move the current ship to the new ship, (with each coordinate follows a specific order)
+     *
+     * @param newShip the new ship
+     */
   void moveTo(Ship<Character> newShip);
 
+  /** getter and setters **/
   HashMap<Coordinate, Boolean> getMyPieces();
 
   HashMap<Integer, Coordinate> getOrderToCoordinate();

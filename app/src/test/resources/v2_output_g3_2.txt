@@ -1,0 +1,293 @@
+Player A, do you want to play as a Human (H) or as a Computer (C)?
+
+That choice is invalid: choose H (Human) or C (Computer).
+Player A, do you want to play as a Human (H) or as a Computer (C)?
+
+Player B, do you want to play as a Human (H) or as a Computer (C)?
+
+A hit a Submarine at (0, 0)!
+B hit a Submarine at (0, 0)!
+A hit a Submarine at (0, 1)!
+B hit a Submarine at (0, 1)!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A hit a Submarine at (1, 0)!
+B hit a Submarine at (1, 0)!
+A hit a Submarine at (1, 1)!
+B hit a Submarine at (1, 1)!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A hit a Destroyer at (2, 0)!
+B hit a Destroyer at (2, 0)!
+A hit a Destroyer at (2, 1)!
+B hit a Destroyer at (2, 1)!
+A hit a Destroyer at (2, 2)!
+B hit a Destroyer at (2, 2)!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A hit a Destroyer at (3, 0)!
+B hit a Destroyer at (3, 0)!
+A hit a Destroyer at (3, 1)!
+B hit a Destroyer at (3, 1)!
+A hit a Destroyer at (3, 2)!
+B hit a Destroyer at (3, 2)!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A hit a Destroyer at (4, 0)!
+B hit a Destroyer at (4, 0)!
+A hit a Destroyer at (4, 1)!
+B hit a Destroyer at (4, 1)!
+A hit a Destroyer at (4, 2)!
+B hit a Destroyer at (4, 2)!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A hit a Battleship at (5, 1)!
+B hit a Battleship at (5, 1)!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A hit a Battleship at (6, 0)!
+B hit a Battleship at (6, 0)!
+A hit a Battleship at (6, 1)!
+B hit a Battleship at (6, 1)!
+A hit a Battleship at (6, 2)!
+B hit a Battleship at (6, 2)!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A hit a Battleship at (7, 1)!
+B hit a Battleship at (7, 1)!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A hit a Battleship at (8, 0)!
+B hit a Battleship at (8, 0)!
+A hit a Battleship at (8, 1)!
+B hit a Battleship at (8, 1)!
+A hit a Battleship at (8, 2)!
+B hit a Battleship at (8, 2)!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A hit a Battleship at (9, 1)!
+B hit a Battleship at (9, 1)!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A hit a Battleship at (10, 0)!
+B hit a Battleship at (10, 0)!
+A hit a Battleship at (10, 1)!
+B hit a Battleship at (10, 1)!
+A hit a Battleship at (10, 2)!
+B hit a Battleship at (10, 2)!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A hit a Carrier at (11, 1)!
+B hit a Carrier at (11, 1)!
+A hit a Carrier at (11, 2)!
+B hit a Carrier at (11, 2)!
+A hit a Carrier at (11, 3)!
+B hit a Carrier at (11, 3)!
+A hit a Carrier at (11, 4)!
+B hit a Carrier at (11, 4)!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A hit a Carrier at (12, 0)!
+B hit a Carrier at (12, 0)!
+A hit a Carrier at (12, 1)!
+B hit a Carrier at (12, 1)!
+A hit a Carrier at (12, 2)!
+B hit a Carrier at (12, 2)!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A hit a Carrier at (13, 1)!
+B hit a Carrier at (13, 1)!
+A hit a Carrier at (13, 2)!
+B hit a Carrier at (13, 2)!
+A hit a Carrier at (13, 3)!
+B hit a Carrier at (13, 3)!
+A hit a Carrier at (13, 4)!
+B hit a Carrier at (13, 4)!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A missed!
+B missed!
+A hit a Carrier at (14, 0)!
+B hit a Carrier at (14, 0)!
+A hit a Carrier at (14, 1)!
+B hit a Carrier at (14, 1)!
+A hit a Carrier at (14, 2)!
+Player A wins!

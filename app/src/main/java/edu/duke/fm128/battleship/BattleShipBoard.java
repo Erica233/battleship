@@ -63,12 +63,6 @@ public class BattleShipBoard<T> implements Board<T> {
     return null;
   }
 
-
-  /**
-   * checks if all myShips have sunk
-   *
-   * @return true if my ships are all sunk, otherwise false
-   */
   @Override
   public boolean allSunk() {
     for (Ship<T> s : myShips) {
@@ -97,6 +91,12 @@ public class BattleShipBoard<T> implements Board<T> {
     return null;
   }
 
+  /**
+   * set up a sonar scan result map
+   *
+   * @param shipNames available ship names
+   * @return the empty scan results
+   */
   public HashMap<String, Integer> setUpScanResultsMap(Set<String> shipNames) {
     HashMap<String, Integer> output = new HashMap<>();
     for (String shipName: shipNames) {
@@ -105,6 +105,13 @@ public class BattleShipBoard<T> implements Board<T> {
     return output;
   }
 
+  /**
+   * a helper method to generate a list of sonar scan's relative coordinates
+   *
+   * @param range range of the sonar scan
+   * @param center the center coordinate of sonar scan
+   * @return a list of sonar scan's relative coordinates to scan
+   */
   public ArrayList<Coordinate> generateSonarCoords(int range, Coordinate center) {
     ArrayList<Coordinate> output = new ArrayList<>();
     int row = center.getRow();
@@ -144,7 +151,7 @@ public class BattleShipBoard<T> implements Board<T> {
   }
 
   /**
-   * Checks the validity of the placement,
+   * try to add ship, also Checks the validity of the placement,
    * if it is valid, adds a ship to the list of myShips and returns true,
    * otherwise, return false
    * 

@@ -43,7 +43,7 @@ public class ZShapedShip<T> extends BasicShip<T>  {
 
     /**
      * Generates the set of coordinates for a rectangle starting at upperLeft
-     * whose width and height are as specified
+     * whose upperleft coordinate and height are as specified
      *
      * @param upperLeft     the coordinate of the upper left part of the ship
      * @param orientation   the orientation of the ship, up (U), right (R), down (D), and left (L))
@@ -58,7 +58,6 @@ public class ZShapedShip<T> extends BasicShip<T>  {
             for (int i = 0; i < 3; i++) {
                 coordsSet.add(new Coordinate(upperLeft.getRow() + 2 + i, upperLeft.getColumn() + 1));
             }
-
         }
         if (orientation == 'R') {
             for (int i = 4; i > 0; i--) {

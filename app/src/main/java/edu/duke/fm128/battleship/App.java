@@ -57,6 +57,11 @@ public class App {
     }
   }
 
+  /**
+   * do the entire choose as human or computer phase for both players
+   *
+   * @throws IOException
+   */
   public void doChoosePlayerPhase() throws IOException {
     player1.choosePlayer();
     player2.choosePlayer();
