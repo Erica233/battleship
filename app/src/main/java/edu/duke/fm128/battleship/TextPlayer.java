@@ -1,10 +1,7 @@
 package edu.duke.fm128.battleship;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Locale;
+import java.util.*;
 import java.util.function.Function;
 
 /**
@@ -50,7 +47,6 @@ public class TextPlayer {
     availableActions.put("M", 3);
     availableActions.put("S", 3);
   }
-
 
   /**
    * set up ships creation function
@@ -212,12 +208,12 @@ public class TextPlayer {
         if (action.equals("F")) {
           tryFireAction(enemyBoard, enemyView, enemyName);
         }
-//        if (action.equals("M")) {
-//          tryMoveAction();
-//        }
-//        if (action.equals("S")) {
-//          trySonarScanAction();
-//        }
+        if (action.equals("M")) {
+          tryMoveAction();
+        }
+        if (action.equals("S")) {
+          trySonarScanAction();
+        }
 
 
         problem = null;
@@ -311,20 +307,46 @@ public class TextPlayer {
    * @throws IOException              if no input for coordinate
    * @throws IllegalArgumentException if the input coordinate is invalid
    */
-//  public void tryMoveAction(Board<Character> enemyBoard, BoardTextView enemyView, String enemyName)
-//          throws IOException, IllegalArgumentException {
-//    //out.print("Player " + name + "'s turn:\n");
-//    //out.print(view.displayMyBoardWithEnemyNextToIt(enemyView, "Your ocean", "Player " + enemyName + "'s ocean"));
-//    String prompt = "Player " + name + ", please enter a coordinate where you want to fire at?\n";
-//    Coordinate c = readCoordinate(prompt);
-//    Ship<Character> s = enemyBoard.fireAt(c);
-//    problem = null;
-//    if (s == null) {
-//      out.print("You missed!\n");
-//    } else {
-//      out.print("You hit a " + s.getName() + "!\n");
-//    }
-//  }
+  public void tryMoveAction(Board<Character> enemyBoard, BoardTextView enemyView, String enemyName)
+          throws IOException, IllegalArgumentException {
+    //out.print("Player " + name + "'s turn:\n");
+    //out.print(view.displayMyBoardWithEnemyNextToIt(enemyView, "Your ocean", "Player " + enemyName + "'s ocean"));
+    //type coordinate
+    String prompt = "Player " + name + ", which ship do you want to move? Please enter a coordinate!\n";
+    Coordinate c = readCoordinate(prompt);
+    Ship<Character> theShipToMove = theBoard.findShip(c);
+    if (theShipToMove == null) {
+      throw new IllegalArgumentException("The coordinate is not belong to your ships!");
+    }
+
+    //type placement
+    Placement p = readPlacement("Player " + name + " where do you want to place the " + theShipToMove.getName() + " you selected?");
+    Ship<Character> s = shipCreationFns.get(p).apply(p);
+
+
+
+    Ship<Character> s = enemyBoard.fireAt(c);
+    problem = null;
+    if (s == null) {
+      out.print("You missed!\n");
+    } else {
+      out.print("You hit a " + s.getName() + "!\n");
+    }
+  }
+
+
+  public void trySonarScanAction(Board<Character> enemyBoard, BoardTextView enemyView, String enemyName)
+          throws IOException, IllegalArgumentException {
+    String prompt = "Player " + name + ", where do you want to do sonar scan? Please enter a center coordinate.\n";
+    Coordinate center = readCoordinate(prompt);
+    //scan
+    HashMap<String, Integer> scanResults = enemyBoard.scanAt(center, shipCreationFns.keySet());
+
+    //print results
+    for (String shipName: scanResults.keySet()) {
+      out.print(shipName + " occupy " + scanResults.get(shipName) + " squares\n");
+    }
+  }
 
   /**
    * check if it's lose

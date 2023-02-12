@@ -1,5 +1,8 @@
 package edu.duke.fm128.battleship;
 
+import java.util.HashMap;
+import java.util.Set;
+
 /**
  * A Board
  */
@@ -27,6 +30,8 @@ public interface Board<T> {
 //   * @return the ship that is fired at
 //   */
 //  Ship<T> moveTo(Coordinate c);
+
+  HashMap<String, Integer> scanAt(Coordinate c, Set<String> shipNames);
 
   /**
    * Adds the ship to the list of myShips and return true
@@ -82,4 +87,12 @@ public interface Board<T> {
    * @return true if coordinates is within the board, otherwise false
    */
   boolean checkContain(Coordinate c);
+
+  /**
+   * find the ship that the input coordinate belongs to
+   *
+   * @param c the coordinate to check if it is part of one of my ships
+   * @return ship if the coordinate is part of one of my ships, otherwise return null
+   */
+  Ship<T> findShip(Coordinate c);
 }

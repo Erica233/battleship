@@ -15,6 +15,7 @@ public abstract class BasicShip<T> implements Ship<T> {
   protected HashMap<Coordinate, Boolean> myPieces;
   protected ShipDisplayInfo<T> myDisplayInfo;
   protected ShipDisplayInfo<T> enemyDisplayInfo;
+  protected HashMap<Integer, Coordinate> coordinateOrders;
 
   /**
    * Constructs a BasicShip

@@ -1,7 +1,10 @@
 package edu.duke.fm128.battleship;
 
+import java.awt.image.ColorConvertOp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A battleship board for the battleship game
@@ -49,6 +52,17 @@ public class BattleShipBoard<T> implements Board<T> {
     this.missInfo = _missInfo;
   }
 
+  @Override
+  public Ship<T> findShip(Coordinate c) {
+    for (Ship<T> s : myShips) {
+      if (s.occupiesCoordinates(c)) {
+        return s;
+      }
+    }
+    return null;
+  }
+
+
   /**
    * checks if all myShips have sunk
    *
@@ -78,6 +92,52 @@ public class BattleShipBoard<T> implements Board<T> {
     // return null.
     enemyMisses.add(c);
     return null;
+  }
+
+  public HashMap<String, Integer> setUpScanResultsMap(Set<String> shipNames) {
+    HashMap<String, Integer> output = new HashMap<>();
+    for (String shipName: shipNames) {
+      output.put(shipName, 0);
+    }
+    return output;
+  }
+
+  public ArrayList<Coordinate> generateSonarCoords(int range, Coordinate center) {
+    ArrayList<Coordinate> output = new ArrayList<>();
+    int row = center.getRow();
+    int col = center.getColumn();
+    for (int i = 0; i <= range; i++) {
+      for (int j = range - i; j < range + i + 1; j++) {
+        Coordinate c = new Coordinate(i - range + row, j - range + col);
+        if (checkContain(c)) {
+          output.add(new Coordinate(i - range + row, j - range + col));
+        }
+      }
+    }
+    for (int i = 1; i <= range; i++) {
+      for (int j = i; j < 2 * range - i + 1; j++) {
+        Coordinate c = new Coordinate(i + row, j - range + col);
+        if (checkContain(c)) {
+          output.add(c);
+        }
+      }
+    }
+    return output;
+  }
+
+  @Override
+  public HashMap<String, Integer> scanAt(Coordinate center, Set<String> shipNames) {
+    HashMap<String, Integer> scanResults = setUpScanResultsMap(shipNames);
+    int range = 3;
+    ArrayList<Coordinate> sonarCoords = generateSonarCoords(range, center);
+    for (Ship<T> ship : myShips) {
+      for (Coordinate c: sonarCoords) {
+        if (ship.occupiesCoordinates(c)) {
+          scanResults.put(ship.getName(), scanResults.get(ship.getName()) + 1);
+        }
+      }
+    }
+    return scanResults;
   }
 
   /**
