@@ -13,7 +13,7 @@ public interface Ship<T> {
    * 
    * @return An Iterable with the coordinates that this Ship occupies
    */
-   Iterable<Coordinate> getCoordinates();
+  Iterable<Coordinate> getCoordinates();
 
   /**
    * Check if this ship occupies the given coordinate.
@@ -21,7 +21,7 @@ public interface Ship<T> {
    * @param where is the Coordinate to check if this Ship occupies
    * @return true if where is inside this ship, false if not.
    */
-   boolean occupiesCoordinates(Coordinate where);
+  boolean occupiesCoordinates(Coordinate where);
 
   /**
    * Check if this ship has been hit in all of its locations meaning it has been
@@ -29,7 +29,7 @@ public interface Ship<T> {
    * 
    * @return true if this ship has been sunk, false otherwise.
    */
-   boolean isSunk();
+  boolean isSunk();
 
   /**
    * Make this ship record that it has been hit at the given coordinate. The
@@ -38,7 +38,7 @@ public interface Ship<T> {
    * @param where specifies the coordinates that were hit.
    * @throws IllegalArgumentException if where is not part of the Ship
    */
-   void recordHitAt(Coordinate where);
+  void recordHitAt(Coordinate where);
 
   /**
    * Check if this ship was hit at the specified coordinates. The coordinates must
@@ -50,7 +50,7 @@ public interface Ship<T> {
    * @throws IllegalArgumentException if the coordinates are not part of this
    *                                  ship.
    */
-   boolean wasHitAt(Coordinate where);
+  boolean wasHitAt(Coordinate where);
 
   /**
    * Return the view-specific information at the given coordinate. This coordinate
@@ -61,7 +61,7 @@ public interface Ship<T> {
    * @throws IllegalArgumentException if where is not part of the Ship
    * @return The view-specific information at that coordinate.
    */
-   T getDisplayInfoAt(Coordinate where, boolean myShip);
+  T getDisplayInfoAt(Coordinate where, boolean myShip);
 
   /**
    * Get the name of this Ship, such as "submarine".
@@ -70,11 +70,12 @@ public interface Ship<T> {
    */
   String getName();
 
-    /**
-     * move the current ship to the new ship, (with each coordinate follows a specific order)
-     *
-     * @param newShip the new ship
-     */
+  /**
+   * move the current ship to the new ship, (with each coordinate follows a
+   * specific order)
+   *
+   * @param newShip the new ship
+   */
   void moveTo(Ship<Character> newShip);
 
   /** getter and setters **/

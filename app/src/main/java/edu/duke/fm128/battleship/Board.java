@@ -25,7 +25,7 @@ public interface Board<T> {
    * and generate the results in a map, with shipName as key,
    * and the number of ship as value
    *
-   * @param c center coordinate
+   * @param c         center coordinate
    * @param shipNames ship names
    * @return a hashmap about how many ships of each type within the area
    */
@@ -106,7 +106,8 @@ public interface Board<T> {
    * find the ship that the input coordinate belongs to
    *
    * @param c the coordinate to check if it is part of one of my ships
-   * @return ship if the coordinate is part of one of my ships, otherwise return null
+   * @return ship if the coordinate is part of one of my ships, otherwise return
+   *         null
    */
   Ship<T> findShip(Coordinate c);
 }

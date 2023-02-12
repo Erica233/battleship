@@ -42,7 +42,7 @@ public abstract class BasicShip<T> implements Ship<T> {
 
   @Override
   public void moveTo(Ship<Character> newShip) {
-    for (Coordinate c: myPieces.keySet()) {
+    for (Coordinate c : myPieces.keySet()) {
       if (myPieces.get(c)) {
         int oldId = this.coordinateToOrder.get(c);
         Coordinate newCoord = newShip.getOrderToCoordinate().get(oldId);

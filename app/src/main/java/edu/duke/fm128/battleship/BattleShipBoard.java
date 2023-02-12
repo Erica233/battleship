@@ -99,7 +99,7 @@ public class BattleShipBoard<T> implements Board<T> {
    */
   public HashMap<String, Integer> setUpScanResultsMap(Set<String> shipNames) {
     HashMap<String, Integer> output = new HashMap<>();
-    for (String shipName: shipNames) {
+    for (String shipName : shipNames) {
       output.put(shipName, 0);
     }
     return output;
@@ -108,7 +108,7 @@ public class BattleShipBoard<T> implements Board<T> {
   /**
    * a helper method to generate a list of sonar scan's relative coordinates
    *
-   * @param range range of the sonar scan
+   * @param range  range of the sonar scan
    * @param center the center coordinate of sonar scan
    * @return a list of sonar scan's relative coordinates to scan
    */
@@ -141,7 +141,7 @@ public class BattleShipBoard<T> implements Board<T> {
     int range = 3;
     ArrayList<Coordinate> sonarCoords = generateSonarCoords(range, center);
     for (Ship<T> ship : myShips) {
-      for (Coordinate c: sonarCoords) {
+      for (Coordinate c : sonarCoords) {
         if (ship.occupiesCoordinates(c)) {
           scanResults.put(ship.getName(), scanResults.get(ship.getName()) + 1);
         }

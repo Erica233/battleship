@@ -224,7 +224,7 @@ class TextPlayerTest {
     assertThrows(IllegalArgumentException.class, () -> p.readCoordinate(prompt));
   }
 
-  //@Disabled
+  // @Disabled
   @Test
   void test_playOneTurn_V2() throws IOException {
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -236,41 +236,41 @@ class TextPlayerTest {
     p1.getTheBoard().tryAddShip(s1);
     p2.getTheBoard().tryAddShip(s2);
     String expected1 = "Player A's turn:\n" +
-            "     Your ocean           Player A's ocean\n" +
-            "  0|1                    0|1\n" +
-            "A  |  A                A  |  A\n" +
-            "B s|s B                B  |  B\n" +
-            "C  |  C                C  |  C\n" +
-            "  0|1                    0|1\n" +
-            "Possible actions for Player A:\n" +
-            " F Fire at a square\n" +
-            " M Move a ship to another square (3 remaining)\n" +
-            " S Sonar scan (3 remaining)\n" +
-            "\n" +
-            "Player A, what would you like to do?\n" +
-            "Player A, please enter a coordinate where you want to fire at?\n" +
-            "You missed!\n";
+        "     Your ocean           Player A's ocean\n" +
+        "  0|1                    0|1\n" +
+        "A  |  A                A  |  A\n" +
+        "B s|s B                B  |  B\n" +
+        "C  |  C                C  |  C\n" +
+        "  0|1                    0|1\n" +
+        "Possible actions for Player A:\n" +
+        " F Fire at a square\n" +
+        " M Move a ship to another square (3 remaining)\n" +
+        " S Sonar scan (3 remaining)\n" +
+        "\n" +
+        "Player A, what would you like to do?\n" +
+        "Player A, please enter a coordinate where you want to fire at?\n" +
+        "You missed!\n";
     p1.playOneTurn(p2.getTheBoard(), p2.getView(), p2.getName());
     assertEquals(expected1, bytes.toString());
     bytes.reset();
     String expected2 = "Player A's turn:\n" +
-            "     Your ocean           Player A's ocean\n" +
-            "  0|1                    0|1\n" +
-            "A s|  A                A  |  A\n" +
-            "B s|  B                B  |  B\n" +
-            "C  |  C                C  |  C\n" +
-            "  0|1                    0|1\n" +
-            "Possible actions for Player A:\n" +
-            " F Fire at a square\n" +
-            " M Move a ship to another square (3 remaining)\n" +
-            " S Sonar scan (3 remaining)\n" +
-            "\n" +
-            "Player A, what would you like to do?\n" +
-            "Player A, where do you want to do sonar scan? Please enter a center coordinate.\n" +
-            "Submarine occupy 2 squares\n" +
-            "Destroyer occupy 0 squares\n" +
-            "Carrier occupy 0 squares\n" +
-            "Battleship occupy 0 squares\n";
+        "     Your ocean           Player A's ocean\n" +
+        "  0|1                    0|1\n" +
+        "A s|  A                A  |  A\n" +
+        "B s|  B                B  |  B\n" +
+        "C  |  C                C  |  C\n" +
+        "  0|1                    0|1\n" +
+        "Possible actions for Player A:\n" +
+        " F Fire at a square\n" +
+        " M Move a ship to another square (3 remaining)\n" +
+        " S Sonar scan (3 remaining)\n" +
+        "\n" +
+        "Player A, what would you like to do?\n" +
+        "Player A, where do you want to do sonar scan? Please enter a center coordinate.\n" +
+        "Submarine occupy 2 squares\n" +
+        "Destroyer occupy 0 squares\n" +
+        "Carrier occupy 0 squares\n" +
+        "Battleship occupy 0 squares\n";
     p2.playOneTurn(p1.getTheBoard(), p1.getView(), p1.getName());
     assertEquals(expected2, bytes.toString());
   }
@@ -298,6 +298,5 @@ class TextPlayerTest {
     String prompt = "Player A, do you want to play as a Human (H) or as a Computer (C)?\n";
     assertThrows(IllegalArgumentException.class, () -> player.chooseAsComputer(prompt));
   }
-
 
 }
