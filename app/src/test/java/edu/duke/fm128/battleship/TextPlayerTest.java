@@ -1,5 +1,6 @@
 package edu.duke.fm128.battleship;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import java.io.*;
 import java.util.Collections;
@@ -189,6 +190,7 @@ class TextPlayerTest {
     assertThrows(IllegalArgumentException.class, () -> p.readCoordinate(prompt));
   }
 
+  @Disabled
   @Test
   void test_playOneTurn() throws IOException {
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();

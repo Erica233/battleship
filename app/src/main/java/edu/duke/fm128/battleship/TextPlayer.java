@@ -150,7 +150,7 @@ public class TextPlayer {
     return "Possible actions for Player " + name + ":\n" +
             " F Fire at a square\n" +
             " M Move a ship to another square (" + availableActions.get("M") + " remaining)\n" +
-            " S Sonar scan (" + availableActions.get("M") + " remaining)\n" +
+            " S Sonar scan (" + availableActions.get("S") + " remaining)\n" +
             "\n" +
             "Player " + name + ", what would you like to do?\n";
   }
@@ -318,10 +318,7 @@ public class TextPlayer {
 
     //read placement
     Placement p = readPlacement("Player " + name + " where do you want to place the " + theShipToMove.getName() + " you selected?");
-    if (shipCreationFns.get(p) == null) {
-      throw new IllegalArgumentException();
-    }
-    Ship<Character> newShip = shipCreationFns.get(p).apply(p);
+    Ship<Character> newShip = shipCreationFns.get(theShipToMove.getName()).apply(p);
     Ship<Character> oldShip = theBoard.getMyShips().get(theBoard.getMyShips().indexOf(theShipToMove));
     theBoard.getMyShips().remove(oldShip);
     String problem = theBoard.tryAddShip(newShip);

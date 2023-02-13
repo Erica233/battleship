@@ -52,10 +52,6 @@ public class BattleShipBoard<T> implements Board<T> {
     this.missInfo = _missInfo;
   }
 
-  public ArrayList<Ship<T>> getMyShips() {
-    return myShips;
-  }
-
   @Override
   public Ship<T> findShip(Coordinate c) {
     for (Ship<T> s : myShips) {
@@ -203,24 +199,6 @@ public class BattleShipBoard<T> implements Board<T> {
     return null;
   }
 
-  /**
-   * Gets the height of the BattleShipBoard
-   * 
-   * @return the height of the BattleShipBoard
-   */
-  public int getHeight() {
-    return height;
-  }
-
-  /**
-   * Gets the width of the BattleShipBoard
-   * 
-   * @return the width of the BattleShipBoard
-   */
-  public int getWidth() {
-    return width;
-  }
-
   @Override
   public boolean checkContain(Coordinate c) {
     if (c.getColumn() < 0 || c.getColumn() >= width || c.getRow() < 0 || c.getRow() >= height) {
@@ -228,5 +206,18 @@ public class BattleShipBoard<T> implements Board<T> {
     } else {
       return true;
     }
+  }
+
+  /** getters and setters */
+  public int getHeight() {
+    return height;
+  }
+
+  public int getWidth() {
+    return width;
+  }
+
+  public ArrayList<Ship<T>> getMyShips() {
+    return myShips;
   }
 }
