@@ -52,6 +52,10 @@ public class BattleShipBoard<T> implements Board<T> {
     this.missInfo = _missInfo;
   }
 
+  public ArrayList<Ship<T>> getMyShips() {
+    return myShips;
+  }
+
   @Override
   public Ship<T> findShip(Coordinate c) {
     for (Ship<T> s : myShips) {
@@ -157,6 +161,11 @@ public class BattleShipBoard<T> implements Board<T> {
       return null;
     }
     return info;
+  }
+
+  @Override
+  public void substituteShip(Ship<Character> oldShip, Ship<Character> newShip) {
+    oldShip.moveTo(newShip);
   }
 
   @Override

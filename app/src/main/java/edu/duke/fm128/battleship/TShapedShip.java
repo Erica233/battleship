@@ -51,10 +51,10 @@ public class TShapedShip<T> extends BasicShip<T>  {
     public static HashSet<Coordinate> makeCoords(Coordinate upperLeft, Character orientation) {
         HashSet<Coordinate> coordsSet = new HashSet<>();
         if (orientation == 'U') {
-            coordsSet.add(new Coordinate(upperLeft.getRow(), upperLeft.getColumn() + 1));
             coordsSet.add(new Coordinate(upperLeft.getRow() + 1, upperLeft.getColumn()));
             coordsSet.add(new Coordinate(upperLeft.getRow() + 1, upperLeft.getColumn() + 1));
             coordsSet.add(new Coordinate(upperLeft.getRow() + 1, upperLeft.getColumn() + 2));
+            coordsSet.add(new Coordinate(upperLeft.getRow(), upperLeft.getColumn() + 1));
         }
         if (orientation == 'R') {
             coordsSet.add(new Coordinate(upperLeft.getRow(), upperLeft.getColumn()));
@@ -70,9 +70,9 @@ public class TShapedShip<T> extends BasicShip<T>  {
         }
         if (orientation == 'L') {
             coordsSet.add(new Coordinate(upperLeft.getRow(), upperLeft.getColumn() + 1));
-            coordsSet.add(new Coordinate(upperLeft.getRow() + 1, upperLeft.getColumn()));
             coordsSet.add(new Coordinate(upperLeft.getRow() + 1, upperLeft.getColumn() + 1));
             coordsSet.add(new Coordinate(upperLeft.getRow() + 2, upperLeft.getColumn() + 1));
+            coordsSet.add(new Coordinate(upperLeft.getRow() + 1, upperLeft.getColumn()));
         }
         return coordsSet;
     }

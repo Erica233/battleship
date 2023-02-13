@@ -147,13 +147,12 @@ public class TextPlayer {
    * @return a string contains possible actions
    */
   public String generateActionInstruction() {
-    String actionPrompt = "Possible actions for Player " + name + ":\n" +
+    return "Possible actions for Player " + name + ":\n" +
             " F Fire at a square\n" +
             " M Move a ship to another square (" + availableActions.get("M") + " remaining)\n" +
             " S Sonar scan (" + availableActions.get("M") + " remaining)\n" +
             "\n" +
             "Player " + name + ", what would you like to do?\n";
-    return actionPrompt;
   }
 
 
@@ -206,17 +205,19 @@ public class TextPlayer {
         String actionInstruction = generateActionInstruction();
         String action = readAction(actionInstruction);
         if (action.equals("F")) {
-          tryFireAction(enemyBoard, enemyView, enemyName);
+          tryFireAction(enemyBoard);
         }
         if (action.equals("M")) {
           tryMoveAction();
         }
         if (action.equals("S")) {
-          trySonarScanAction();
+          trySonarScanAction(enemyBoard);
+        }
+        problem = null;
+        if (!action.equals("F")) {
+          availableActions.put(action, availableActions.get(action) - 1);
         }
 
-
-        problem = null;
 //        if (s == null) {
 //          out.print("You missed!\n");
 //        } else {
@@ -224,6 +225,7 @@ public class TextPlayer {
 //        }
       } catch (IllegalArgumentException iae) {
         problem = "it does not have the correct format";
+        out.println("Invalid action!");
       }
       if (problem != null) {
         String msg = "That action is invalid: " + problem;
@@ -262,22 +264,20 @@ public class TextPlayer {
    * It then reports the result.
    *
    * @param enemyBoard the enemy's board
-   * @param enemyView  the enemy's BoardTextView
-   * @param enemyName  the enemy's name
    * @throws IOException              if no input for coordinate
    * @throws IllegalArgumentException if the input coordinate is invalid
    */
-  public void tryFireAction(Board<Character> enemyBoard, BoardTextView enemyView, String enemyName)
+  public void tryFireAction(Board<Character> enemyBoard)
       throws IOException, IllegalArgumentException {
     //out.print("Player " + name + "'s turn:\n");
     //out.print(view.displayMyBoardWithEnemyNextToIt(enemyView, "Your ocean", "Player " + enemyName + "'s ocean"));
-    String problem;
+    //String problem;
     //do {
       //try {
         String prompt = "Player " + name + ", please enter a coordinate where you want to fire at?\n";
         Coordinate c = readCoordinate(prompt);
         Ship<Character> s = enemyBoard.fireAt(c);
-        problem = null;
+        //problem = null;
         if (s == null) {
           out.print("You missed!\n");
         } else {
@@ -301,17 +301,14 @@ public class TextPlayer {
    * coordinates are invalid, it prompts the player to enter a valid choice.
    * It then reports the result.
    *
-   * @param enemyBoard the enemy's board
-   * @param enemyView  the enemy's BoardTextView
-   * @param enemyName  the enemy's name
    * @throws IOException              if no input for coordinate
    * @throws IllegalArgumentException if the input coordinate is invalid
    */
-  public void tryMoveAction(Board<Character> enemyBoard, BoardTextView enemyView, String enemyName)
+  public void tryMoveAction()
           throws IOException, IllegalArgumentException {
     //out.print("Player " + name + "'s turn:\n");
     //out.print(view.displayMyBoardWithEnemyNextToIt(enemyView, "Your ocean", "Player " + enemyName + "'s ocean"));
-    //type coordinate
+    //read coordinate
     String prompt = "Player " + name + ", which ship do you want to move? Please enter a coordinate!\n";
     Coordinate c = readCoordinate(prompt);
     Ship<Character> theShipToMove = theBoard.findShip(c);
@@ -319,23 +316,25 @@ public class TextPlayer {
       throw new IllegalArgumentException("The coordinate is not belong to your ships!");
     }
 
-    //type placement
+    //read placement
     Placement p = readPlacement("Player " + name + " where do you want to place the " + theShipToMove.getName() + " you selected?");
-    Ship<Character> s = shipCreationFns.get(p).apply(p);
-
-
-
-    Ship<Character> s = enemyBoard.fireAt(c);
-    problem = null;
-    if (s == null) {
-      out.print("You missed!\n");
-    } else {
-      out.print("You hit a " + s.getName() + "!\n");
+    if (shipCreationFns.get(p) == null) {
+      throw new IllegalArgumentException();
     }
+    Ship<Character> newShip = shipCreationFns.get(p).apply(p);
+    Ship<Character> oldShip = theBoard.getMyShips().get(theBoard.getMyShips().indexOf(theShipToMove));
+    theBoard.getMyShips().remove(oldShip);
+    String problem = theBoard.tryAddShip(newShip);
+    if (problem != null) {
+      theBoard.getMyShips().add(oldShip);
+      throw new IllegalArgumentException(problem);
+    }
+    //theBoard.getMyShips().remove(newShip);
+    theBoard.substituteShip(theShipToMove, newShip);
   }
 
 
-  public void trySonarScanAction(Board<Character> enemyBoard, BoardTextView enemyView, String enemyName)
+  public void trySonarScanAction(Board<Character> enemyBoard)
           throws IOException, IllegalArgumentException {
     String prompt = "Player " + name + ", where do you want to do sonar scan? Please enter a center coordinate.\n";
     Coordinate center = readCoordinate(prompt);

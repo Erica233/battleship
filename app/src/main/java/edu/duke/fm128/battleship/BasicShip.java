@@ -15,7 +15,8 @@ public abstract class BasicShip<T> implements Ship<T> {
   protected HashMap<Coordinate, Boolean> myPieces;
   protected ShipDisplayInfo<T> myDisplayInfo;
   protected ShipDisplayInfo<T> enemyDisplayInfo;
-  protected HashMap<Integer, Coordinate> coordinateOrders;
+  protected HashMap<Coordinate, Integer> coordinateToOrder;
+  protected HashMap<Integer, Coordinate> orderToCoordinate;
 
   /**
    * Constructs a BasicShip
@@ -26,11 +27,27 @@ public abstract class BasicShip<T> implements Ship<T> {
   public BasicShip(Iterable<Coordinate> where, ShipDisplayInfo<T> _myDisplayInfo,
       ShipDisplayInfo<T> _enemyDisplayInfo) {
     this.myPieces = new HashMap<>();
+    this.coordinateToOrder = new HashMap<>();
+    this.orderToCoordinate = new HashMap<>();
+    int id = 0;
     for (Coordinate c : where) {
       this.myPieces.put(c, false);
+      this.coordinateToOrder.put(c, id);
+      this.orderToCoordinate.put(id, c);
+      id++;
     }
     this.myDisplayInfo = _myDisplayInfo;
     this.enemyDisplayInfo = _enemyDisplayInfo;
+  }
+
+  public void moveTo(Ship<Character> newShip) {
+    for (Coordinate c: myPieces.keySet()) {
+      if (myPieces.get(c)) {
+        int oldId = coordinateToOrder.get(c);
+        Coordinate newCoord = newShip.getOrderToCoordinate().get(oldId);
+        newShip.getMyPieces().put(newCoord, true);
+      }
+    }
   }
 
   /**
@@ -87,5 +104,21 @@ public abstract class BasicShip<T> implements Ship<T> {
       return myDisplayInfo.getInfo(where, wasHitAt(where));
     }
     return enemyDisplayInfo.getInfo(where, wasHitAt(where));
+  }
+
+  public void setMyPieces(HashMap<Coordinate, Boolean> myPieces) {
+    this.myPieces = myPieces;
+  }
+
+  public HashMap<Coordinate, Boolean> getMyPieces() {
+    return myPieces;
+  }
+
+  public HashMap<Coordinate, Integer> getCoordinateToOrder() {
+    return coordinateToOrder;
+  }
+
+  public HashMap<Integer, Coordinate> getOrderToCoordinate() {
+    return orderToCoordinate;
   }
 }

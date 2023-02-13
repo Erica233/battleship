@@ -60,18 +60,18 @@ public class ZShapedShip<T> extends BasicShip<T>  {
 
         }
         if (orientation == 'R') {
-            for (int i = 0; i < 4; i++) {
-                coordsSet.add(new Coordinate(upperLeft.getRow(), upperLeft.getColumn() + 1 + i));
+            for (int i = 4; i > 0; i--) {
+                coordsSet.add(new Coordinate(upperLeft.getRow(), upperLeft.getColumn() + i));
             }
-            for (int i = 0; i < 3; i++) {
+            for (int i = 2; i >= 0; i--) {
                 coordsSet.add(new Coordinate(upperLeft.getRow() + 1, upperLeft.getColumn() + i));
             }
         }
         if (orientation == 'D') {
-            for (int i = 0; i < 4; i++) {
-                coordsSet.add(new Coordinate(upperLeft.getRow() + 1 + i, upperLeft.getColumn() + 1));
+            for (int i = 4; i > 0; i--) {
+                coordsSet.add(new Coordinate(upperLeft.getRow() + i, upperLeft.getColumn() + 1));
             }
-            for (int i = 0; i < 3; i++) {
+            for (int i = 2; i >= 0; i--) {
                 coordsSet.add(new Coordinate(upperLeft.getRow() + i, upperLeft.getColumn()));
             }
         }

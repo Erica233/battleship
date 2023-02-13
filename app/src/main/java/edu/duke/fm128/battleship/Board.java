@@ -1,5 +1,6 @@
 package edu.duke.fm128.battleship;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -19,17 +20,7 @@ public interface Board<T> {
    */
   Ship<T> fireAt(Coordinate c);
 
-//  /**
-//   * search for any ship that occupies coordinate c.
-//   * If one is found, that Ship is "hit" by the attack and should record it, then
-//   * return this ship.
-//   * If no ships are at this coordinate, record the miss in the enemyMisses, and
-//   * return null.
-//   *
-//   * @param c coordinate which the enemy tries to fire at
-//   * @return the ship that is fired at
-//   */
-//  Ship<T> moveTo(Coordinate c);
+  ArrayList<Ship<T>> getMyShips();
 
   HashMap<String, Integer> scanAt(Coordinate c, Set<String> shipNames);
 
@@ -40,6 +31,8 @@ public interface Board<T> {
    * @return a String that shows the validity of the add operation
    */
   String tryAddShip(Ship<T> toAdd);
+
+  void substituteShip(Ship<Character> oldShip, Ship<Character> newShip);
 
   /**
    * Gives the information of the given coordinate if it is occupied.
