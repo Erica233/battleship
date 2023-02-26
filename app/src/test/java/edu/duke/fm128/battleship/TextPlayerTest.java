@@ -178,6 +178,14 @@ class TextPlayerTest {
   }
 
   @Test
+  void test_move_illegal_action() throws IOException {
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    TextPlayer player = createTextPlayer(10, 20, "a0h\na0\na9h\n", bytes);
+    player.doOnePlacement("Submarine", player.shipCreationFns.get("Submarine"));
+    assertThrows(IllegalArgumentException.class, () -> player.tryMoveAction());
+  }
+
+  @Test
   void test_place_ship_at_another_ship() throws IOException {
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     TextPlayer player = createTextPlayer(10, 20, "b2v\nA2h\nm\nb2\na2\n", bytes);
